@@ -1,17 +1,16 @@
-#+hugo_base_dir: ../
-
-* DONE On Existential Loneliness 
-CLOSED: [2023-09-29 Fri 23:31]
-:PROPERTIES:
-:EXPORT_FILE_NAME: existential-loneliness
-:END:
++++
+title = "On Existential Loneliness"
+author = ["mamad"]
+date = 2023-09-29T23:31:00+03:30
+draft = false
++++
 
 Loneliness is one of those situations which we all have experienced to a certain degree in different points of our lives. It can be claimed that
 it is one of the most disturbing and emotionally painful experiences which cannot be described by words precisely. Those who feel lonely on a regular bases
-may wonder: Do other people feel lonely as I do?
+may wonder: Do they feel lonely as I do?
 
 One of the most common ways in which one finds oneself lonely is when one is alone. In this case you don't have anyone physically around you to
-make any kind of contact with. But there exists a much more painful kind of loneliness which I call emotional loneliness. When you're emotionally lonely
+make any kind of contact with. But there exists a more painful kind of loneliness which I call emotional loneliness. When you're emotionally lonely
 it is not that you don't have anyone around you, but rather the people around you do not wish to listen to you. Or maybe your ideas are
 simply too vulgar and socially inappropriate that no one wants to listen. In this case you find yourself deeply lonely and disconnected from the outside world.
 Having sufficient amount of time, as a result of very little or no human contact at all, you may ask yourself: Is everyone lonely?
