@@ -1,7 +1,7 @@
 #+hugo_base_dir: ../
+#+author: Amir M. Taati
 
-* DONE On Existential Loneliness 
-CLOSED: [2023-09-29 Fri 23:31]
+* On Existential Loneliness 
 :PROPERTIES:
 :EXPORT_FILE_NAME: existential-loneliness
 :END:
