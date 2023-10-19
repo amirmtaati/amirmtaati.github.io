@@ -1,0 +1,23 @@
+#+hugo_base_dir: ../
+#+author: Amir M. Taati
+
+* DONE Age of Distraction 
+CLOSED: [2023-10-19 Thu 20:36]
+:PROPERTIES:
+:EXPORT_FILE_NAME: age-of-distraction
+:END:
+
+Our lives have become much more distracting than ever. We live in a world where you can distract yourself anytime, anywhere, anyway you wish.
+One might wonder why we are so distracted when having so many things to do in life?
+
+We all have responsibilities that require us to accomplish certain tasks. But the things we do in our life aren't just done because they need to be done, but
+they also add meaning and value to our existence. To give our full attention to the task we have in our hand is the only way to accomplish it
+successfully and yet we fail to do so.
+
+At first glance it seems like that we are constantly being distracted simply because the means of distraction have become widely available. Although
+this idea is valid, there is something deeper to that. Having a sense of meaning in life is the most powerful force that can push you forward in life.
+Living a life deprived of such meaning and sense of belonging can lead to high degrees of distraction. He who doesn't have anything valuable to do will
+do anything to fill the void of meaning in his life and what hole can be deeper than the absence of meaning in one's life?
+
+One who wishes to live life to the fullest must be very careful. It is very easy to fool yourself. But the sense of meaning will always show you the direction in which you must divert your attention.
+We all have an inner compass deep down inside. Listen to your gut.
