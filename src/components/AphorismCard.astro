@@ -3,19 +3,21 @@ export interface Props {
   aphorism: {
     content: string;
     date: Date;
-    id: string;
+    slug: string;
+    tags?: string[];
   }
 }
 
 const { aphorism } = Astro.props;
+import Tag from './Tag.astro';
 ---
 
-<article class="mb-8 p-6 rounded-xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border hover:shadow-md transition-all">
+<article class="mb-8 p-6 rounded-xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border hover:shadow-md transition-all relative">
   <blockquote class="font-serif text-xl italic mb-4 leading-relaxed">
     "{aphorism.content}"
   </blockquote>
   
-  <div class="flex justify-end">
+  <div class="flex justify-between items-center">
     <time class="text-sm text-gl-fg2 dark:text-gd-fg2">
       {new Date(aphorism.date).toLocaleDateString('en-US', {
         year: 'numeric',
@@ -24,8 +26,4 @@ const { aphorism } = Astro.props;
       })}
     </time>
   </div>
-  
-  <a href={`/aphorisms/${aphorism.id}`} class="absolute inset-0" aria-label="View aphorism details">
-    <span class="sr-only">View details</span>
-  </a>
 </article>
