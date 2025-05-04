@@ -1,9 +1,21 @@
 ---
-// src/components/ThemeToggle.astro
+// Enhanced ThemeToggle.astro
 ---
-<button id="theme-toggle" class="flex items-center gap-2 text-sm text-gl-fg2 dark:text-gd-fg2 hover:text-gl-fg dark:hover:text-gd-fg transition-colors">
-  <span class="i-carbon-moon dark:hidden"></span>
-  <span class="i-carbon-sun hidden dark:inline"></span>
+<button 
+  id="theme-toggle" 
+  class="flex items-center justify-center gap-2 py-2 px-4 rounded-full bg-gl-bg2/70 dark:bg-gd-bg2/70 border border-gl-border dark:border-gd-border text-sm text-gl-fg2 dark:text-gd-fg2 hover:text-gl-fg dark:hover:text-gd-fg transition-all hover:shadow-md hover:scale-105"
+>
+  <span class="i-carbon-moon w-4 h-4 dark:hidden"></span>
+  <span class="i-carbon-sun w-4 h-4 hidden dark:inline"></span>
   <span class="dark:hidden">Dark Mode</span>
   <span class="hidden dark:inline">Light Mode</span>
 </button>
+
+<style>
+  #theme-toggle {
+    transition: transform 0.2s ease;
+  }
+  #theme-toggle:hover {
+    transform: translateY(-1px);
+  }
+</style>

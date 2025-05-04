@@ -1,0 +1,105 @@
+---
+// src/pages/essays/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import Pagination from '../../components/Pagination.astro';
+
+// Mock data for essays - would come from collections in a real app
+const essays = [
+  {
+    title: "Digital Minimalism in an Age of Excess",
+    slug: "digital-minimalism",
+    description: "Exploring how we can cultivate a more intentional relationship with technology in our increasingly connected world.",
+    date: new Date('2025-05-01'),
+    readTime: 12
+  },
+  {
+    title: "The Lost Art of Deep Reading",
+    slug: "lost-art-deep-reading",
+    description: "In an age of skimming, how can we reclaim our ability to engage deeply with texts and ideas?",
+    date: new Date('2025-04-22'),
+    readTime: 15
+  },
+  {
+    title: "Mindful Writing in a Distracted Age",
+    slug: "mindful-writing",
+    description: "Techniques for bringing presence and attention to your writing practice despite digital distractions.",
+    date: new Date('2025-04-15'),
+    readTime: 8
+  },
+  {
+    title: "The Philosophy of Enough",
+    slug: "philosophy-of-enough",
+    description: "Examining the concept of 'enough' and how it can lead to greater contentment in our lives.",
+    date: new Date('2025-04-08'),
+    readTime: 10
+  },
+  {
+    title: "Attention as a Scarce Resource",
+    slug: "attention-scarce-resource",
+    description: "How our attention has become one of the most valuable commodities in the digital economy.",
+    date: new Date('2025-03-28'),
+    readTime: 14
+  }
+];
+
+const ESSAYS_PER_PAGE = 4;
+const totalPages = Math.ceil(essays.length / ESSAYS_PER_PAGE);
+---
+
+<BaseLayout title="Essays | Amir's Blog" description="Longer form reflections on technology, minimalism, and writing">
+  <Navigation slot="navigation" />
+  <ThemeToggle slot="theme-toggle" />
+
+  <div>
+    <h1 class="heading text-3xl mb-10">Essays</h1>
+    
+    <p class="text-gl-fg2 dark:text-gd-fg2 mb-8">
+      Longer-form reflections on digital minimalism, intentional technology use, and the craft of writing.
+    </p>
+    
+    <section>
+      {essays.slice(0, ESSAYS_PER_PAGE).map(essay => (
+        <article class="mb-12 pb-8 border-b border-gl-border dark:border-gd-border last:border-0">
+          <a href={`/essays/${essay.slug}`}>
+            <h2 class="heading text-2xl mb-3 hover:text-gl-accent dark:hover:text-gd-accent transition-colors">
+              {essay.title}
+            </h2>
+          </a>
+          
+          <div class="flex items-center gap-4 mb-4 text-sm">
+            <time class="text-gl-fg2 dark:text-gd-fg2">
+              {new Date(essay.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            
+            <span class="text-gl-fg2 dark:text-gd-fg2">
+              {essay.readTime} min read
+            </span>
+          </div>
+          
+          <p class="text-gl-fg2 dark:text-gd-fg2 mb-4">
+            {essay.description}
+          </p>
+          
+          <a 
+            href={`/essays/${essay.slug}`} 
+            class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
+          >
+            Read essay
+            <span class="i-carbon-arrow-right ml-1"></span>
+          </a>
+        </article>
+      ))}
+    </section>
+    
+    <Pagination currentPage={1} totalPages={totalPages} basePath="/essays" />
+  </div>
+  
+  <Footer slot="footer" />
+</BaseLayout>

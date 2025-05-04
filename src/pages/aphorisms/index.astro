@@ -1,0 +1,79 @@
+---
+// src/pages/aphorisms/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import AphorismCard from '../../components/AphorismCard.astro';
+import Pagination from '../../components/Pagination.astro';
+
+// Mock data for aphorisms
+const aphorisms = [
+  {
+    id: '1',
+    content: 'The quieter you become, the more you can hear.',
+    date: new Date('2025-04-28')
+  },
+  {
+    id: '2',
+    content: 'Simplicity is the ultimate sophistication.',
+    date: new Date('2025-04-25')
+  },
+  {
+    id: '3',
+    content: 'The best way to predict the future is to invent it.',
+    date: new Date('2025-04-22')
+  },
+  {
+    id: '4',
+    content: 'We shape our tools, and thereafter our tools shape us.',
+    date: new Date('2025-04-19')
+  },
+  {
+    id: '5',
+    content: 'Technology is best when it brings people together.',
+    date: new Date('2025-04-16')
+  },
+  {
+    id: '6',
+    content: 'The more you know, the more you realize you don\'t know.',
+    date: new Date('2025-04-13')
+  },
+  {
+    id: '7',
+    content: 'Digital minimalism is about choosing the tools that work for you.',
+    date: new Date('2025-04-10')
+  },
+  {
+    id: '8',
+    content: 'Attention is the rarest and purest form of generosity.',
+    date: new Date('2025-04-07')
+  }
+];
+
+const APHORISMS_PER_PAGE = 6;
+const totalPages = Math.ceil(aphorisms.length / APHORISMS_PER_PAGE);
+---
+
+<BaseLayout title="Aphorisms | Amir's Blog" description="Short, thoughtful observations and reflections">
+  <Navigation slot="navigation" />
+  <ThemeToggle slot="theme-toggle" />
+
+  <div>
+    <h1 class="heading text-3xl mb-10">Aphorisms</h1>
+    
+    <p class="text-gl-fg2 dark:text-gd-fg2 mb-8">
+      A collection of brief, thoughtful observations and reflections on life, technology, and philosophy.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+      {aphorisms.slice(0, APHORISMS_PER_PAGE).map(aphorism => (
+        <AphorismCard aphorism={aphorism} />
+      ))}
+    </div>
+    
+    <Pagination currentPage={1} totalPages={totalPages} basePath="/aphorisms" />
+  </div>
+  
+  <Footer slot="footer" />
+</BaseLayout>

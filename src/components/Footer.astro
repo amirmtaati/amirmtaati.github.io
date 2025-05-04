@@ -1,9 +1,11 @@
 ---
 // src/components/Footer.astro
 ---
-<footer class="py-6 text-center text-sm text-gl-fg2 dark:text-gd-fg2">
-  <div class="container">
-    © {new Date().getFullYear()} Amir's Blog. All rights reserved.
+<footer class="py-6 text-center text-sm text-gl-fg2 dark:text-gd-fg2 border-t border-gl-border/30 dark:border-gd-border/30 bg-gl-bg dark:bg-gd-bg">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-center items-center gap-2">
+      <span class="i-carbon-copyright text-lg"></span>
+      <span>{new Date().getFullYear()} Amir's Blog. All rights reserved.</span>
+    </div>
   </div>
 </footer>
-

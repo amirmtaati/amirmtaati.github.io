@@ -1,4 +1,4 @@
-import { defineConfig, presetUno, presetTypography, presetWebFonts } from 'unocss';
+import { defineConfig, presetUno, presetTypography, presetWebFonts, presetIcons } from 'unocss';
 
 export default defineConfig({
   presets: [
@@ -10,6 +10,13 @@ export default defineConfig({
         serif: 'Cormorant Garamond:400,500,600,700',
       },
       provider: 'google',
+    }),
+    presetIcons({
+      scale: 1.2,
+      cdn: 'https://esm.sh/',
+      collections: {
+        carbon: () => import('@iconify-json/carbon/icons.json').then(i => i.default),
+      }
     }),
   ],
   theme: {

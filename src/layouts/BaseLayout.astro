@@ -11,25 +11,47 @@
   <link rel="stylesheet" href="../styles/theme.css">
 </head>
 <body class="bg-gl-bg text-gl-fg dark:bg-gd-bg dark:text-gd-fg font-sans transition-colors duration-300 min-h-screen flex flex-col">
-  <div class="container flex py-8 gap-8 flex-1">
-    <aside class="w-64 shrink-0 hidden md:block">
-      <div class="card card-light dark:card-dark p-8 sticky top-8">
+  <!-- Mobile menu button -->
+  <div class="md:hidden fixed top-4 right-4 z-50">
+    <button id="mobile-menu-toggle" class="bg-gl-bg2 dark:bg-gd-bg2 p-2 rounded-md shadow-md border border-gl-border dark:border-gd-border">
+      <span class="i-carbon-menu block w-6 h-6"></span>
+    </button>
+  </div>
+  
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed md:sticky inset-y-0 left-0 w-72 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 h-screen top-0 border-r border-gl-border dark:border-gd-border">
+      <div class="h-full bg-gl-bg dark:bg-gd-bg overflow-y-auto p-8 flex flex-col">
         <header class="mb-8">
-          <h1 class="text-2xl logo mb-8">Amir's Blog</h1>
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded-full bg-gl-accent dark:bg-gd-accent flex items-center justify-center text-white shadow-md">
+              <span class="text-base font-bold">A</span>
+            </div>
+            <h1 class="text-2xl logo font-serif">Amir's Blog</h1>
+          </div>
           <slot name="navigation" />
         </header>
-        <div class="mt-4">
+        <div class="mt-auto">
           <slot name="theme-toggle" />
         </div>
       </div>
     </aside>
-    <main class="flex-1">
-      <div class="card card-light dark:card-dark p-8">
-        <slot />
+    
+    <!-- Main content -->
+    <main class="flex-1 flex flex-col min-h-screen">
+      <div class="flex-1 p-4 md:p-8 container mx-auto">
+        <div class="card card-light dark:card-dark p-6 md:p-8 shadow-lg">
+          <slot />
+        </div>
       </div>
+      
+      <slot name="footer" />
     </main>
   </div>
-  <slot name="footer" />
+  
+  <!-- Overlay for mobile menu -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+  
   <script>
     // Theme toggle functionality
     document.addEventListener('DOMContentLoaded', () => {
@@ -44,6 +66,22 @@
           document.documentElement.className = newTheme;
           localStorage.setItem('theme', newTheme);
         });
+      }
+      
+      // Mobile menu functionality
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebar-overlay');
+      
+      function toggleSidebar() {
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+        document.body.classList.toggle('overflow-hidden');
+      }
+      
+      if (mobileMenuToggle && sidebar && overlay) {
+        mobileMenuToggle.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
       }
     });
   </script>

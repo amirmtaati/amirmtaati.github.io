@@ -8,7 +8,10 @@ const { name } = Astro.props;
 
 <a 
   href={`/tags/${name}`} 
-  class="px-2 py-1 rounded-full text-xs bg-gl-tag dark:bg-gd-tag text-gl-fg dark:text-gd-fg hover:opacity-90 transition-opacity"
+  class="px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1
+         bg-gl-tag dark:bg-gd-tag text-gl-fg dark:text-gd-fg 
+         hover:opacity-90 transition-all hover:shadow-sm"
 >
+  <span class="i-carbon-tag"></span>
   {name}
 </a>
