@@ -1,0 +1,58 @@
+---
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  basePath: string;
+}
+
+const { currentPage, totalPages, basePath } = Astro.props;
+
+// Generate an array of page numbers
+const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+---
+
+<nav class="flex justify-center mt-12" aria-label="Pagination">
+  <ul class="flex items-center gap-2">
+    <!-- Previous button -->
+    {currentPage > 1 && (
+      <li>
+        <a 
+          href={currentPage === 2 ? basePath : `${basePath}/${currentPage - 1}`}
+          class="flex items-center justify-center w-10 h-10 rounded-full border border-gl-border dark:border-gd-border hover:bg-gl-bg2 dark:hover:bg-gd-bg2 transition-colors"
+          aria-label="Previous page"
+        >
+          <span class="i-carbon-chevron-left"></span>
+        </a>
+      </li>
+    )}
+    
+    <!-- Page numbers -->
+    {pageNumbers.map(num => (
+      <li>
+        <a 
+          href={num === 1 ? basePath : `${basePath}/${num}`}
+          class={`flex items-center justify-center w-10 h-10 rounded-full transition-colors
+            ${currentPage === num 
+              ? "bg-gl-accent dark:bg-gd-accent text-white" 
+              : "hover:bg-gl-bg2 dark:hover:bg-gd-bg2 border border-gl-border dark:border-gd-border"}`}
+          aria-current={currentPage === num ? "page" : undefined}
+        >
+          {num}
+        </a>
+      </li>
+    ))}
+    
+    <!-- Next button -->
+    {currentPage < totalPages && (
+      <li>
+        <a 
+          href={`${basePath}/${currentPage + 1}`}
+          class="flex items-center justify-center w-10 h-10 rounded-full border border-gl-border dark:border-gd-border hover:bg-gl-bg2 dark:hover:bg-gd-bg2 transition-colors"
+          aria-label="Next page"
+        >
+          <span class="i-carbon-chevron-right"></span>
+        </a>
+      </li>
+    )}
+  </ul>
+</nav>

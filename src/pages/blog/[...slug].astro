@@ -1,0 +1,53 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro'; // Adjust path if different
+
+// Generate static paths for all blog posts
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+  }));
+}
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+
+// Fetch the post by slug
+const post = await getEntry('blog', slug!);
+if (!post) {
+  return Astro.redirect('/404'); // Redirect to 404 if post not found
+}
+
+// Render the Markdown content
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title}>
+  <article class="prose max-w-3xl mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-4">{post.data.title}</h1>
+    <div class="flex items-center gap-4 mb-6 text-gray-500 text-sm">
+      <time>
+      {new Date(post.data.date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}
+
+      </time>
+      {post.data.tags && (
+        <div class="flex gap-2">
+          {post.data.tags.map(tag => (
+            <span class="bg-gray-100 px-2 py-1 rounded">{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+    {post.data.description && (
+      <p class="text-gray-600 mb-6">{post.data.description}</p>
+    )}
+    <div class="prose prose-lg">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+// src/layouts/BaseLayout.astro
+---
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amir's Blog</title>
+  <link rel="stylesheet" href="@unocss/reset/tailwind.css">
+  <link rel="stylesheet" href="../styles/theme.css">
+</head>
+<body class="bg-gl-bg text-gl-fg dark:bg-gd-bg dark:text-gd-fg font-sans transition-colors duration-300 min-h-screen flex flex-col">
+  <div class="container flex py-8 gap-8 flex-1">
+    <aside class="w-64 shrink-0 hidden md:block">
+      <div class="card card-light dark:card-dark p-8 sticky top-8">
+        <header class="mb-8">
+          <h1 class="text-2xl logo mb-8">Amir's Blog</h1>
+          <slot name="navigation" />
+        </header>
+        <div class="mt-4">
+          <slot name="theme-toggle" />
+        </div>
+      </div>
+    </aside>
+    <main class="flex-1">
+      <div class="card card-light dark:card-dark p-8">
+        <slot />
+      </div>
+    </main>
+  </div>
+  <slot name="footer" />
+  <script>
+    // Theme toggle functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.className = theme;
+      
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.className;
+          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          document.documentElement.className = newTheme;
+          localStorage.setItem('theme', newTheme);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  publishDate: string;
+}
+
+const { title, publishDate } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <article class="content-container">
+    <h1 class="post-title">{title}</h1>
+    <p class="text-light-fg-soft dark:text-dark-fg-soft mb-6 font-body">
+      Published on <time>{publishDate}</time>
+    </p>
+    <div class="post-content prose dark:prose-invert max-w-none">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

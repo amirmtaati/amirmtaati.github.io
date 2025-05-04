@@ -1,16 +1,43 @@
 ---
+// src/pages/index.astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import PostCard from '../components/PostCard.astro';
+import Footer from '../components/Footer.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
+// This would typically come from a CMS or markdown files
+// For demo purposes, we'll use mock data
+const posts = await getCollection('blog');
+posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Optional: Limit to latest posts (e.g., 3 posts)
+const latestPosts = posts.slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Navigation slot="navigation" />
+  <ThemeToggle slot="theme-toggle" />
+
+  <div>
+    <h1 class="heading text-3xl mb-10">Latest Posts</h1>
+    
+    <section>
+      {latestPosts.map(post => (
+        <PostCard post={post} />
+      ))}
+    </section>
+    
+    <div class="mt-8">
+      <a 
+        href="/blog" 
+        class="text-gl-accent dark:text-gd-accent hover:underline font-medium"
+      >
+        View all posts →
+      </a>
+    </div>
+  </div>
+  
+  <Footer slot="footer" />
+</BaseLayout>
