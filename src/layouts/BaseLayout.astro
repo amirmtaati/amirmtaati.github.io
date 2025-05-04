@@ -11,9 +11,9 @@
   <link rel="stylesheet" href="../styles/theme.css">
 </head>
 <body class="bg-gl-bg text-gl-fg dark:bg-gd-bg dark:text-gd-fg font-sans transition-colors duration-300 min-h-screen flex flex-col">
-  <!-- Mobile menu button -->
-  <div class="md:hidden fixed top-4 right-4 z-50">
-    <button id="mobile-menu-toggle" class="bg-gl-bg2 dark:bg-gd-bg2 p-2 rounded-md shadow-md border border-gl-border dark:border-gd-border">
+  <!-- Mobile menu button - Improved -->
+  <div class="md:hidden fixed top-5 right-5 z-50">
+    <button id="mobile-menu-toggle" class="flex items-center justify-center bg-gl-bg2 dark:bg-gd-bg2 p-3 rounded-xl shadow-lg border-2 border-gl-border dark:border-gd-border hover:scale-105 transition-all">
       <span class="i-carbon-menu block w-6 h-6"></span>
     </button>
   </div>
@@ -24,9 +24,12 @@
       <div class="h-full bg-gl-bg dark:bg-gd-bg overflow-y-auto p-8 flex flex-col">
         <header class="mb-8">
           <div class="flex items-center gap-3 mb-8">
-            <div class="w-10 h-10 rounded-full bg-gl-accent dark:bg-gd-accent flex items-center justify-center text-white shadow-md">
-              <span class="text-base font-bold">A</span>
-            </div>
+            <!-- Replace with your actual image - using placeholder for now -->
+            <img 
+              src="/me.jpg" 
+              alt="Blog Logo" 
+              class="w-12 h-12 rounded-xl shadow-md"
+            />
             <h1 class="text-2xl logo font-serif">Amir's Blog</h1>
           </div>
           <slot name="navigation" />
@@ -49,8 +52,8 @@
     </main>
   </div>
   
-  <!-- Overlay for mobile menu -->
-  <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+  <!-- Overlay for mobile menu - Improved with fade effect -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 hidden md:hidden opacity-0 transition-opacity duration-300"></div>
   
   <script>
     // Theme toggle functionality
@@ -68,7 +71,7 @@
         });
       }
       
-      // Mobile menu functionality
+      // Mobile menu functionality - Enhanced with animation
       const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('sidebar-overlay');
@@ -76,6 +79,18 @@
       function toggleSidebar() {
         sidebar.classList.toggle('-translate-x-full');
         overlay.classList.toggle('hidden');
+        
+        // Add animation for overlay
+        setTimeout(() => {
+          if (!overlay.classList.contains('hidden')) {
+            overlay.classList.add('opacity-100');
+            overlay.classList.remove('opacity-0');
+          } else {
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0');
+          }
+        }, 10);
+        
         document.body.classList.toggle('overflow-hidden');
       }
       

@@ -12,16 +12,16 @@ const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 ---
 
 <nav class="flex justify-center mt-12" aria-label="Pagination">
-  <ul class="flex items-center gap-3 p-2 rounded-xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border">
+  <ul class="flex items-center gap-4 p-3 rounded-2xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border shadow-sm">
     <!-- Previous button -->
     {currentPage > 1 && (
       <li>
         <a 
           href={currentPage === 2 ? basePath : `${basePath}/${currentPage - 1}`}
-          class="flex items-center justify-center w-10 h-10 rounded-full text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg2 dark:hover:bg-gd-bg2 hover:text-gl-fg dark:hover:text-gd-fg transition-colors"
+          class="flex items-center justify-center w-12 h-12 rounded-xl text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg dark:hover:bg-gd-bg3 hover:text-gl-accent dark:hover:text-gd-accent transition-colors border border-transparent hover:border-gl-border dark:hover:border-gd-border"
           aria-label="Previous page"
         >
-          <span class="i-carbon-chevron-left w-5 h-5"></span>
+          <span class="i-carbon-chevron-left w-6 h-6"></span>
         </a>
       </li>
     )}
@@ -31,10 +31,10 @@ const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
       <li>
         <a 
           href={num === 1 ? basePath : `${basePath}/${num}`}
-          class={`flex items-center justify-center w-10 h-10 rounded-full font-medium transition-colors
+          class={`flex items-center justify-center w-12 h-12 rounded-xl font-medium transition-all
             ${currentPage === num 
-              ? "bg-gl-accent dark:bg-gd-accent text-white shadow-md" 
-              : "hover:bg-gl-bg2 dark:hover:bg-gd-bg2 text-gl-fg2 dark:text-gd-fg2 hover:text-gl-fg dark:hover:text-gd-fg"}`}
+              ? "bg-gl-accent dark:bg-gd-accent text-white shadow-md border-0" 
+              : "hover:bg-gl-bg dark:hover:bg-gd-bg3 text-gl-fg2 dark:text-gd-fg2 hover:text-gl-accent dark:hover:text-gd-accent border border-transparent hover:border-gl-border dark:hover:border-gd-border"}`}
           aria-current={currentPage === num ? "page" : undefined}
         >
           {num}
@@ -47,10 +47,10 @@ const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
       <li>
         <a 
           href={`${basePath}/${currentPage + 1}`}
-          class="flex items-center justify-center w-10 h-10 rounded-full text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg2 dark:hover:bg-gd-bg2 hover:text-gl-fg dark:hover:text-gd-fg transition-colors"
+          class="flex items-center justify-center w-12 h-12 rounded-xl text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg dark:hover:bg-gd-bg3 hover:text-gl-accent dark:hover:text-gd-accent transition-colors border border-transparent hover:border-gl-border dark:hover:border-gd-border"
           aria-label="Next page"
         >
-          <span class="i-carbon-chevron-right w-5 h-5"></span>
+          <span class="i-carbon-chevron-right w-6 h-6"></span>
         </a>
       </li>
     )}
