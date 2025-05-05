@@ -4,39 +4,109 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navigation from '../components/Navigation.astro';
 import PostCard from '../components/PostCard.astro';
+import EssayCard from '../components/EssayCard.astro';
+import AphorismCard from '../components/AphorismCard.astro';
 import Footer from '../components/Footer.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
-// This would typically come from a CMS or markdown files
-// For demo purposes, we'll use mock data
-const posts = await getCollection('blog');
-posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+// Get all content collections
+const allPosts = await getCollection('blog');
+const allEssays = await getCollection('essays');
+const allAphorisms = await getCollection('aphorisms');
 
-// Optional: Limit to latest posts (e.g., 3 posts)
-const latestPosts = posts.slice(0, 3);
+// Sort by date (newest first)
+const sortByDate = (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+
+const latestPosts = allPosts.sort(sortByDate).slice(0, 2);
+const latestEssays = allEssays.sort(sortByDate).slice(0, 1);
+const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
 ---
 
 <BaseLayout>
   <Navigation slot="navigation" />
   <ThemeToggle slot="theme-toggle" />
 
-  <div>
-    <h1 class="heading text-3xl mb-10">Latest Posts</h1>
-    
-    <section>
-      {latestPosts.map(post => (
-        <PostCard post={post} />
-      ))}
+  <div class="space-y-16">
+    <!-- Welcome Section -->
+    <section class="mb-12">
+      <h1 class="heading text-4xl mb-4">Welcome to My Digital Garden</h1>
+      <div class="w-20 h-1 bg-gl-accent dark:bg-gd-accent rounded-full mb-6"></div>
+      <p class="text-lg text-gl-fg2 dark:text-gd-fg2 leading-relaxed">
+        A minimalist space for thoughts, essays, and observations on digital minimalism, 
+        technology, and the art of living well in the digital age.
+      </p>
     </section>
     
-    <div class="mt-8">
-      <a 
-        href="/blog" 
-        class="text-gl-accent dark:text-gd-accent hover:underline font-medium"
-      >
-        View all posts →
-      </a>
-    </div>
+    <!-- Latest Blog Posts -->
+    <section>
+      <h2 class="heading text-2xl mb-6 flex items-center">
+        <span class="i-carbon-blog mr-2"></span>
+        Latest Posts
+      </h2>
+      <div class="w-full max-w-3xl">
+        {latestPosts.map(post => (
+          <PostCard post={post} />
+        ))}
+      </div>
+      <div class="mt-6">
+        <a 
+          href="/blog" 
+          class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
+        >
+          View all posts
+          <span class="i-carbon-arrow-right ml-1"></span>
+        </a>
+      </div>
+    </section>
+    
+    <!-- Latest Essays -->
+    <section>
+      <h2 class="heading text-2xl mb-6 flex items-center">
+        <span class="i-carbon-document mr-2"></span>
+        Latest Essays
+      </h2>
+      <div class="w-full max-w-3xl">
+        {latestEssays.map(essay => (
+          <EssayCard essay={essay} />
+        ))}
+      </div>
+      <div class="mt-6">
+        <a 
+          href="/essays" 
+          class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
+        >
+          Explore all essays
+          <span class="i-carbon-arrow-right ml-1"></span>
+        </a>
+      </div>
+    </section>
+    
+    <!-- Latest Aphorisms -->
+    <section>
+      <h2 class="heading text-2xl mb-6 flex items-center">
+        <span class="i-carbon-quote mr-2"></span>
+        Recent Aphorisms
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
+        {latestAphorisms.map(aphorism => (
+          <AphorismCard aphorism={{
+            content: aphorism.data.content,
+            date: aphorism.data.date,
+            slug: aphorism.slug,
+            tags: aphorism.data.tags
+          }} />
+        ))}
+      </div>
+      <div class="mt-6">
+        <a 
+          href="/aphorisms" 
+          class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
+        >
+          Read more aphorisms
+          <span class="i-carbon-arrow-right ml-1"></span>
+        </a>
+      </div>
+    </section>
   </div>
   
   <Footer slot="footer" />

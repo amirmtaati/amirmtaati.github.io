@@ -1,11 +1,13 @@
 ---
 export interface Props {
   post: {
-    title: string;
+    data: {
+      title: string;
+      date: Date;
+      description?: string;
+      tags?: string[];
+    };
     slug: string;
-    excerpt: string;
-    date: Date;
-    tags: string[];
   }
 }
 
@@ -13,11 +15,11 @@ const { post } = Astro.props;
 import Tag from './Tag.astro';
 ---
 
-<article class="mb-8 pb-8 border-b border-gl-border/40 dark:border-gd-border/40 last:border-0 last:mb-0 last:pb-0">
+<article class="mb-8 pb-8 border-b border-gl-border/40 dark:border-gd-border/40 last:border-0 last:mb-0 last:pb-0 w-full">
   <a href={`/blog/${post.slug}`} class="no-underline text-inherit visited:text-inherit outline-none block group pb-5">
-    <h1 class="heading text-2xl mb-3 group-hover:text-gl-accent dark:group-hover:text-gd-accent transition-colors text-4xl font-bold">
+    <h2 class="heading text-2xl mb-3 group-hover:text-gl-accent dark:group-hover:text-gd-accent transition-colors font-bold">
       {post.data.title}
-    </h1>
+    </h2>
   </a>
   
   <div class="flex items-center flex-wrap gap-4 mb-4 text-sm">
@@ -30,14 +32,28 @@ import Tag from './Tag.astro';
       })}
     </time>
     
-    <div class="flex flex-wrap gap-2">
-      {post.data.tags.map((tag) => (
-        <Tag name={tag} />
-      ))}
-    </div>
+    {post.data.tags && (
+      <div class="flex flex-wrap gap-2">
+        {post.data.tags.map((tag) => (
+          <Tag name={tag} />
+        ))}
+      </div>
+    )}
   </div>
   
-  <p class="text-gl-fg2 dark:text-gd-fg2 leading-relaxed">
-    {post.data.description}
-  </p>
+  {post.data.description && (
+    <p class="text-gl-fg2 dark:text-gd-fg2 leading-relaxed">
+      {post.data.description}
+    </p>
+  )}
+  
+  <div class="mt-4">
+    <a 
+      href={`/blog/${post.slug}`} 
+      class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
+    >
+      Read post
+      <span class="i-carbon-arrow-right ml-1"></span>
+    </a>
+  </div>
 </article>

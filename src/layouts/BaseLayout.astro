@@ -1,17 +1,30 @@
 ---
 // src/layouts/BaseLayout.astro
+import Favicon from '../components/Favicon.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Amir's Blog",
+  description = "A personal blog about writing, technology, and digital minimalism"
+} = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amir's Blog</title>
+  <meta name="description" content={description}>
+  <title>{title}</title>
   <link rel="stylesheet" href="@unocss/reset/tailwind.css">
   <link rel="stylesheet" href="../styles/theme.css">
+  <Favicon />
 </head>
 <body class="bg-gl-bg text-gl-fg dark:bg-gd-bg dark:text-gd-fg font-sans transition-colors duration-300 min-h-screen flex flex-col">
-  <!-- Mobile menu button - Improved -->
+  <!-- Mobile menu button -->
   <div class="md:hidden fixed top-5 right-5 z-50">
     <button id="mobile-menu-toggle" class="flex items-center justify-center bg-gl-bg2 dark:bg-gd-bg2 p-3 rounded-xl shadow-lg border-2 border-gl-border dark:border-gd-border hover:scale-105 transition-all">
       <span class="i-carbon-menu block w-6 h-6"></span>
@@ -20,7 +33,7 @@
   
   <div class="flex flex-1">
     <!-- Sidebar -->
-    <aside id="sidebar" class="fixed md:sticky inset-y-0 left-0 w-72 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 h-screen top-0 border-r border-gl-border dark:border-gd-border">
+    <aside id="sidebar" class="fixed md:sticky inset-y-0 left-0 w-72 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 h-screen top-0 border-r border-gl-border dark:border-gd-border shadow-lg">
       <div class="h-full bg-gl-bg dark:bg-gd-bg overflow-y-auto p-8 flex flex-col">
         <header class="mb-8">
           <div class="flex items-center gap-3 mb-8">
@@ -43,7 +56,7 @@
     <!-- Main content -->
     <main class="flex-1 flex flex-col min-h-screen">
       <div class="flex-1 p-4 md:p-8 container mx-auto">
-        <div class="card card-light dark:card-dark p-6 md:p-8 shadow-lg">
+        <div class="card card-light dark:card-dark p-6 md:p-8 shadow-lg max-w-3xl mx-auto">
           <slot />
         </div>
       </div>
@@ -52,7 +65,7 @@
     </main>
   </div>
   
-  <!-- Overlay for mobile menu - Improved with fade effect -->
+  <!-- Overlay for mobile menu -->
   <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 hidden md:hidden opacity-0 transition-opacity duration-300"></div>
   
   <script>
