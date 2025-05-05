@@ -40,7 +40,6 @@ const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
     <!-- Latest Blog Posts -->
     <section>
       <h2 class="heading text-2xl mb-6 flex items-center">
-        <span class="i-carbon-blog mr-2"></span>
         Latest Posts
       </h2>
       <div class="w-full max-w-3xl">
@@ -62,7 +61,6 @@ const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
     <!-- Latest Essays -->
     <section>
       <h2 class="heading text-2xl mb-6 flex items-center">
-        <span class="i-carbon-document mr-2"></span>
         Latest Essays
       </h2>
       <div class="w-full max-w-3xl">
@@ -84,7 +82,6 @@ const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
     <!-- Latest Aphorisms -->
     <section>
       <h2 class="heading text-2xl mb-6 flex items-center">
-        <span class="i-carbon-quote mr-2"></span>
         Recent Aphorisms
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
@@ -96,15 +93,6 @@ const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
             tags: aphorism.data.tags
           }} />
         ))}
-      </div>
-      <div class="mt-6">
-        <a 
-          href="/aphorisms" 
-          class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
-        >
-          Read more aphorisms
-          <span class="i-carbon-arrow-right ml-1"></span>
-        </a>
       </div>
     </section>
   </div>
