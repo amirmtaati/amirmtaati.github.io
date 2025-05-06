@@ -8,7 +8,16 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout title={frontmatter.title}>
+  <!-- Add KaTeX CSS -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" 
+    integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" 
+    crossorigin="anonymous"
+    slot="head"
+  />
+  
   <Navigation slot="navigation" />
   <ThemeToggle slot="theme-toggle" />
   
