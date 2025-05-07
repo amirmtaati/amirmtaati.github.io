@@ -53,4 +53,5 @@ export default defineConfig({
     'btn': 'rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center',
     'btn-primary': 'bg-gl-accent dark:bg-gd-accent text-white font-medium',
   },
+  darkMode: 'class', // Adds support for dark:* utilities
 });
