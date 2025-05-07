@@ -11,5 +11,10 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [[rehypeKatex, { output: 'html' }]], // 'html' ensures compatibility
+    shikiConfig: {
+      theme: 'gruvbox-dark-soft', // Use Gruvbox dark theme
+      langs: ['javascript', 'typescript', 'python', 'html', 'css', 'bash', 'c', 'go'], // Specify languages
+      wrap: true, // Wrap long lines
+    },
   },
 });
