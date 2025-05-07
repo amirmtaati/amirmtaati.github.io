@@ -9,50 +9,103 @@ const { currentPage, totalPages, basePath } = Astro.props;
 
 // Generate an array of page numbers
 const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+// Calculate which page numbers to show
+const showPageNumbers = () => {
+  if (totalPages <= 5) {
+    // If 5 or fewer pages, show all
+    return pageNumbers;
+  }
+  
+  if (currentPage <= 3) {
+    // If near start, show first 5 pages
+    return [...pageNumbers.slice(0, 4), '...', totalPages];
+  }
+  
+  if (currentPage >= totalPages - 2) {
+    // If near end, show last 5 pages
+    return [1, '...', ...pageNumbers.slice(totalPages - 4)];
+  }
+  
+  // Otherwise show current page with neighbors
+  return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+};
+
+const pagesToShow = showPageNumbers();
 ---
 
 <nav class="flex justify-center mt-12" aria-label="Pagination">
-  <ul class="flex items-center gap-4 p-3 rounded-2xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border shadow-sm">
+  <div class="flex items-center gap-2 py-3 px-2 rounded-2xl bg-gl-bg2/50 dark:bg-gd-bg2/50 shadow-sm overflow-hidden">
     <!-- Previous button -->
     {currentPage > 1 && (
-      <li>
-        <a 
-          href={currentPage === 2 ? basePath : `${basePath}/${currentPage - 1}`}
-          class="flex items-center justify-center w-12 h-12 rounded-xl text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg dark:hover:bg-gd-bg3 hover:text-gl-accent dark:hover:text-gd-accent transition-colors border border-transparent hover:border-gl-border dark:hover:border-gd-border"
-          aria-label="Previous page"
-        >
-          <span class="i-carbon-chevron-left w-6 h-6"></span>
-        </a>
-      </li>
+      <a 
+        href={currentPage === 2 ? basePath : `${basePath}/${currentPage - 1}`}
+        class="flex items-center justify-center w-10 h-10 rounded-xl text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg dark:hover:bg-gd-bg3 hover:text-gl-accent dark:hover:text-gd-accent transition-all border border-transparent hover:border-gl-border/30 dark:hover:border-gd-border/30"
+        aria-label="Previous page"
+      >
+        <span class="i-carbon-chevron-left w-5 h-5"></span>
+      </a>
     )}
     
     <!-- Page numbers -->
-    {pageNumbers.map(num => (
-      <li>
-        <a 
-          href={num === 1 ? basePath : `${basePath}/${num}`}
-          class={`flex items-center justify-center w-12 h-12 rounded-xl font-medium transition-all
-            ${currentPage === num 
-              ? "bg-gl-accent dark:bg-gd-accent text-white shadow-md border-0" 
-              : "hover:bg-gl-bg dark:hover:bg-gd-bg3 text-gl-fg2 dark:text-gd-fg2 hover:text-gl-accent dark:hover:text-gd-accent border border-transparent hover:border-gl-border dark:hover:border-gd-border"}`}
-          aria-current={currentPage === num ? "page" : undefined}
-        >
-          {num}
-        </a>
-      </li>
-    ))}
+    <div class="flex items-center">
+      {pagesToShow.map((num, index) => (
+        num === '...' ? (
+          <span class="w-8 text-center text-gl-fg2 dark:text-gd-fg2 flex items-center justify-center">...</span>
+        ) : (
+          <a 
+            href={num === 1 ? basePath : `${basePath}/${num}`}
+            class={`flex items-center justify-center w-10 h-10 rounded-xl font-medium transition-all mx-0.5
+              ${currentPage === num 
+                ? "bg-gl-accent dark:bg-gd-accent text-white shadow-md border-0" 
+                : "hover:bg-gl-bg dark:hover:bg-gd-bg3 text-gl-fg2 dark:text-gd-fg2 hover:text-gl-accent dark:hover:text-gd-accent border border-transparent hover:border-gl-border/30 dark:hover:border-gd-border/30"}`}
+            aria-current={currentPage === num ? "page" : undefined}
+          >
+            {num}
+          </a>
+        )
+      ))}
+    </div>
     
     <!-- Next button -->
     {currentPage < totalPages && (
-      <li>
-        <a 
-          href={`${basePath}/${currentPage + 1}`}
-          class="flex items-center justify-center w-12 h-12 rounded-xl text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg dark:hover:bg-gd-bg3 hover:text-gl-accent dark:hover:text-gd-accent transition-colors border border-transparent hover:border-gl-border dark:hover:border-gd-border"
-          aria-label="Next page"
-        >
-          <span class="i-carbon-chevron-right w-6 h-6"></span>
-        </a>
-      </li>
+      <a 
+        href={`${basePath}/${currentPage + 1}`}
+        class="flex items-center justify-center w-10 h-10 rounded-xl text-gl-fg2 dark:text-gd-fg2 hover:bg-gl-bg dark:hover:bg-gd-bg3 hover:text-gl-accent dark:hover:text-gd-accent transition-all border border-transparent hover:border-gl-border/30 dark:hover:border-gd-border/30"
+        aria-label="Next page"
+      >
+        <span class="i-carbon-chevron-right w-5 h-5"></span>
+      </a>
     )}
-  </ul>
+  </div>
 </nav>
+
+<style>
+  /* Add subtle hover effect */
+  a {
+    transform: translateY(0);
+    transition: all 0.2s ease;
+  }
+  
+  a:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Active page styles */
+  a[aria-current="page"] {
+    position: relative;
+  }
+  
+  a[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+  }
+</style>
