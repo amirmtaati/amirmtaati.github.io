@@ -1,0 +1,155 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import Tag from '../../components/Tag.astro';
+
+// Generate static paths for all essays
+export async function getStaticPaths() {
+  const essays = await getCollection('essays');
+  return essays.map(essay => ({
+    params: { slug: essay.slug },
+  }));
+}
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+
+// Fetch the essay by slug
+const essay = await getEntry('essays', slug!);
+if (!essay) {
+  return Astro.redirect('/404'); // Redirect to 404 if essay not found
+}
+
+// Render the Markdown content
+const { Content } = await essay.render();
+
+// Get all essays for "More essays" section
+const allEssays = await getCollection('essays');
+// Filter out current essay and get 3 random ones
+const otherEssays = allEssays
+  .filter(e => e.slug !== slug)
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 2);
+---
+
+<BaseLayout title={essay.data.title}>
+  <!-- Add KaTeX CSS -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" 
+    integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" 
+    crossorigin="anonymous"
+    slot="head"
+  />
+  
+  <Navigation slot="navigation" />
+  <ThemeToggle slot="theme-toggle" />
+  
+  <div class="content-container">
+    <article class="prose prose-lg dark:prose-invert max-w-none">
+      <header class="mb-12">
+        <h1 class="text-5xl font-serif mb-4">{essay.data.title}</h1>
+        
+        <div class="flex flex-wrap gap-3 items-center mb-8">
+          <time class="text-gl-fg2 dark:text-gd-fg2 text-sm">
+            {new Date(essay.data.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+          
+          <span class="text-gl-fg2 dark:text-gd-fg2 text-sm flex items-center gap-2">
+            <span class="i-carbon-time text-lg"></span>
+            {essay.data.readTime} min read
+          </span>
+          
+          {essay.data.tags && (
+            <div class="flex flex-wrap gap-2">
+              {essay.data.tags.map((tag) => (
+                <Tag name={tag} />
+              ))}
+            </div>
+          )}
+        </div>
+        
+        {essay.data.description && (
+          <p class="text-lg italic text-gl-fg2 dark:text-gd-fg2 mb-8 border-l-4 border-gl-accent dark:border-gd-accent pl-4 py-1">
+            {essay.data.description}
+          </p>
+        )}
+      </header>
+      
+      <div class="essay-content mt-10">
+        <Content />
+      </div>
+      
+      <!-- Author section -->
+      <div class="mt-20 pt-10 border-t border-gl-border dark:border-gd-border">
+        <div class="flex items-center gap-4">
+          <img 
+            src="/me.jpg" 
+            alt="Author avatar" 
+            class="w-16 h-16 rounded-full border-2 border-gl-border dark:border-gd-border"
+          />
+          <div>
+            <h3 class="text-xl font-serif mb-1">Amir</h3>
+            <p class="text-gl-fg2 dark:text-gd-fg2 text-sm">
+              Writer, thinker, and digital minimalist sharing thoughts on technology and intentional living.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Related Essays section -->
+      {otherEssays.length > 0 && (
+        <div class="mt-20 pt-10 border-t border-gl-border dark:border-gd-border">
+          <h2 class="text-2xl font-serif mb-8">More Essays</h2>
+          <div class="grid grid-cols-1 gap-8">
+            {otherEssays.map(relatedEssay => (
+              <div class="p-6 rounded-xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border hover:shadow-md transition-all">
+                <a href={`/essays/${relatedEssay.slug}`} class="no-underline text-inherit visited:text-inherit">
+                  <h3 class="text-xl mb-2 hover:text-gl-accent dark:hover:text-gd-accent transition-colors">
+                    {relatedEssay.data.title}
+                  </h3>
+                </a>
+                <p class="text-gl-fg2 dark:text-gd-fg2 mb-2 line-clamp-2">
+                  {relatedEssay.data.description}
+                </p>
+                <div class="flex justify-between items-center">
+                  <time class="text-sm text-gl-fg2 dark:text-gd-fg2">
+                    {new Date(relatedEssay.data.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <span class="text-sm text-gl-fg2 dark:text-gd-fg2">
+                    {relatedEssay.data.readTime} min read
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </article>
+  </div>
+  
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .content-container {
+    /* Set fixed minimum height to ensure consistent page height */
+    min-height: 70vh;
+  }
+  
+  .essay-content {
+    /* Ensure minimum height for the content area */
+    min-height: 30vh;
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import Tag from '../../components/Tag.astro';
+
+// Get all content collections
+const allPosts = await getCollection('blog');
+const allEssays = await getCollection('essays');
+const allAphorisms = await getCollection('aphorisms');
+
+// Combine all tags from different collections
+const allTags = new Set();
+
+// Extract tags from blog posts
+allPosts.forEach(post => {
+  if (post.data.tags) {
+    post.data.tags.forEach(tag => allTags.add(tag));
+  }
+});
+
+// Extract tags from essays
+allEssays.forEach(essay => {
+  if (essay.data.tags) {
+    essay.data.tags.forEach(tag => allTags.add(tag));
+  }
+});
+
+// Extract tags from aphorisms
+allAphorisms.forEach(aphorism => {
+  if (aphorism.data.tags) {
+    aphorism.data.tags.forEach(tag => allTags.add(tag));
+  }
+});
+
+// Convert set to sorted array
+const sortedTags = Array.from(allTags).sort();
+
+// Count how many items have each tag
+const tagCounts = {};
+sortedTags.forEach(tag => {
+  let count = 0;
+  
+  // Count blog posts with this tag
+  count += allPosts.filter(post => post.data.tags && post.data.tags.includes(tag)).length;
+  
+  // Count essays with this tag
+  count += allEssays.filter(essay => essay.data.tags && essay.data.tags.includes(tag)).length;
+  
+  // Count aphorisms with this tag
+  count += allAphorisms.filter(aphorism => aphorism.data.tags && aphorism.data.tags.includes(tag)).length;
+  
+  tagCounts[tag] = count;
+});
+---
+
+<BaseLayout title="Tags | Amir's Blog" description="Browse content by tags">
+  <Navigation slot="navigation" />
+  <ThemeToggle slot="theme-toggle" />
+
+  <div>
+    <h1 class="heading text-3xl mb-10">Tags</h1>
+    
+    <p class="text-gl-fg2 dark:text-gd-fg2 mb-8">
+      Browse all content by topics and categories.
+    </p>
+    
+    <div class="flex flex-wrap gap-3 mb-12">
+      {sortedTags.map(tag => (
+        <a 
+          href={`/tags/${tag}`} 
+          class="px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2
+                bg-gl-tag dark:bg-gd-tag text-gl-fg dark:text-gd-fg 
+                hover:opacity-90 transition-all hover:shadow-md"
+        >
+          <span class="i-carbon-tag"></span>
+          {tag}
+          <span class="inline-flex items-center justify-center bg-gl-bg dark:bg-gd-bg px-2 py-0.5 rounded-full text-xs">
+            {tagCounts[tag]}
+          </span>
+        </a>
+      ))}
+    </div>
+    
+    <div class="bg-gl-bg2/50 dark:bg-gd-bg2/50 p-6 rounded-xl border border-gl-border dark:border-gd-border">
+      <h2 class="text-xl mb-4">Looking for Something Specific?</h2>
+      <p class="text-gl-fg2 dark:text-gd-fg2">
+        Click on any tag above to see all content related to that topic. Tags are a great way to discover connections between different pieces.
+      </p>
+    </div>
+  </div>
+  
+  <Footer slot="footer" />
+</BaseLayout>
