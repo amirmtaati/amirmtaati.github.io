@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+import PostCard from '../../components/PostCard.astro';
+import EssayCard from '../../components/EssayCard.astro';
+import AphorismCard from '../../components/AphorismCard.astro';
+
+// Generate paths for all tags
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const allEssays = await getCollection('essays');
+  const allAphorisms = await getCollection('aphorisms');
+  
+  // Collect all unique tags
+  const allTags = new Set();
+  
+  allPosts.forEach(post => {
+    if (post.data.tags) {
+      post.data.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+  
+  allEssays.forEach(essay => {
+    if (essay.data.tags) {
+      essay.data.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+  
+  allAphorisms.forEach(aphorism => {
+    if (aphorism.data.tags) {
+      aphorism.data.tags.forEach(tag => allTags.add(tag));
+    }
+  });
+  
+  // Create a path for each tag
+  return Array.from(allTags).map(tag => ({
+    params: { tag },
+    props: { tag }
+  }));
+}
+
+// Get the tag from params
+const { tag } = Astro.props;
+
+// Get all content collections
+const allPosts = await getCollection('blog');
+const allEssays = await getCollection('essays');
+const allAphorisms = await getCollection('aphorisms');
+
+// Filter content by tag
+const postsWithTag = allPosts.filter(post => post.data.tags && post.data.tags.includes(tag));
+const essaysWithTag = allEssays.filter(essay => essay.data.tags && essay.data.tags.includes(tag));
+const aphorismsWithTag = allAphorisms.filter(aphorism => aphorism.data.tags && aphorism.data.tags.includes(tag));
+
+// Sort by date (newest first)
+const sortByDate = (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+
+postsWithTag.sort(sortByDate);
+essaysWithTag.sort(sortByDate);
+aphorismsWithTag.sort(sortByDate);
+
+// Count total items with this tag
+const totalItems = postsWithTag.length + essaysWithTag.length + aphorismsWithTag.length;
+---
+
+<BaseLayout title={`${tag} | Amir's Blog`} description={`Content tagged with ${tag}`}>
+  <Navigation slot="navigation" />
+  <ThemeToggle slot="theme-toggle" />
+
+  <div>
+    <div class="flex items-center mb-10 gap-3">
+      <h1 class="heading text-3xl">Tag: {tag}</h1>
+      <span class="inline-flex items-center justify-center bg-gl-tag dark:bg-gd-tag px-3 py-1 rounded-full text-sm">
+        {totalItems} {totalItems === 1 ? 'item' : 'items'}
+      </span>
+    </div>
+    
+    <a href="/tags" class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline mb-8">
+      <span class="i-carbon-arrow-left mr-1"></span>
+      Back to all tags
+    </a>
+    
+    {/* Blog Posts Section */}
+    {postsWithTag.length > 0 && (
+      <section class="mb-12">
+        <h2 class="heading text-2xl mb-6">Blog Posts</h2>
+        <div class="space-y-8">
+          {postsWithTag.map(post => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      </section>
+    )}
+    
+    {/* Essays Section */}
+    {essaysWithTag.length > 0 && (
+      <section class="mb-12">
+        <h2 class="heading text-2xl mb-6">Essays</h2>
+        <div class="space-y-8">
+          {essaysWithTag.map(essay => (
+            <EssayCard essay={essay} />
+          ))}
+        </div>
+      </section>
+    )}
+    
+    {/* Aphorisms Section */}
+    {aphorismsWithTag.length > 0 && (
+      <section>
+        <h2 class="heading text-2xl mb-6">Aphorisms</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {aphorismsWithTag.map(aphorism => (
+            <AphorismCard aphorism={{
+              content: aphorism.data.content,
+              date: aphorism.data.date,
+              slug: aphorism.slug,
+              tags: aphorism.data.tags
+            }} />
+          ))}
+        </div>
+      </section>
+    )}
+    
+    {totalItems === 0 && (
+      <div class="bg-gl-bg2/50 dark:bg-gd-bg2/50 p-6 rounded-xl border border-gl-border dark:border-gd-border text-center my-12">
+        <h2 class="text-xl mb-4">No content found</h2>
+        <p class="text-gl-fg2 dark:text-gd-fg2">
+          There are currently no items tagged with "{tag}".
+        </p>
+      </div>
+    )}
+  </div>
+  
+  <Footer slot="footer" />
+</BaseLayout>
