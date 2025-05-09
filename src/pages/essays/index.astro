@@ -31,7 +31,7 @@ const totalPages = Math.ceil(allEssays.length / ESSAYS_PER_PAGE);
     
     <section>
       {allEssays.slice(0, ESSAYS_PER_PAGE).map(essay => (
-        <PostCard post={essay} />
+        <EssayCard essay={essay} />
       ))}
     </section>
     
