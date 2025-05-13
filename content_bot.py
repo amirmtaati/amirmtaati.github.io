@@ -1,3 +1,4 @@
+Amir Mohammad, [5/14/25 1:29 AM]
 import os
 from dotenv import load_dotenv
 
@@ -45,7 +46,7 @@ def run_server():
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(name)
 
 # Define conversation states
 CHOOSING_CONTENT_TYPE, ENTERING_TITLE, ENTERING_DESCRIPTION, ENTERING_READ_TIME, ENTERING_CONTENT, ENTERING_TAGS, CONFIRM = range(7)
@@ -59,18 +60,20 @@ REPO_URL = os.environ.get("REPO_URL", "")  # Format: https://x-access-token:GITH
 CONTENT_PATHS = {
     "blog": "src/content/blog",
     "essays": "src/content/essays",
-    "aphorisms": "src/content/aphorisms"
+    "aphorisms": "src/content/aphorisms",
+    "notes": "src/content/notes"  # Added notes path
 }
 
 # Required fields by content type
 REQUIRED_FIELDS = {
     "blog": ["title", "date", "description"],
     "essays": ["title", "date", "description", "readTime"],
-    "aphorisms": ["content", "date"]
+    "aphorisms": ["content", "date"],
+    "notes": ["content", "date"]  # Added notes required fields
 }
 
 class ContentData:
-    def __init__(self, content_type: str):
+    def init(self, content_type: str):
         self.content_type = content_type
         self.title: Optional[str] = None
         self.description: Optional[str] = None
@@ -105,7 +108,7 @@ class ContentData:
         if self.content_type in ["blog", "essays"]:
             fm_data["title"] = self.title
 
-        if self.content_type == "aphorisms":
+        if self.content_type in ["aphorisms", "notes"]:
             fm_data["content"] = self.content
 
         fm_data["date"] = datetime.now()
@@ -123,7 +126,8 @@ class ContentData:
         frontmatter = yaml.dump(fm_data, default_flow_style=False)
         return f"---\n{frontmatter}---"
 
-    def generate_filename(self) -> str:
+Amir Mohammad, [5/14/25 1:29 AM]
+def generate_filename(self) -> str:
         """Generate an appropriate filename for the content."""
         if self.content_type in ["blog", "essays"]:
             # Create slug from title
@@ -132,7 +136,7 @@ class ContentData:
             slug = re.sub(r'[^a-z0-9\s-]', '', slug)
             slug = re.sub(r'\s+', '-', slug)
             return f"{slug}.md"
-        elif self.content_type == "aphorisms":
+        elif self.content_type in ["aphorisms", "notes"]:
             # Create slug from first few words of content
             first_words = ' '.join(self.content.split()[:3])
             slug = first_words.lower()
@@ -147,8 +151,8 @@ class ContentData:
         """Create the full content for the file."""
         frontmatter = self.create_frontmatter()
 
-        if self.content_type == "aphorisms":
-            # For aphorisms, the content is already in the frontmatter
+        if self.content_type in ["aphorisms", "notes"]:
+            # For aphorisms and notes, the content is already in the frontmatter
             return frontmatter
         else:
             # For blog and essays, add the content after frontmatter
@@ -165,7 +169,7 @@ class ContentData:
     def get_file_extension(self) -> str:
         """Determine the appropriate file extension."""
         # Check if content contains JSX/React components
-        if "<" in self.content and ">" in self.content and self.content_type != "aphorisms":
+        if "<" in self.content and ">" in self.content and self.content_type not in ["aphorisms", "notes"]:
             return "mdx"
         return "md"
 
@@ -214,11 +218,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def new_content(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Start the content creation process."""
     keyboard = [
-        [
+
+Amir Mohammad, [5/14/25 1:29 AM]
+[
             InlineKeyboardButton("Blog Post", callback_data="blog"),
             InlineKeyboardButton("Essay", callback_data="essays"),
         ],
-        [InlineKeyboardButton("Aphorism", callback_data="aphorisms")],
+        [
+            InlineKeyboardButton("Aphorism", callback_data="aphorisms"),
+            InlineKeyboardButton("Note", callback_data="notes"),
+        ],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(
@@ -235,9 +244,9 @@ async def content_type_chosen(update: Update, context: ContextTypes.DEFAULT_TYPE
     content_type = query.data
     context.user_data["content_data"] = ContentData(content_type)
 
-    if content_type == "aphorisms":
+    if content_type in ["aphorisms", "notes"]:
         await query.edit_message_text(
-            f"You've chosen to create an aphorism. Please enter your aphorism text:"
+            f"You've chosen to create a {content_type.rstrip('s')}. Please enter your {content_type.rstrip('s')} text:"
         )
         return ENTERING_CONTENT
     else:
@@ -319,7 +328,8 @@ async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     if content_data.tags:
         confirmation += f"Tags: {', '.join(content_data.tags)}\n"
 
-    # Show beginning of content
+Amir Mohammad, [5/14/25 1:29 AM]
+# Show beginning of content
     content_preview = content_data.content
     if len(content_preview) > 100:
         content_preview = content_preview[:100] + "..."
@@ -416,7 +426,7 @@ def main() -> None:
     # Run the bot
     application.run_polling()
 
-if __name__ == "__main__":
+if name == "main":
         # Start HTTP server in a separate thread
     threading.Thread(target=run_server, daemon=True).start()
     # Start the bot
