@@ -1,4 +1,3 @@
-Amir Mohammad, [5/14/25 1:39 AM]
 import os
 from dotenv import load_dotenv
 
@@ -126,7 +125,6 @@ class ContentData:
         frontmatter = yaml.dump(fm_data, default_flow_style=False)
         return f"---\n{frontmatter}---"
 
-Amir Mohammad, [5/14/25 1:39 AM]
 def generate_filename(self) -> str:
         """Generate an appropriate filename for the content."""
         if self.content_type in ["blog", "essays"]:
@@ -224,7 +222,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def new_content(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
-Amir Mohammad, [5/14/25 1:39 AM]
 """Start the content creation process."""
     keyboard = [
         [
@@ -332,7 +329,6 @@ async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     if content_data.read_time:
         confirmation += f"Read Time: {content_data.read_time} minutes\n"
 
-Amir Mohammad, [5/14/25 1:39 AM]
 if content_data.tags:
         confirmation += f"Tags: {', '.join(content_data.tags)}\n"
 
