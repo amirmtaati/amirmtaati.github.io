@@ -1,0 +1,46 @@
+---
+// src/pages/notes/index.astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import NoteCard from '../../components/NoteCard.astro';
+import Footer from '../../components/Footer.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
+
+// Get all notes
+const allNotes = await getCollection('notes');
+
+// Sort by date (newest first)
+const sortedNotes = allNotes.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="Notes | Amir's Blog">
+  <Navigation slot="navigation" />
+  <ThemeToggle slot="theme-toggle" />
+
+  <div class="space-y-12">
+    <section class="mb-8">
+      <h1 class="heading text-3xl mb-4">Notes</h1>
+      <div class="w-20 h-1 bg-gl-accent dark:bg-gd-accent rounded-full mb-6"></div>
+      <p class="text-lg text-gl-fg2 dark:text-gd-fg2 leading-relaxed">
+        Unpolished thoughts, fragments, and observations.
+      </p>
+    </section>
+    
+    <section>
+      <div class="w-full">
+        {sortedNotes.map(note => (
+          <NoteCard note={{
+            body: note.body,
+            slug: note.slug,
+            data: note.data
+          }} />
+        ))}
+      </div>
+    </section>
+  </div>
+  
+  <Footer slot="footer" />
+</BaseLayout>

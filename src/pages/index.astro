@@ -6,6 +6,7 @@ import Navigation from '../components/Navigation.astro';
 import PostCard from '../components/PostCard.astro';
 import EssayCard from '../components/EssayCard.astro';
 import AphorismCard from '../components/AphorismCard.astro';
+import NoteCard from '../components/NoteCard.astro';
 import Footer from '../components/Footer.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
@@ -13,6 +14,7 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 const allPosts = await getCollection('blog');
 const allEssays = await getCollection('essays');
 const allAphorisms = await getCollection('aphorisms');
+const allNotes = await getCollection('notes');
 
 // Sort by date (newest first)
 const sortByDate = (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
@@ -20,6 +22,7 @@ const sortByDate = (a, b) => new Date(b.data.date).getTime() - new Date(a.data.d
 const latestPosts = allPosts.sort(sortByDate).slice(0, 2);
 const latestEssays = allEssays.sort(sortByDate).slice(0, 1);
 const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
+const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
 ---
 
 <BaseLayout>
@@ -35,6 +38,31 @@ const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
         A minimalist space for thoughts, essays, and observations on digital minimalism, 
         technology, and the art of living well in the digital age.
       </p>
+    </section>
+    
+    <!-- Latest Notes - NEW SECTION -->
+    <section>
+      <h2 class="heading text-2xl mb-6 flex items-center">
+        Recent Notes
+      </h2>
+      <div class="w-full max-w-3xl">
+        {latestNotes.map(note => (
+          <NoteCard note={{
+            body: note.body,
+            slug: note.slug,
+            data: note.data
+          }} />
+        ))}
+      </div>
+      <div class="mt-6">
+        <a 
+          href="/notes" 
+          class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
+        >
+          View all notes
+          <span class="i-carbon-arrow-right ml-1"></span>
+        </a>
+      </div>
     </section>
     
     <!-- Latest Blog Posts -->

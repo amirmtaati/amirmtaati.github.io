@@ -1,0 +1,22 @@
+---
+// src/pages/notes/[slug].astro
+import { getCollection } from 'astro:content';
+import NoteLayout from '../../layouts/NoteLayout.astro';
+
+// Generate static paths for all notes
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  
+  return notes.map(note => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await note.render();
+---
+
+<NoteLayout noteDate={note.data.date} tags={note.data.tags}>
+  <Content />
+</NoteLayout>

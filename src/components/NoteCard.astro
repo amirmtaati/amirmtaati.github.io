@@ -1,0 +1,49 @@
+---
+export interface Props {
+  note: {
+    body: string;
+    slug: string;
+    data: {
+      date: Date;
+      tags?: string[];
+    };
+  }
+}
+
+const { note } = Astro.props;
+
+// Get the first 150 characters of the note content as a preview
+const contentPreview = note.body.slice(0, 150) + (note.body.length > 150 ? '...' : '');
+---
+
+<div class="mb-6 pb-6 border-b border-gl-border/40 dark:border-gd-border/40 last:border-0 last:mb-0 last:pb-0 w-full">
+  <a href={`/notes/${note.slug}`} class="no-underline text-inherit visited:text-inherit outline-none block group">
+    <div class="mb-3 text-lg leading-relaxed group-hover:text-gl-accent dark:group-hover:text-gd-accent transition-colors">
+      {contentPreview}
+    </div>
+  </a>
+  
+  <div class="flex items-center flex-wrap gap-4 text-sm">
+    <time class="text-gl-fg2 dark:text-gd-fg2 flex items-center gap-2">
+      <span class="i-carbon-calendar text-lg"></span>
+      {new Date(note.data.date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}
+    </time>
+    
+    {note.data.tags && note.data.tags.length > 0 && (
+      <div class="flex flex-wrap gap-2">
+        {note.data.tags.map((tag) => (
+          <a 
+            href={`/tags/${tag}`} 
+            class="px-2 py-1 rounded-full bg-gl-tag dark:bg-gd-tag text-gl-fg dark:text-gd-fg text-xs"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</div>

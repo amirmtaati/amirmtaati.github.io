@@ -31,8 +31,18 @@ const aphorismsCollection = defineCollection({
   }),
 });
 
+const notesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    date: z.date(),
+    tags: z.array(z.string()).optional(),
+    // Notes don't need a title - the content itself is shown
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
   essays: essaysCollection,
   aphorisms: aphorismsCollection,
+  notes: notesCollection,
 };
