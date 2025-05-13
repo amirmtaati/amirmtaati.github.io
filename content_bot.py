@@ -11,14 +11,14 @@ from datetime import datetime
 import yaml
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
-    Application,
-    CommandHandler,
-    MessageHandler,
-    CallbackQueryHandler,
-    ContextTypes,
-    ConversationHandler,
-    filters,
-)
+        Application,
+        CommandHandler,
+        MessageHandler,
+        CallbackQueryHandler,
+        ContextTypes,
+        ConversationHandler,
+        filters,
+        )
 from git import Repo, GitCommandError
 
 # Add at the top with other imports
@@ -43,8 +43,8 @@ def run_server():
 
 # Enable logging
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+        )
 logger = logging.getLogger(name)
 
 # Define conversation states
@@ -57,19 +57,19 @@ REPO_URL = os.environ.get("REPO_URL", "")  # Format: https://x-access-token:GITH
 
 # Content type paths
 CONTENT_PATHS = {
-    "blog": "src/content/blog",
-    "essays": "src/content/essays",
-    "aphorisms": "src/content/aphorisms",
-    "notes": "src/content/notes"  # Added notes path
-}
+        "blog": "src/content/blog",
+        "essays": "src/content/essays",
+        "aphorisms": "src/content/aphorisms",
+        "notes": "src/content/notes"  # Added notes path
+        }
 
 # Required fields by content type
 REQUIRED_FIELDS = {
-    "blog": ["title", "date", "description"],
-    "essays": ["title", "date", "description", "readTime"],
-    "aphorisms": ["content", "date"],
-    "notes": ["content", "date"]  # Added notes required fields
-}
+        "blog": ["title", "date", "description"],
+        "essays": ["title", "date", "description", "readTime"],
+        "aphorisms": ["content", "date"],
+        "notes": ["content", "date"]  # Added notes required fields
+        }
 
 class ContentData:
     def init(self, content_type: str):
@@ -126,7 +126,7 @@ class ContentData:
         return f"---\n{frontmatter}---"
 
 def generate_filename(self) -> str:
-        """Generate an appropriate filename for the content."""
+    """Generate an appropriate filename for the content."""
         if self.content_type in ["blog", "essays"]:
             # Create slug from title
             slug = self.title.lower()
@@ -216,28 +216,28 @@ def commit_and_push(repo, file_path: str, commit_message: str) -> bool:
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued."""
     await update.message.reply_text(
-        "👋 Welcome to the Content Management Bot!\n\n"
-        "Use /new to create new content for your website."
-    )
+            "👋 Welcome to the Content Management Bot!\n\n"
+            "Use /new to create new content for your website."
+            )
 
 async def new_content(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
-"""Start the content creation process."""
+    """Start the content creation process."""
     keyboard = [
-        [
-            InlineKeyboardButton("Blog Post", callback_data="blog"),
-            InlineKeyboardButton("Essay", callback_data="essays"),
-        ],
-        [
-            InlineKeyboardButton("Aphorism", callback_data="aphorisms"),
-            InlineKeyboardButton("Note", callback_data="notes"),
-        ],
-    ]
+            [
+                InlineKeyboardButton("Blog Post", callback_data="blog"),
+                InlineKeyboardButton("Essay", callback_data="essays"),
+                ],
+            [
+                InlineKeyboardButton("Aphorism", callback_data="aphorisms"),
+                InlineKeyboardButton("Note", callback_data="notes"),
+                ],
+            ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(
-        "What type of content would you like to create?",
-        reply_markup=reply_markup,
-    )
+            "What type of content would you like to create?",
+            reply_markup=reply_markup,
+            )
     return CHOOSING_CONTENT_TYPE
 
 async def content_type_chosen(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -250,13 +250,13 @@ async def content_type_chosen(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     if content_type in ["aphorisms", "notes"]:
         await query.edit_message_text(
-            f"You've chosen to create a {content_type.rstrip('s')}. Please enter your {content_type.rstrip('s')} text:"
-        )
+                f"You've chosen to create a {content_type.rstrip('s')}. Please enter your {content_type.rstrip('s')} text:"
+                )
         return ENTERING_CONTENT
     else:
         await query.edit_message_text(
-            f"You've chosen to create a {content_type} post. Please enter the title:"
-        )
+                f"You've chosen to create a {content_type} post. Please enter the title:"
+                )
         return ENTERING_TITLE
 
 async def title_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -265,8 +265,8 @@ async def title_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
     content_data.title = update.message.text
 
     await update.message.reply_text(
-        f"Title: {content_data.title}\n\nNow, please enter a description:"
-    )
+            f"Title: {content_data.title}\n\nNow, please enter a description:"
+            )
     return ENTERING_DESCRIPTION
 
 async def description_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -276,13 +276,13 @@ async def description_entered(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     if content_data.content_type == "essays":
         await update.message.reply_text(
-            f"Description saved. Please enter estimated read time in minutes (just the number):"
-        )
+                f"Description saved. Please enter estimated read time in minutes (just the number):"
+                )
         return ENTERING_READ_TIME
 
     await update.message.reply_text(
-        f"Description saved. Now please enter the main content of your {content_data.content_type}:"
-    )
+            f"Description saved. Now please enter the main content of your {content_data.content_type}:"
+            )
     return ENTERING_CONTENT
 
 async def read_time_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -291,13 +291,13 @@ async def read_time_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     try:
         content_data.read_time = int(update.message.text)
         await update.message.reply_text(
-            f"Read time set to {content_data.read_time} minutes. Now please enter the main content of your essay:"
-        )
+                f"Read time set to {content_data.read_time} minutes. Now please enter the main content of your essay:"
+                )
         return ENTERING_CONTENT
     except ValueError:
         await update.message.reply_text(
-            "Please enter a valid number for read time:"
-        )
+                "Please enter a valid number for read time:"
+                )
         return ENTERING_READ_TIME
 
 async def content_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -306,8 +306,8 @@ async def content_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     content_data.content = update.message.text
 
     await update.message.reply_text(
-        "Content saved. Please enter tags as comma-separated values (or type 'skip' to skip):"
-    )
+            "Content saved. Please enter tags as comma-separated values (or type 'skip' to skip):"
+            )
     return ENTERING_TAGS
 
 async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -330,7 +330,7 @@ async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         confirmation += f"Read Time: {content_data.read_time} minutes\n"
 
 if content_data.tags:
-        confirmation += f"Tags: {', '.join(content_data.tags)}\n"
+    confirmation += f"Tags: {', '.join(content_data.tags)}\n"
 
     # Show beginning of content
     content_preview = content_data.content
@@ -340,17 +340,17 @@ if content_data.tags:
     confirmation += f"\nContent Preview: {content_preview}\n"
 
     keyboard = [
-        [
-            InlineKeyboardButton("Confirm", callback_data="confirm"),
-            InlineKeyboardButton("Cancel", callback_data="cancel"),
-        ]
-    ]
+            [
+                InlineKeyboardButton("Confirm", callback_data="confirm"),
+                InlineKeyboardButton("Cancel", callback_data="cancel"),
+                ]
+            ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(
-        f"Please confirm your submission:\n\n{confirmation}",
-        reply_markup=reply_markup,
-    )
+            f"Please confirm your submission:\n\n{confirmation}",
+            reply_markup=reply_markup,
+            )
     return CONFIRM
 
 async def confirm_submission(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -383,18 +383,18 @@ async def confirm_submission(update: Update, context: ContextTypes.DEFAULT_TYPE)
         commit_message = f"Add {content_data.content_type}: {filename}"
         if commit_and_push(repo, file_path, commit_message):
             await query.edit_message_text(
-                f"✅ Content saved and pushed to repository!\nFile: {filename}"
-            )
+                    f"✅ Content saved and pushed to repository!\nFile: {filename}"
+                    )
         else:
             await query.edit_message_text(
-                f"✅ Content saved locally, but there was an issue pushing to the repository.\nFile: {filename}"
-            )
+                    f"✅ Content saved locally, but there was an issue pushing to the repository.\nFile: {filename}"
+                    )
 
     except Exception as e:
         logger.error(f"Error saving content: {e}")
         await query.edit_message_text(
-            f"❌ There was an error saving your content: {str(e)}"
-        )
+                f"❌ There was an error saving your content: {str(e)}"
+                )
 
     return ConversationHandler.END
 
@@ -410,18 +410,18 @@ def main() -> None:
 
     # Add conversation handler for content creation
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("new", new_content)],
-        states={
-            CHOOSING_CONTENT_TYPE: [CallbackQueryHandler(content_type_chosen)],
-            ENTERING_TITLE: [MessageHandler(filters.TEXT & ~filters.COMMAND, title_entered)],
-            ENTERING_DESCRIPTION: [MessageHandler(filters.TEXT & ~filters.COMMAND, description_entered)],
-            ENTERING_READ_TIME: [MessageHandler(filters.TEXT & ~filters.COMMAND, read_time_entered)],
-            ENTERING_CONTENT: [MessageHandler(filters.TEXT & ~filters.COMMAND, content_entered)],
-            ENTERING_TAGS: [MessageHandler(filters.TEXT & ~filters.COMMAND, tags_entered)],
-            CONFIRM: [CallbackQueryHandler(confirm_submission)],
-        },
-        fallbacks=[CommandHandler("cancel", cancel)],
-    )
+            entry_points=[CommandHandler("new", new_content)],
+            states={
+                CHOOSING_CONTENT_TYPE: [CallbackQueryHandler(content_type_chosen)],
+                ENTERING_TITLE: [MessageHandler(filters.TEXT & ~filters.COMMAND, title_entered)],
+                ENTERING_DESCRIPTION: [MessageHandler(filters.TEXT & ~filters.COMMAND, description_entered)],
+                ENTERING_READ_TIME: [MessageHandler(filters.TEXT & ~filters.COMMAND, read_time_entered)],
+                ENTERING_CONTENT: [MessageHandler(filters.TEXT & ~filters.COMMAND, content_entered)],
+                ENTERING_TAGS: [MessageHandler(filters.TEXT & ~filters.COMMAND, tags_entered)],
+                CONFIRM: [CallbackQueryHandler(confirm_submission)],
+                },
+            fallbacks=[CommandHandler("cancel", cancel)],
+            )
 
     application.add_handler(conv_handler)
     application.add_handler(CommandHandler("start", start))
@@ -430,7 +430,7 @@ def main() -> None:
     application.run_polling()
 
 if name == "main":
-        # Start HTTP server in a separate thread
+    # Start HTTP server in a separate thread
     threading.Thread(target=run_server, daemon=True).start()
     # Start the bot
     main()
