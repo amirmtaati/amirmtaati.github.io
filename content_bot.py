@@ -45,7 +45,7 @@ def run_server():
 logging.basicConfig(
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
         )
-logger = logging.getLogger(name)
+logger = logging.getLogger(__name__)
 
 # Define conversation states
 CHOOSING_CONTENT_TYPE, ENTERING_TITLE, ENTERING_DESCRIPTION, ENTERING_READ_TIME, ENTERING_CONTENT, ENTERING_TAGS, CONFIRM = range(7)
@@ -72,7 +72,7 @@ REQUIRED_FIELDS = {
         }
 
 class ContentData:
-    def init(self, content_type: str):
+    def __init__(self, content_type: str):
         self.content_type = content_type
         self.title: Optional[str] = None
         self.description: Optional[str] = None
@@ -125,22 +125,22 @@ class ContentData:
         frontmatter = yaml.dump(fm_data, default_flow_style=False)
         return f"---\n{frontmatter}---"
 
-def generate_filename(self) -> str:
-    """Generate an appropriate filename for the content."""
-    if self.content_type in ["blog", "essays"]:
-            # Create slug from title
-        slug = self.title.lower()
-        # Replace spaces with dashes and remove special characters
-        slug = re.sub(r'[^a-z0-9\s-]', '', slug)
-        slug = re.sub(r'\s+', '-', slug)
-        return f"{slug}.md"
-    elif self.content_type in ["aphorisms", "notes"]:
-# Create slug from first few words of content
-        first_words = ' '.join(self.content.split()[:3])
-        slug = first_words.lower()
-        slug = re.sub(r'[^a-z0-9\s-]', '', slug)
-        slug = re.sub(r'\s+', '-', slug)
-        return f"{slug}.md"
+    def generate_filename(self) -> str:
+        """Generate an appropriate filename for the content."""
+        if self.content_type in ["blog", "essays"]:
+                # Create slug from title
+            slug = self.title.lower()
+            # Replace spaces with dashes and remove special characters
+            slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+            slug = re.sub(r'\s+', '-', slug)
+            return f"{slug}.md"
+        elif self.content_type in ["aphorisms", "notes"]:
+            # Create slug from first few words of content
+            first_words = ' '.join(self.content.split()[:3])
+            slug = first_words.lower()
+            slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+            slug = re.sub(r'\s+', '-', slug)
+            return f"{slug}.md"
 
         # Default fallback
         return f"content-{datetime.now().strftime('%Y%m%d-%H%M%S')}.md"
@@ -329,8 +329,8 @@ async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     if content_data.read_time:
         confirmation += f"Read Time: {content_data.read_time} minutes\n"
 
-if content_data.tags:
-    confirmation += f"Tags: {', '.join(content_data.tags)}\n"
+    if content_data.tags:
+        confirmation += f"Tags: {', '.join(content_data.tags)}\n"
 
     # Show beginning of content
     content_preview = content_data.content
@@ -429,7 +429,7 @@ def main() -> None:
     # Run the bot
     application.run_polling()
 
-if name == "main":
+if __name__ == "__main__":
     # Start HTTP server in a separate thread
     threading.Thread(target=run_server, daemon=True).start()
     # Start the bot
