@@ -127,20 +127,20 @@ class ContentData:
 
 def generate_filename(self) -> str:
     """Generate an appropriate filename for the content."""
-        if self.content_type in ["blog", "essays"]:
+    if self.content_type in ["blog", "essays"]:
             # Create slug from title
-            slug = self.title.lower()
-            # Replace spaces with dashes and remove special characters
-            slug = re.sub(r'[^a-z0-9\s-]', '', slug)
-            slug = re.sub(r'\s+', '-', slug)
-            return f"{slug}.md"
-        elif self.content_type in ["aphorisms", "notes"]:
-            # Create slug from first few words of content
-            first_words = ' '.join(self.content.split()[:3])
-            slug = first_words.lower()
-            slug = re.sub(r'[^a-z0-9\s-]', '', slug)
-            slug = re.sub(r'\s+', '-', slug)
-            return f"{slug}.md"
+        slug = self.title.lower()
+        # Replace spaces with dashes and remove special characters
+        slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+        slug = re.sub(r'\s+', '-', slug)
+        return f"{slug}.md"
+    elif self.content_type in ["aphorisms", "notes"]:
+# Create slug from first few words of content
+        first_words = ' '.join(self.content.split()[:3])
+        slug = first_words.lower()
+        slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+        slug = re.sub(r'\s+', '-', slug)
+        return f"{slug}.md"
 
         # Default fallback
         return f"content-{datetime.now().strftime('%Y%m%d-%H%M%S')}.md"
