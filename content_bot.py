@@ -68,7 +68,7 @@ REQUIRED_FIELDS = {
         "blog": ["title", "date", "description"],
         "essays": ["title", "date", "description", "readTime"],
         "aphorisms": ["content", "date"],
-        "notes": ["content", "date"]  # Added notes required fields
+        "notes": ["date"]  # Notes only require date in frontmatter
         }
 
 class ContentData:
@@ -107,7 +107,7 @@ class ContentData:
         if self.content_type in ["blog", "essays"]:
             fm_data["title"] = self.title
 
-        if self.content_type in ["aphorisms", "notes"]:
+        if self.content_type == "aphorisms":
             fm_data["content"] = self.content
 
         fm_data["date"] = datetime.now()
@@ -149,15 +149,15 @@ class ContentData:
         """Create the full content for the file."""
         frontmatter = self.create_frontmatter()
 
-        if self.content_type in ["aphorisms", "notes"]:
-            # For aphorisms and notes, the content is already in the frontmatter
+        if self.content_type == "aphorisms":
+            # For aphorisms, the content is already in the frontmatter
             return frontmatter
         else:
-            # For blog and essays, add the content after frontmatter
+            # For blog, essays, and notes, add the content after frontmatter
             # Determine if it's MDX based on content
             is_mdx = "<" in self.content and ">" in self.content
 
-            if is_mdx:
+            if is_mdx and self.content_type != "notes":
                 file_content = f"{frontmatter}\n\nimport Summary from '../../components/Summary.astro';\nimport 'uno.css';\n\n{self.content}"
             else:
                 file_content = f"{frontmatter}\n\n{self.content}"
@@ -167,7 +167,7 @@ class ContentData:
     def get_file_extension(self) -> str:
         """Determine the appropriate file extension."""
         # Check if content contains JSX/React components
-        if "<" in self.content and ">" in self.content and self.content_type not in ["aphorisms", "notes"]:
+        if "<" in self.content and ">" in self.content and self.content_type not in ["aphorisms"]:
             return "mdx"
         return "md"
 
