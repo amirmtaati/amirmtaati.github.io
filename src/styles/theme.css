@@ -126,6 +126,67 @@ html.dark .section-divider {
   background: linear-gradient(90deg, transparent, var(--gd-accent, #818cf8), transparent);
 }
 
+/* NEW: Subtle section divider style (alternative option) */
+.subtle-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gl-border, #e2e8f0), transparent);
+  width: 40%;
+  margin: 3rem auto;
+  opacity: 0.6;
+}
+
+html.dark .subtle-divider {
+  background: linear-gradient(90deg, transparent, var(--gd-border, #334155), transparent);
+}
+
+/* NEW: Section title decorative divider */
+.heading::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--gl-accent, #6366f1);
+  margin: 1rem auto 2.5rem;
+  border-radius: 2px;
+}
+
+html.dark .heading::after {
+  background-color: var(--gd-accent, #818cf8);
+}
+
+/* IMPROVED: Enhanced spacing between section titles and content */
+.heading {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+/* IMPROVED: Enhanced card styling with more distinct borders and shadows */
+article, .mb-6 {
+  border: 3px solid var(--gl-border, #e2e8f0);
+  border-radius: 16px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+html.dark article, html.dark .mb-6 {
+  border-color: var(--gd-border, #334155);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+}
+
+/* IMPROVED: More pronounced hover effect */
+article:hover, .mb-6:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: var(--gl-accent, #6366f1);
+}
+
+html.dark article:hover, html.dark .mb-6:hover {
+  border-color: var(--gd-accent, #818cf8);
+}
+
 /* KaTeX math formula styling adjustments */
 .katex-display {
   margin: 1.5em 0;
@@ -192,6 +253,63 @@ html.dark .section-divider {
   text-align: center;
 }
 
+/* NEW: Tiny section divider between main body sections */
+.space-y-16 > section {
+  position: relative;
+  width: 100%;
+  padding-bottom: 3rem;
+}
+
+.space-y-16 > section:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: var(--gl-border, #e2e8f0);
+  border-radius: 1px;
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+html.dark .space-y-16 > section:not(:last-child)::after {
+  background: var(--gd-border, #334155);
+}
+
+/* IMPROVED: Better spacing for cards */
+.mb-6, .mb-8, .mb-12 {
+  margin-bottom: 2.5rem !important;
+}
+
+/* NEW: Additional spacing for sections */
+section {
+  margin-bottom: 4rem;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
+/* IMPROVED: Enhanced styling for AphorismCard */
+.mb-6.p-6.rounded-xl {
+  padding: 1.75rem !important;
+  background-color: var(--gl-bg2, #f8fafc) !important;
+  border: 3px solid var(--gl-border, #e2e8f0) !important;
+}
+
+html.dark .mb-6.p-6.rounded-xl {
+  background-color: var(--gd-bg2, #1e293b) !important;
+  border-color: var(--gd-border, #334155) !important;
+}
+
+/* IMPROVED: Better styling for NoteCard */
+.mb-6.pb-6.border-b {
+  padding-bottom: 2rem !important;
+  border-bottom-width: 3px !important;
+}
+
 /* Media queries for responsive fixed heights */
 @media (min-width: 768px) {
   .content-fixed-height {
@@ -217,7 +335,6 @@ html.dark .section-divider {
 /* Center all headings */
 .heading {
   text-align: center;
-  margin-bottom: 1.5rem;
 }
 
 /* Center post cards and other content items */
