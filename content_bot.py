@@ -193,12 +193,12 @@ def setup_repo():
 
 def commit_and_push(repo, file_path: str, commit_message: str) -> bool:
     try:
-        origin = repo.remote(name="origin") # Set remote URL with token for authentication
+        origin = repo.remote(name="origin")  # Set remote URL with token for authentication
         repo_url_with_token = REPO_URL.replace("GITHUB_TOKEN", GITHUB_TOKEN)
-        origin.set_url(repo_url_with_token) # Pull latest changes
-        origin.pull() # Add file
-        repo.git.add(file_path) # Commit
-        repo.git.commit(m=commit_message) # Push changes
+        origin.set_url(repo_url_with_token)  # Pull latest changes
+        origin.pull()  # Add file
+        repo.git.add(file_path)  # Commit
+        repo.git.commit(m=commit_message)  # Push changes
         origin.push()
         return True
     except GitCommandError as e:
