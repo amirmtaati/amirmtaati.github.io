@@ -1,3 +1,4 @@
+Amir Mohammad, [5/14/25 1:39 AM]
 import os
 from dotenv import load_dotenv
 
@@ -125,6 +126,7 @@ class ContentData:
         frontmatter = yaml.dump(fm_data, default_flow_style=False)
         return f"---\n{frontmatter}---"
 
+Amir Mohammad, [5/14/25 1:39 AM]
 def generate_filename(self) -> str:
         """Generate an appropriate filename for the content."""
         if self.content_type in ["blog", "essays"]:
@@ -191,14 +193,21 @@ def setup_repo():
 
     return Repo(REPO_PATH)
 
+
 def commit_and_push(repo, file_path: str, commit_message: str) -> bool:
+    """Commit and push changes to remote repository."""
     try:
-        origin = repo.remote(name="origin")  # Set remote URL with token for authentication
+        # Set remote URL with token for authentication
+        origin = repo.remote(name="origin")
         repo_url_with_token = REPO_URL.replace("GITHUB_TOKEN", GITHUB_TOKEN)
-        origin.set_url(repo_url_with_token)  # Pull latest changes
-        origin.pull()  # Add file
-        repo.git.add(file_path)  # Commit
-        repo.git.commit(m=commit_message)  # Push changes
+        origin.set_url(repo_url_with_token)
+        # Pull latest changes
+        origin.pull()
+        # Add file
+        repo.git.add(file_path)
+        # Commit
+        repo.git.commit(m=commit_message)
+        # Push changes
         origin.push()
         return True
     except GitCommandError as e:
@@ -214,10 +223,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     )
 
 async def new_content(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Start the content creation process."""
-    keyboard = [
 
-[
+Amir Mohammad, [5/14/25 1:39 AM]
+"""Start the content creation process."""
+    keyboard = [
+        [
             InlineKeyboardButton("Blog Post", callback_data="blog"),
             InlineKeyboardButton("Essay", callback_data="essays"),
         ],
@@ -322,10 +332,11 @@ async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     if content_data.read_time:
         confirmation += f"Read Time: {content_data.read_time} minutes\n"
 
-    if content_data.tags:
+Amir Mohammad, [5/14/25 1:39 AM]
+if content_data.tags:
         confirmation += f"Tags: {', '.join(content_data.tags)}\n"
 
-# Show beginning of content
+    # Show beginning of content
     content_preview = content_data.content
     if len(content_preview) > 100:
         content_preview = content_preview[:100] + "..."
