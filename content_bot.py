@@ -1,4 +1,9 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 import re
 import logging
 from typing import Dict, List, Optional, Tuple, Union
@@ -26,7 +31,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
         self.wfile.write(b'Bot is running!')
-    
+
     def log_message(self, format, *args):
         # Silence the log messages
         return
@@ -43,7 +48,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Define conversation states
-CHOOSING_CONTENT_TYPE, ENTERING_TITLE, ENTERING_DESCRIPTION, ENTERING_CONTENT, ENTERING_TAGS, CONFIRM = range(6)
+CHOOSING_CONTENT_TYPE, ENTERING_TITLE, ENTERING_DESCRIPTION, ENTERING_READ_TIME, ENTERING_CONTENT, ENTERING_TAGS, CONFIRM = range(7)
 
 # Repository settings
 REPO_PATH = os.environ.get("REPO_PATH", "./my_content_repo")
@@ -73,11 +78,11 @@ class ContentData:
         self.tags: List[str] = []
         self.read_time: Optional[int] = None
         self.date = datetime.now().strftime("%Y-%m-%d")
-    
+
     def is_complete(self) -> bool:
         """Check if all required fields for the content type are filled."""
         required = REQUIRED_FIELDS.get(self.content_type, [])
-        
+
         if "title" in required and not self.title:
             return False
         if "description" in required and not self.description:
@@ -86,38 +91,38 @@ class ContentData:
             return False
         if "readTime" in required and not self.read_time:
             return False
-        
+
         # Content is always required regardless of content type
         if not self.content:
             return False
-            
+
         return True
-    
+
     def create_frontmatter(self) -> str:
         """Generate frontmatter for the content."""
         fm_data = {}
-        
+
         if self.content_type in ["blog", "essays"]:
             fm_data["title"] = self.title
-        
+
         if self.content_type == "aphorisms":
             fm_data["content"] = self.content
-        
-        fm_data["date"] = self.date
-        
+
+        fm_data["date"] = datetime.now()
+
         if self.description and self.content_type in ["blog", "essays"]:
             fm_data["description"] = self.description
-        
+
         if self.read_time and self.content_type == "essays":
             fm_data["readTime"] = self.read_time
-        
+
         if self.tags:
             fm_data["tags"] = self.tags
-        
+
         # Convert to YAML
         frontmatter = yaml.dump(fm_data, default_flow_style=False)
         return f"---\n{frontmatter}---"
-    
+
     def generate_filename(self) -> str:
         """Generate an appropriate filename for the content."""
         if self.content_type in ["blog", "essays"]:
@@ -134,14 +139,14 @@ class ContentData:
             slug = re.sub(r'[^a-z0-9\s-]', '', slug)
             slug = re.sub(r'\s+', '-', slug)
             return f"{slug}.md"
-        
+
         # Default fallback
         return f"content-{datetime.now().strftime('%Y%m%d-%H%M%S')}.md"
-    
+
     def create_file_content(self) -> str:
         """Create the full content for the file."""
         frontmatter = self.create_frontmatter()
-        
+
         if self.content_type == "aphorisms":
             # For aphorisms, the content is already in the frontmatter
             return frontmatter
@@ -149,12 +154,12 @@ class ContentData:
             # For blog and essays, add the content after frontmatter
             # Determine if it's MDX based on content
             is_mdx = "<" in self.content and ">" in self.content
-            
+
             if is_mdx:
                 file_content = f"{frontmatter}\n\nimport Summary from '../../components/Summary.astro';\nimport 'uno.css';\n\n{self.content}"
             else:
                 file_content = f"{frontmatter}\n\n{self.content}"
-            
+
             return file_content
 
     def get_file_extension(self) -> str:
@@ -163,7 +168,7 @@ class ContentData:
         if "<" in self.content and ">" in self.content and self.content_type != "aphorisms":
             return "mdx"
         return "md"
-    
+
     def get_full_filename(self) -> str:
         """Get the full filename with appropriate extension."""
         base_filename = self.generate_filename()
@@ -181,26 +186,18 @@ def setup_repo():
             Repo.clone_from(repo_url_with_token, REPO_PATH)
         else:
             raise ValueError("Repository doesn't exist and credentials for cloning not provided")
-    
+
     return Repo(REPO_PATH)
 
 def commit_and_push(repo, file_path: str, commit_message: str) -> bool:
-    """Commit changes to the repository and push to remote."""
     try:
-        # Pull latest changes
-        origin = repo.remote(name="origin")
-        origin.pull()
-        
-        # Add file
-        repo.git.add(file_path)
-        
-        # Commit
-        repo.git.commit(m=commit_message)
-        
-        # Push
-        if GITHUB_TOKEN:
-            origin.push()
-        
+        origin = repo.remote(name="origin") # Set remote URL with token for authentication
+        repo_url_with_token = REPO_URL.replace("GITHUB_TOKEN", GITHUB_TOKEN)
+        origin.set_url(repo_url_with_token) # Pull latest changes
+        origin.pull() # Add file
+        repo.git.add(file_path) # Commit
+        repo.git.commit(m=commit_message) # Push changes
+        origin.push()
         return True
     except GitCommandError as e:
         logger.error(f"Git error: {e}")
@@ -234,10 +231,10 @@ async def content_type_chosen(update: Update, context: ContextTypes.DEFAULT_TYPE
     """Handle the content type choice."""
     query = update.callback_query
     await query.answer()
-    
+
     content_type = query.data
     context.user_data["content_data"] = ContentData(content_type)
-    
+
     if content_type == "aphorisms":
         await query.edit_message_text(
             f"You've chosen to create an aphorism. Please enter your aphorism text:"
@@ -253,7 +250,7 @@ async def title_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> i
     """Handle the title entry."""
     content_data = context.user_data.get("content_data")
     content_data.title = update.message.text
-    
+
     await update.message.reply_text(
         f"Title: {content_data.title}\n\nNow, please enter a description:"
     )
@@ -263,13 +260,13 @@ async def description_entered(update: Update, context: ContextTypes.DEFAULT_TYPE
     """Handle the description entry."""
     content_data = context.user_data.get("content_data")
     content_data.description = update.message.text
-    
+
     if content_data.content_type == "essays":
         await update.message.reply_text(
             f"Description saved. Please enter estimated read time in minutes (just the number):"
         )
         return ENTERING_READ_TIME
-    
+
     await update.message.reply_text(
         f"Description saved. Now please enter the main content of your {content_data.content_type}:"
     )
@@ -294,7 +291,7 @@ async def content_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     """Handle the main content entry."""
     content_data = context.user_data.get("content_data")
     content_data.content = update.message.text
-    
+
     await update.message.reply_text(
         "Content saved. Please enter tags as comma-separated values (or type 'skip' to skip):"
     )
@@ -303,32 +300,32 @@ async def content_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Handle tags entry."""
     content_data = context.user_data.get("content_data")
-    
+
     if update.message.text.lower() != "skip":
         content_data.tags = [tag.strip() for tag in update.message.text.split(",")]
-    
+
     # Prepare confirmation message
     confirmation = f"Content Type: {content_data.content_type}\n"
-    
+
     if content_data.title:
         confirmation += f"Title: {content_data.title}\n"
-    
+
     if content_data.description:
         confirmation += f"Description: {content_data.description}\n"
-    
+
     if content_data.read_time:
         confirmation += f"Read Time: {content_data.read_time} minutes\n"
-    
+
     if content_data.tags:
         confirmation += f"Tags: {', '.join(content_data.tags)}\n"
-    
+
     # Show beginning of content
     content_preview = content_data.content
     if len(content_preview) > 100:
         content_preview = content_preview[:100] + "..."
-    
+
     confirmation += f"\nContent Preview: {content_preview}\n"
-    
+
     keyboard = [
         [
             InlineKeyboardButton("Confirm", callback_data="confirm"),
@@ -336,7 +333,7 @@ async def tags_entered(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    
+
     await update.message.reply_text(
         f"Please confirm your submission:\n\n{confirmation}",
         reply_markup=reply_markup,
@@ -347,28 +344,28 @@ async def confirm_submission(update: Update, context: ContextTypes.DEFAULT_TYPE)
     """Handle the confirmation of content submission."""
     query = update.callback_query
     await query.answer()
-    
+
     if query.data == "cancel":
         await query.edit_message_text("Content creation canceled.")
         return ConversationHandler.END
-    
+
     # Process and save the content
     content_data = context.user_data.get("content_data")
-    
+
     try:
         # Setup repository
         repo = setup_repo()
-        
+
         # Create directory if it doesn't exist
         content_dir = os.path.join(REPO_PATH, CONTENT_PATHS[content_data.content_type])
         os.makedirs(content_dir, exist_ok=True)
-        
+
         # Create file
         filename = content_data.get_full_filename()
         file_path = os.path.join(content_dir, filename)
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(content_data.create_file_content())
-        
+
         # Commit and push
         commit_message = f"Add {content_data.content_type}: {filename}"
         if commit_and_push(repo, file_path, commit_message):
@@ -379,13 +376,13 @@ async def confirm_submission(update: Update, context: ContextTypes.DEFAULT_TYPE)
             await query.edit_message_text(
                 f"✅ Content saved locally, but there was an issue pushing to the repository.\nFile: {filename}"
             )
-    
+
     except Exception as e:
         logger.error(f"Error saving content: {e}")
         await query.edit_message_text(
             f"❌ There was an error saving your content: {str(e)}"
         )
-    
+
     return ConversationHandler.END
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
