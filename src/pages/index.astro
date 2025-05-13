@@ -30,19 +30,9 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
   <ThemeToggle slot="theme-toggle" />
 
   <div class="space-y-16">
-    <!-- Welcome Section -->
-    <section class="mb-12">
-      <h1 class="heading text-4xl mb-4">Welcome to My Digital Garden</h1>
-      <div class="w-20 h-1 bg-gl-accent dark:bg-gd-accent rounded-full mb-6"></div>
-      <p class="text-lg text-gl-fg2 dark:text-gd-fg2 leading-relaxed">
-        A minimalist space for thoughts, essays, and observations on digital minimalism, 
-        technology, and the art of living well in the digital age.
-      </p>
-    </section>
-    
     <!-- Latest Notes - NEW SECTION -->
-    <section>
-      <h2 class="heading text-2xl mb-6 flex items-center">
+    <section class="w-full mt-8">
+      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
         Recent Notes
       </h2>
       <div class="w-full max-w-3xl">
@@ -54,7 +44,7 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
           }} />
         ))}
       </div>
-      <div class="mt-6">
+      <div class="mt-6 text-center">
         <a 
           href="/notes" 
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
@@ -65,9 +55,12 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
       </div>
     </section>
     
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
     <!-- Latest Blog Posts -->
-    <section>
-      <h2 class="heading text-2xl mb-6 flex items-center">
+    <section class="w-full">
+      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
         Latest Posts
       </h2>
       <div class="w-full max-w-3xl">
@@ -75,7 +68,7 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
           <PostCard post={post} />
         ))}
       </div>
-      <div class="mt-6">
+      <div class="mt-6 text-center">
         <a 
           href="/blog" 
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
@@ -86,9 +79,12 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
       </div>
     </section>
     
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
     <!-- Latest Essays -->
-    <section>
-      <h2 class="heading text-2xl mb-6 flex items-center">
+    <section class="w-full">
+      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
         Latest Essays
       </h2>
       <div class="w-full max-w-3xl">
@@ -96,7 +92,7 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
           <EssayCard essay={essay} />
         ))}
       </div>
-      <div class="mt-6">
+      <div class="mt-6 text-center">
         <a 
           href="/essays" 
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
@@ -107,9 +103,12 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
       </div>
     </section>
     
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
+    
     <!-- Latest Aphorisms -->
-    <section>
-      <h2 class="heading text-2xl mb-6 flex items-center">
+    <section class="w-full">
+      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
         Recent Aphorisms
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
