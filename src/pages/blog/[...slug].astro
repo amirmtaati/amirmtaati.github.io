@@ -1,9 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostLayout from '../../layouts/PostLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
-import ThemeToggle from '../../components/ThemeToggle.astro';
 import Tag from '../../components/Tag.astro';
 
 // Generate static paths for all blog posts
@@ -24,10 +23,10 @@ if (!post) {
 }
 
 // Render the Markdown content
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
-<BaseLayout title={post.data.title}>
+<PostLayout title={post.data.title} headings={headings}>
   <!-- Add KaTeX CSS -->
   <link 
     rel="stylesheet" 
@@ -38,44 +37,41 @@ const { Content } = await post.render();
   />
   
   <Navigation slot="navigation" />
-  <ThemeToggle slot="theme-toggle" />
   
-  <div class="content-container min-h-screen flex flex-col">
-    <article class="prose prose-lg dark:prose-invert max-w-none flex-1">
-      <h1 class="text-5xl font-serif mb-4">{post.data.title}</h1>
+  <article class="prose prose-lg dark:prose-invert max-w-none">
+    <h1 class="text-6xl font-serif mb-6">{post.data.title}</h1>
+    
+    <div class="flex flex-wrap gap-3 items-center mb-10">
+      <time class="text-gl-fg2 dark:text-gd-fg2 text-base">
+        {new Date(post.data.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}
+      </time>
       
-      <div class="flex flex-wrap gap-3 items-center mb-8">
-        <time class="text-gl-fg2 dark:text-gd-fg2 text-sm">
-          {new Date(post.data.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </time>
-        
-        {post.data.tags && (
-          <div class="flex flex-wrap gap-2">
-            {post.data.tags.map((tag) => (
-              <Tag name={tag} />
-            ))}
-          </div>
-        )}
-      </div>
-      
-      {post.data.description && (
-        <p class="text-lg italic text-gl-fg2 dark:text-gd-fg2 mb-8 border-l-4 border-gl-accent dark:border-gd-accent pl-4 py-1">
-          {post.data.description}
-        </p>
+      {post.data.tags && (
+        <div class="flex flex-wrap gap-2">
+          {post.data.tags.map((tag) => (
+            <Tag name={tag} />
+          ))}
+        </div>
       )}
-      
-      <div class="post-content mt-10">
-        <Content />
-      </div>
-    </article>
-  </div>
-  
+    </div>
+    
+    {post.data.description && (
+      <p class="text-xl italic text-gl-fg2 dark:text-gd-fg2 mb-12 border-l-4 border-gl-accent dark:border-gd-accent pl-4 py-2">
+        {post.data.description}
+      </p>
+    )}
+    
+    <div class="post-content mt-12 text-lg leading-relaxed">
+      <Content />
+    </div>
+  </article>
+
   <Footer slot="footer" />
-</BaseLayout>
+</PostLayout>
 
 <style>
   .content-container {
@@ -88,5 +84,51 @@ const { Content } = await post.render();
   .post-content {
     /* This ensures the content area takes available space */
     flex: 1;
+  }
+
+  .post-content :global(h2) {
+    font-size: 2.25rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .post-content :global(ul), .post-content :global(ol) {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.75rem;
+  }
+
+  .post-content :global(pre) {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .post-content :global(img) {
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .post-content :global(blockquote) {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-left-width: 4px;
+    font-style: italic;
   }
 </style>

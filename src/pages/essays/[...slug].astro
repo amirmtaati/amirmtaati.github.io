@@ -1,9 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostLayout from '../../layouts/PostLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
-import ThemeToggle from '../../components/ThemeToggle.astro';
 import Tag from '../../components/Tag.astro';
 
 // Generate static paths for all essays
@@ -24,7 +23,7 @@ if (!essay) {
 }
 
 // Render the Markdown content
-const { Content } = await essay.render();
+const { Content, headings } = await essay.render();
 
 // Get all essays for "More essays" section
 const allEssays = await getCollection('essays');
@@ -35,7 +34,7 @@ const otherEssays = allEssays
   .slice(0, 2);
 ---
 
-<BaseLayout title={essay.data.title}>
+<PostLayout title={essay.data.title} headings={headings}>
   <!-- Add KaTeX CSS -->
   <link 
     rel="stylesheet" 
@@ -46,14 +45,13 @@ const otherEssays = allEssays
   />
   
   <Navigation slot="navigation" />
-  <ThemeToggle slot="theme-toggle" />
   
   <article class="prose prose-lg dark:prose-invert max-w-none">
-    <header class="mb-12">
-      <h1 class="text-5xl font-serif mb-4">{essay.data.title}</h1>
+    <header class="mb-16">
+      <h1 class="text-6xl font-serif mb-6">{essay.data.title}</h1>
       
-      <div class="flex flex-wrap gap-3 items-center mb-8">
-        <time class="text-gl-fg2 dark:text-gd-fg2 text-sm">
+      <div class="flex flex-wrap gap-3 items-center mb-10">
+        <time class="text-gl-fg2 dark:text-gd-fg2 text-base">
           {new Date(essay.data.date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -61,7 +59,7 @@ const otherEssays = allEssays
           })}
         </time>
         
-        <span class="text-gl-fg2 dark:text-gd-fg2 text-sm flex items-center gap-2">
+        <span class="text-gl-fg2 dark:text-gd-fg2 text-base flex items-center gap-2">
           <span class="i-carbon-time text-lg"></span>
           {essay.data.readTime} min read
         </span>
@@ -76,41 +74,40 @@ const otherEssays = allEssays
       </div>
       
       {essay.data.description && (
-        <p class="text-lg italic text-gl-fg2 dark:text-gd-fg2 mb-8 border-l-4 border-gl-accent dark:border-gd-accent pl-4 py-1">
+        <p class="text-xl italic text-gl-fg2 dark:text-gd-fg2 mb-12 border-l-4 border-gl-accent dark:border-gd-accent pl-4 py-2">
           {essay.data.description}
         </p>
       )}
     </header>
     
-    <div class="mt-10">
+    <div class="essay-content mt-12 text-lg leading-relaxed">
       <Content />
     </div>
-  </div>
     
     <!-- Related Essays section -->
     {otherEssays.length > 0 && (
-      <div class="mt-20 pt-10 border-t border-gl-border dark:border-gd-border">
-        <h2 class="text-2xl font-serif mb-8">More Essays</h2>
+      <div class="mt-24 pt-12 border-t border-gl-border dark:border-gd-border">
+        <h2 class="text-3xl font-serif mb-10">More Essays</h2>
         <div class="grid grid-cols-1 gap-8">
           {otherEssays.map(relatedEssay => (
-            <div class="p-6 rounded-xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border hover:shadow-md transition-all">
+            <div class="p-8 rounded-xl bg-gl-bg2/50 dark:bg-gd-bg2/50 border border-gl-border dark:border-gd-border hover:shadow-md transition-all">
               <a href={`/essays/${relatedEssay.slug}`} class="no-underline text-inherit visited:text-inherit">
-                <h3 class="text-xl mb-2 hover:text-gl-accent dark:hover:text-gd-accent transition-colors">
+                <h3 class="text-2xl mb-3 hover:text-gl-accent dark:hover:text-gd-accent transition-colors">
                   {relatedEssay.data.title}
                 </h3>
               </a>
-              <p class="text-gl-fg2 dark:text-gd-fg2 mb-2 line-clamp-2">
+              <p class="text-lg text-gl-fg2 dark:text-gd-fg2 mb-4 line-clamp-2">
                 {relatedEssay.data.description}
               </p>
               <div class="flex justify-between items-center">
-                <time class="text-sm text-gl-fg2 dark:text-gd-fg2">
+                <time class="text-base text-gl-fg2 dark:text-gd-fg2">
                   {new Date(relatedEssay.data.date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric'
                   })}
                 </time>
-                <span class="text-sm text-gl-fg2 dark:text-gd-fg2">
+                <span class="text-base text-gl-fg2 dark:text-gd-fg2">
                   {relatedEssay.data.readTime} min read
                 </span>
               </div>
@@ -120,6 +117,59 @@ const otherEssays = allEssays
       </div>
     )}
   </article>
-  
+
   <Footer slot="footer" />
-</BaseLayout>
+</PostLayout>
+
+<style>
+  .essay-content {
+    /* This ensures the content area takes available space */
+    flex: 1;
+  }
+
+  .essay-content :global(h2) {
+    font-size: 2.25rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .essay-content :global(h3) {
+    font-size: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .essay-content :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .essay-content :global(ul), .essay-content :global(ol) {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .essay-content :global(li) {
+    margin-bottom: 0.75rem;
+  }
+
+  .essay-content :global(pre) {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .essay-content :global(img) {
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .essay-content :global(blockquote) {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-left-width: 4px;
+    font-style: italic;
+  }
+</style>

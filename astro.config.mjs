@@ -1,21 +1,28 @@
 import { defineConfig } from 'astro/config';
 import UnoCSS from 'unocss/astro';
 import mdx from '@astrojs/mdx';
-import remarkMath from 'remark-math'; // Add this import
+import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+// https://astro.build/config
 export default defineConfig({
-  integrations: [UnoCSS(), mdx()],
-  site: 'https://amirmtaati.github.io', // Replace with your GitHub Pages URL
-  base: '/', // Replace with your repository name, e.g., '/my-blog'
-  output: 'static', // Ensure static site generation,
+  integrations: [
+    UnoCSS({
+      injectReset: true, // Add CSS reset
+      mode: 'global', // Use global mode for now
+    }), 
+    mdx()
+  ],
+  site: 'https://amirmtaati.github.io',
+  base: '/',
+  output: 'static',
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [[rehypeKatex, { output: 'html' }]], // 'html' ensures compatibility
+    rehypePlugins: [[rehypeKatex, { output: 'html' }]],
     shikiConfig: {
-      theme: 'gruvbox-dark-soft', // Use Gruvbox dark theme
-      langs: ['javascript', 'typescript', 'python', 'html', 'css', 'bash', 'c', 'go'], // Specify languages
-      wrap: true, // Wrap long lines
+      theme: 'gruvbox-dark-soft',
+      langs: ['javascript', 'typescript', 'python', 'html', 'css', 'bash', 'c', 'go'],
+      wrap: true,
     },
   },
 });

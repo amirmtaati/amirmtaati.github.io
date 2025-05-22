@@ -29,13 +29,15 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
   <Navigation slot="navigation" />
   <ThemeToggle slot="theme-toggle" />
 
-  <div class="space-y-16">
-    <!-- Latest Notes - NEW SECTION -->
-    <section class="w-full mt-8">
-      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
-        Recent Notes
-      </h2>
-      <div class="w-full max-w-3xl">
+  <div class="space-y-24">
+    <!-- Latest Notes -->
+    <section class="w-full mt-12">
+      <div class="flex items-center gap-6 mb-16">
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+        <h2 class="heading text-4xl text-gl-accent dark:text-gd-accent font-serif">Recent Notes</h2>
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+      </div>
+      <div class="w-full max-w-4xl mx-auto">
         {latestNotes.map(note => (
           <NoteCard note={{
             body: note.body,
@@ -44,7 +46,7 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
           }} />
         ))}
       </div>
-      <div class="mt-6 text-center">
+      <div class="mt-12 text-center">
         <a 
           href="/notes" 
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
@@ -55,20 +57,19 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
       </div>
     </section>
     
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-    
     <!-- Latest Blog Posts -->
     <section class="w-full">
-      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
-        Latest Posts
-      </h2>
-      <div class="w-full max-w-3xl">
+      <div class="flex items-center gap-6 mb-16">
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+        <h2 class="heading text-4xl text-gl-accent dark:text-gd-accent font-serif">Latest Posts</h2>
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+      </div>
+      <div class="w-full max-w-4xl mx-auto">
         {latestPosts.map(post => (
           <PostCard post={post} />
         ))}
       </div>
-      <div class="mt-6 text-center">
+      <div class="mt-12 text-center">
         <a 
           href="/blog" 
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
@@ -79,20 +80,19 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
       </div>
     </section>
     
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-    
     <!-- Latest Essays -->
     <section class="w-full">
-      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
-        Latest Essays
-      </h2>
-      <div class="w-full max-w-3xl">
+      <div class="flex items-center gap-6 mb-16">
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+        <h2 class="heading text-4xl text-gl-accent dark:text-gd-accent font-serif">Latest Essays</h2>
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+      </div>
+      <div class="w-full max-w-4xl mx-auto">
         {latestEssays.map(essay => (
           <EssayCard essay={essay} />
         ))}
       </div>
-      <div class="mt-6 text-center">
+      <div class="mt-12 text-center">
         <a 
           href="/essays" 
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
@@ -103,15 +103,14 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
       </div>
     </section>
     
-    <!-- Section Divider -->
-    <div class="section-divider"></div>
-    
     <!-- Latest Aphorisms -->
     <section class="w-full">
-      <h2 class="heading text-3xl mb-10 flex justify-center items-center">
-        Recent Aphorisms
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
+      <div class="flex items-center gap-6 mb-16">
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+        <h2 class="heading text-4xl text-gl-accent dark:text-gd-accent font-serif">Recent Aphorisms</h2>
+        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
         {latestAphorisms.map(aphorism => (
           <AphorismCard aphorism={{
             content: aphorism.data.content,
@@ -126,3 +125,10 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
   
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  /* Add smooth transitions for the dividers */
+  hr {
+    transition: border-color 0.3s ease;
+  }
+</style>

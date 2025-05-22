@@ -1,0 +1,155 @@
+---
+import 'uno.css';
+import Favicon from '../components/Favicon.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  headings: {
+    depth: number;
+    slug: string;
+    text: string;
+  }[];
+}
+
+const { 
+  title,
+  description = "A personal blog about writing, technology, and digital minimalism",
+  headings = []
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <title>{title}</title>
+  <link rel="stylesheet" href="/styles/theme.css">
+  <Favicon />
+  <slot name="head" />
+  <script is:inline>
+    // Initialize theme
+    const theme = (() => {
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+        return localStorage.getItem('theme');
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      return 'light';
+    })();
+    
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+    
+    window.localStorage.setItem('theme', theme);
+  </script>
+</head>
+
+<body class="bg-gl-bg text-gl-fg dark:bg-gd-bg dark:text-gd-fg font-sans transition-colors duration-300">
+  <!-- Mobile menu button -->
+  <button 
+    id="mobile-menu-toggle" 
+    class="fixed top-5 right-5 z-50 flex items-center justify-center bg-gl-bg2 dark:bg-gd-bg2 p-3 rounded-xl shadow-lg border-2 border-gl-border dark:border-gd-border hover:scale-105 transition-all"
+    aria-label="Toggle navigation menu"
+  >
+    <span class="i-carbon-menu block w-6 h-6"></span>
+  </button>
+  
+  <!-- Theme toggle -->
+  <div class="fixed top-5 right-20 z-50">
+    <ThemeToggle />
+  </div>
+
+  <!-- Mobile navigation menu -->
+  <div 
+    id="mobile-menu" 
+    class="fixed inset-0 bg-gl-bg dark:bg-gd-bg z-40 transform translate-x-full transition-transform duration-300 overflow-y-auto"
+  >
+    <div class="p-8 pt-20">
+      <slot name="navigation" />
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="flex min-h-screen relative pt-20">
+    <!-- Table of Contents (Left) -->
+    {headings.length > 0 && (
+      <aside class="hidden lg:block w-64 relative">
+        <div class="fixed w-64 p-6 overflow-y-auto max-h-screen top-20">
+          <TableOfContents headings={headings} />
+        </div>
+      </aside>
+    )}
+
+    <!-- Main content -->
+    <div class="flex-1 flex flex-col">
+      <main class="flex-1 px-4 md:px-8 lg:px-16 xl:px-24 max-w-6xl mx-auto">
+        <slot />
+      </main>
+      <slot name="footer" />
+    </div>
+  </div>
+
+  <!-- Overlay for mobile menu -->
+  <div 
+    id="mobile-menu-overlay" 
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 hidden opacity-0 transition-opacity duration-300"
+  ></div>
+
+  <script>
+    // Theme toggle functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.contains('dark');
+          
+          if (isDark) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+          } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          }
+        });
+      }
+      
+      // Mobile menu functionality
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const overlay = document.getElementById('mobile-menu-overlay');
+      
+      function toggleMenu() {
+        mobileMenu.classList.toggle('translate-x-full');
+        overlay.classList.toggle('hidden');
+        
+        setTimeout(() => {
+          if (!overlay.classList.contains('hidden')) {
+            overlay.classList.add('opacity-100');
+            overlay.classList.remove('opacity-0');
+          } else {
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0');
+          }
+        }, 10);
+        
+        document.body.classList.toggle('overflow-hidden');
+      }
+      
+      if (mobileMenuToggle && mobileMenu && overlay) {
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+      }
+    });
+  </script>
+</body>
+</html> 

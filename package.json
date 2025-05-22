@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.6",
-    "@unocss/reset": "^66.1.0-beta.13",
     "astro": "^5.7.10",
     "katex": "^0.16.22",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
-    "@unocss/preset-typography": "^66.1.0-beta.13",
-    "@unocss/preset-uno": "^66.1.0-beta.13",
-    "unocss": "^66.1.0-beta.13"
+    "@unocss/preset-typography": "^66.1.2",
+    "@unocss/preset-uno": "^66.1.2",
+    "@unocss/reset": "^66.1.2",
+    "unocss": "^66.1.2"
   }
 }

@@ -1,21 +1,9 @@
----
-// src/layouts/BlogPostLayout.astro
 import PostLayout from './PostLayout.astro';
 import Navigation from '../components/Navigation.astro';
 
 const { frontmatter, headings } = Astro.props;
----
 
 <PostLayout title={frontmatter.title} headings={headings}>
-  <!-- Add KaTeX CSS -->
-  <link 
-    rel="stylesheet" 
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" 
-    integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" 
-    crossorigin="anonymous"
-    slot="head"
-  />
-  
   <Navigation slot="navigation" />
   
   <article class="prose prose-lg dark:prose-invert max-w-none">
@@ -28,15 +16,17 @@ const { frontmatter, headings } = Astro.props;
           day: 'numeric'
         })}
       </time>
-      <div class="flex gap-2">
-        {frontmatter.tags.map((tag) => (
-          <a href={`/tags/${tag}`} class="px-2 py-1 rounded-full bg-gl-tag dark:bg-gd-tag text-gl-fg dark:text-gd-fg text-xs">
-            {tag}
-          </a>
-        ))}
-      </div>
+      {frontmatter.tags && (
+        <div class="flex gap-2">
+          {frontmatter.tags.map((tag) => (
+            <a href={`/tags/${tag}`} class="px-2 py-1 rounded-full bg-gl-tag dark:bg-gd-tag text-gl-fg dark:text-gd-fg text-xs">
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
     </div>
     
     <slot />
   </article>
-</PostLayout>
+</PostLayout> 

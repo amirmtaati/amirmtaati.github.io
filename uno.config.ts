@@ -2,7 +2,9 @@ import { defineConfig, presetUno, presetTypography, presetWebFonts, presetIcons 
 
 export default defineConfig({
   presets: [
-    presetUno(),
+    presetUno({
+      dark: 'class',
+    }),
     presetTypography(),
     presetWebFonts({
       fonts: {
@@ -53,5 +55,13 @@ export default defineConfig({
     'btn': 'rounded-xl transition-all shadow-sm hover:shadow-md flex items-center justify-center',
     'btn-primary': 'bg-gl-accent dark:bg-gd-accent text-white font-medium',
   },
-  darkMode: 'class', // Adds support for dark:* utilities
+  safelist: [
+    'border-r-2',
+    'border-gl-border',
+    'dark:border-gd-border',
+    'bg-gl-bg2',
+    'dark:bg-gd-bg2',
+    'shadow-[4px_0_24px_rgba(0,0,0,0.05)]',
+    'dark:shadow-[4px_0_24px_rgba(0,0,0,0.2)]'
+  ],
 });
