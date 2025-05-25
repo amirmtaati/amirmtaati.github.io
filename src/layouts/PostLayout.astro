@@ -71,10 +71,12 @@ const {
   <!-- Mobile navigation menu -->
   <div 
     id="mobile-menu" 
-    class="fixed inset-0 bg-gl-bg dark:bg-gd-bg z-40 transform translate-x-full transition-transform duration-300 overflow-y-auto"
+    class="fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 overflow-y-auto border-l border-gl-border dark:border-gd-border shadow-lg bg-gl-bg dark:bg-gd-bg"
   >
-    <div class="p-8 pt-20">
-      <slot name="navigation" />
+    <div class="p-8 pt-20 bg-gl-bg dark:bg-gd-bg">
+      <div>
+        <slot name="navigation" />
+      </div>
     </div>
   </div>
 

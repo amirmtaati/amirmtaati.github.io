@@ -35,25 +35,25 @@ const {
   <div class="flex flex-1">
     <!-- Sidebar -->
     <aside id="sidebar" class="fixed md:sticky inset-y-0 left-0 w-72 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 h-screen top-0">
-      <div class="h-full bg-gl-bg2 dark:bg-gd-bg3 overflow-y-auto p-8 flex flex-col relative">
+      <div class="h-full bg-gl-bg dark:bg-gd-bg overflow-y-auto p-8 flex flex-col relative shadow-lg">
         <!-- Border overlay -->
-        <div class="absolute inset-y-0 right-0 w-0.5 bg-gl-border dark:bg-gd-border shadow-[2px_0_8px_rgba(0,0,0,0.05)] dark:shadow-[2px_0_8px_rgba(0,0,0,0.2)]"></div>
+        <div class="absolute inset-y-0 right-0 w-0.5 bg-gl-border dark:bg-gd-border"></div>
         
         <header class="mb-8 relative z-10">
           <div class="flex items-center gap-3 mb-4">
-            <!-- Replace with your actual image - using placeholder for now -->
             <img 
               src="/me.jpg" 
               alt="Blog Logo" 
               class="w-12 h-12 rounded-full shadow-md"
             />
-            <h1 class="text-2xl logo font-serif">Amir's Blog</h1>
+            <h1 class="text-2xl logo font-serif text-gl-fg dark:text-gd-fg">Amir's Blog</h1>
           </div>
-          <!-- New: Blog description in sidebar -->
           <p class="text-gl-fg2 dark:text-gd-fg2 text-sm mb-8 italic">
             A personal blog about writing, technology, and digital minimalism
           </p>
-          <slot name="navigation" />
+          <div class="text-gl-fg dark:text-gd-fg">
+            <slot name="navigation" />
+          </div>
         </header>
         <div class="mt-auto relative z-10">
           <slot name="theme-toggle" />
@@ -61,7 +61,7 @@ const {
       </div>
     </aside>
     
-    <!-- Main content - Centered and enlarged -->
+    <!-- Main content -->
     <main class="flex-1 flex flex-col min-h-screen">
       <div class="flex-1 p-4 md:p-8 lg:p-12 w-full max-w-full">
         <div class="w-full mx-auto fixed-height-content max-w-5xl mx-auto">
@@ -124,13 +124,11 @@ const {
   
   <style>
     .fixed-height-content {
-      /* Base height that will grow with content but maintain minimum size */
       min-height: 85vh;
       display: flex;
       flex-direction: column;
     }
     
-    /* Media query for larger screens */
     @media (min-width: 768px) {
       .fixed-height-content {
         min-height: 90vh;
