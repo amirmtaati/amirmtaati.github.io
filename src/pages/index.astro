@@ -6,7 +6,6 @@ import Navigation from '../components/Navigation.astro';
 import PostCard from '../components/PostCard.astro';
 import EssayCard from '../components/EssayCard.astro';
 import AphorismCard from '../components/AphorismCard.astro';
-import NoteCard from '../components/NoteCard.astro';
 import Footer from '../components/Footer.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
@@ -14,7 +13,6 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 const allPosts = await getCollection('blog');
 const allEssays = await getCollection('essays');
 const allAphorisms = await getCollection('aphorisms');
-const allNotes = await getCollection('notes');
 
 // Sort by date (newest first)
 const sortByDate = (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
@@ -22,7 +20,6 @@ const sortByDate = (a, b) => new Date(b.data.date).getTime() - new Date(a.data.d
 const latestPosts = allPosts.sort(sortByDate).slice(0, 2);
 const latestEssays = allEssays.sort(sortByDate).slice(0, 1);
 const latestAphorisms = allAphorisms.sort(sortByDate).slice(0, 3);
-const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
 ---
 
 <BaseLayout>
@@ -30,28 +27,24 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
   <ThemeToggle slot="theme-toggle" />
 
   <div class="space-y-24">
-    <!-- Latest Notes -->
+    <!-- Latest Essays -->
     <section class="w-full mt-12">
       <div class="flex items-center gap-6 mb-16">
         <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
-        <h2 class="heading text-4xl text-gl-accent dark:text-gd-accent font-serif">Recent Notes</h2>
+        <h2 class="heading text-4xl text-gl-accent dark:text-gd-accent font-serif">Latest Essays</h2>
         <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
       </div>
       <div class="w-full max-w-4xl mx-auto">
-        {latestNotes.map(note => (
-          <NoteCard note={{
-            body: note.body,
-            slug: note.slug,
-            data: note.data
-          }} />
+        {latestEssays.map(essay => (
+          <EssayCard essay={essay} />
         ))}
       </div>
       <div class="mt-12 text-center">
         <a 
-          href="/notes" 
+          href="/essays" 
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
         >
-          View all notes
+          Explore all essays
           <span class="i-carbon-arrow-right ml-1"></span>
         </a>
       </div>
@@ -75,29 +68,6 @@ const latestNotes = allNotes.sort(sortByDate).slice(0, 3);
           class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
         >
           View all posts
-          <span class="i-carbon-arrow-right ml-1"></span>
-        </a>
-      </div>
-    </section>
-    
-    <!-- Latest Essays -->
-    <section class="w-full">
-      <div class="flex items-center gap-6 mb-16">
-        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
-        <h2 class="heading text-4xl text-gl-accent dark:text-gd-accent font-serif">Latest Essays</h2>
-        <hr class="flex-1 border-t-2 border-gl-border/30 dark:border-gd-border/30" />
-      </div>
-      <div class="w-full max-w-4xl mx-auto">
-        {latestEssays.map(essay => (
-          <EssayCard essay={essay} />
-        ))}
-      </div>
-      <div class="mt-12 text-center">
-        <a 
-          href="/essays" 
-          class="inline-flex items-center text-sm font-medium text-gl-accent dark:text-gd-accent hover:underline"
-        >
-          Explore all essays
           <span class="i-carbon-arrow-right ml-1"></span>
         </a>
       </div>
