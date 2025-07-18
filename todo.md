@@ -1,161 +1,131 @@
-# Project Context: Personal Technical Blog
+# TODO: Personal Technical Blog Development
 
-## Project Overview
-A personal technical blog built with Astro that serves dual purposes:
-1. **Personal Portfolio** - Showcasing expertise and professional identity
-2. **Technical Blog** - Publishing thoughtful content on programming, computer science, and embedded systems
+## Phase 1: Foundation & Setup
+**Goal**: Basic Astro project with core infrastructure
 
-## Design Philosophy
-- **Minimal & Clean**: Focus on content without visual distractions
-- **Professional**: Suitable for both personal branding and technical discourse
-- **Performance-First**: Fast loading, optimized for Core Web Vitals
-- **Accessibility**: WCAG 2.1 AA compliant
+### Project Setup
+- [ ] Initialize Astro project with TypeScript
+- [ ] Set up folder structure (components, layouts, pages, content)
+- [ ] Install essential dependencies (Astro integrations, TypeScript, etc.)
 
-## Visual Design
+### Basic Configuration
+- [ ] Configure Astro config file (astro.config.mjs)
+- [ ] Set up content collections schema (blog posts)
+- [ ] Configure TypeScript settings
+- [ ] Set up basic ESLint and Prettier configuration
+- [ ] Create basic package.json scripts
 
-### Color Scheme: Nordic Cold Gray Theme
-- **Primary Gray**: `#2E3440` (dark slate)
-- **Secondary Gray**: `#3B4252` (medium slate)
-- **Light Gray**: `#4C566A` (muted slate)
-- **Background**: `#ECEFF4` (light frost)
-- **Text Primary**: `#2E3440` (dark for readability)
-- **Text Secondary**: `#5E81AC` (nord blue for links/accents)
-- **Accent**: `#88C0D0` (light blue for highlights)
-- **Success/Code**: `#A3BE8C` (muted green)
+## Phase 2: Core Layout & Styling
+**Goal**: Establish visual foundation and responsive layout
 
-### Typography
-- **Headings**: Modern sans-serif (Inter, Poppins, or system fonts)
-- **Body**: Readable serif or clean sans-serif
-- **Code**: Monospace (JetBrains Mono, Fira Code)
+### Design System
+- [ ] Create CSS custom properties for Nordic color scheme
+- [ ] Set up typography scales and font loading
+- [ ] Create utility classes for spacing and layout
+- [ ] Implement dark/light mode toggle functionality
+- [ ] Set up responsive breakpoints
 
-## Layout Structure
+### Base Layout Components
+- [ ] Create `BaseLayout.astro` with HTML structure
+- [ ] Build top navigation component
+- [ ] Create simple footer component
+- [ ] Implement responsive navigation (hamburger menu)
+- [ ] Add skip-to-content link for accessibility
 
-### Homepage (Dual Function)
-**Hero Section:**
-- Large name/brand
-- Professional tagline
-- Brief bio (2-3 lines)
-- Call-to-action (Contact, Resume, etc.)
+## Phase 3: Homepage (Portfolio Focus)
+**Goal**: Landing page that showcases professional identity
 
-**Recent Posts Section:**
-- Grid layout of latest 6-8 blog posts
-- Each post card: title, excerpt, date, tags, read time
-- "View All Posts" link
+### Hero Section
+- [ ] Create hero component with name/brand
+- [ ] Add professional tagline and brief bio
+- [ ] Include call-to-action buttons (Contact, Resume)
+- [ ] Make hero section responsive and visually appealing
 
-**About/Skills Section:**
-- Concise professional summary
-- Key technologies/expertise
-- Current focus areas
+### About/Skills Section
+- [ ] Create professional summary component
+- [ ] Add key technologies/expertise display
+- [ ] Include current focus areas
+- [ ] Make section layout responsive
 
-### Navigation (Top)
-- Logo/Name (left)
-- Menu items: Home | Blog | About | Contact
-- Minimal, clean design
-- Responsive hamburger menu on mobile
+## Phase 4: Blog Infrastructure
+**Goal**: Set up content management and blog functionality
 
-### Footer (Simple)
-- Copyright notice
-- Social links (GitHub, LinkedIn, Twitter)
-- RSS feed link
-- Contact email
+### Content Collections
+- [ ] Define blog post schema in content/config.ts
+- [ ] Create sample blog posts in Markdown
+- [ ] Set up frontmatter validation
+- [ ] Configure content collection types
 
-## Content Strategy
+### Blog Layout Components
+- [ ] Create `BlogLayout.astro` for blog pages
+- [ ] Build `PostLayout.astro` for individual posts
+- [ ] Create blog post card component
+- [ ] Add post metadata display (date, tags, read time)
 
-### Blog Categories
-- **Programming**: Languages, tools, software engineering
-- **Computer Science**: Algorithms, theory, practical applications
-- **Embedded Systems**: Hardware, low-level programming
-- **Tutorials**: Step-by-step guides and how-tos
-- **Reflections**: Personal insights on technology and development
+## Phase 5: Blog Pages & Functionality
+**Goal**: Complete blog reading experience
 
-### Content Types
-- **Long-form essays**: 1500-3000 words
-- **Technical tutorials**: Code-heavy, practical guides
-- **Short insights**: 500-800 words
-- **Code snippets**: Quick tips and tricks
+### Blog List Page
+- [ ] Create `/blog` index page
+- [ ] Implement blog post grid/list layout
+- [ ] Add pagination functionality
+- [ ] Include category/tag filtering
+- [ ] Add search functionality (client-side)
 
-## Technical Requirements
+### Individual Blog Posts
+- [ ] Set up dynamic routing for blog posts
+- [ ] Implement syntax highlighting for code blocks
+- [ ] Add table of contents for longer posts
+- [ ] Include social sharing buttons
+- [ ] Add "related posts" suggestions
 
-### Performance Goals
-- **Lighthouse Score**: 90+ on all metrics
-- **First Contentful Paint**: < 1.5s
-- **Largest Contentful Paint**: < 2.5s
-- **Cumulative Layout Shift**: < 0.1
+## Phase 6: Homepage Integration
+**Goal**: Connect portfolio and blog sections
 
-### Features
-- **Dark/Light Mode**: System preference detection
-- **Search**: Client-side search functionality
-- **RSS Feed**: Auto-generated from content
-- **Syntax Highlighting**: Code blocks with proper theming
-- **Image Optimization**: Astro's built-in image optimization
-- **SEO**: Proper meta tags, Open Graph, structured data
+### Recent Posts Section
+- [ ] Create recent posts component for homepage
+- [ ] Display latest 6-8 blog posts as cards
+- [ ] Add "View All Posts" link
+- [ ] Make posts section responsive
+- [ ] Include post preview/excerpt functionality
 
-### Accessibility
-- **Keyboard Navigation**: Full keyboard accessibility
-- **Screen Reader**: Proper ARIA labels and semantic HTML
-- **Color Contrast**: WCAG AA compliant ratios
-- **Focus Management**: Visible focus indicators
+### Homepage Polish
+- [ ] Integrate all homepage sections
+- [ ] Test responsive behavior across devices
+- [ ] Optimize loading performance
+- [ ] Add subtle animations/transitions
 
-## Content Management
+## Phase 7: Content & SEO
+**Goal**: Optimize for search engines and user experience
 
-### File Structure
-```
-src/
-├── content/
-│   ├── blog/           # Blog posts (Markdown)
-│   └── config.ts       # Content collection schemas
-├── components/
-│   ├── ui/             # Reusable UI components
-│   ├── blog/           # Blog-specific components
-│   └── layout/         # Layout components
-├── layouts/
-│   ├── BaseLayout.astro
-│   ├── BlogLayout.astro
-│   └── PostLayout.astro
-├── pages/
-│   ├── index.astro     # Homepage
-│   ├── blog/           # Blog pages
-│   └── about.astro
-└── styles/
-    ├── global.css
-    └── components/
-```
+### SEO Implementation
+- [ ] Add proper meta tags to all pages
+- [ ] Implement Open Graph tags
+- [ ] Create XML sitemap generation
+- [ ] Add structured data (JSON-LD)
+- [ ] Set up canonical URLs
 
-### Content Schema
-```typescript
-interface BlogPost {
-  title: string;
-  description: string;
-  publishDate: Date;
-  tags: string[];
-  category: 'programming' | 'computer-science' | 'embedded' | 'tutorial';
-  draft?: boolean;
-  featured?: boolean;
-}
-```
+### Content Preparation
+- [ ] Write initial blog posts (3-5 posts)
+- [ ] Create About page content
+- [ ] Add Contact page/form
+- [ ] Prepare resume/CV download
+- [ ] Optimize all images
 
-## Brand Identity
+## Phase 8: Performance & Accessibility
+**Goal**: Ensure optimal user experience
 
-### Tone of Voice
-- **Professional but approachable**
-- **Knowledgeable without being condescending**
-- **Practical and actionable**
-- **Honest about limitations and learning**
+### Performance Optimization
+- [ ] Implement image optimization
+- [ ] Configure lazy loading
+- [ ] Minimize and optimize CSS/JS bundles
+- [ ] Set up proper caching headers
+- [ ] Achieve 90+ Lighthouse scores
 
-### Target Audience
-- **Primary**: Software developers, engineers, CS students
-- **Secondary**: Technical recruiters, potential collaborators
-- **Tertiary**: General tech enthusiasts
+### Accessibility Audit
+- [ ] Test keyboard navigation
+- [ ] Verify screen reader compatibility
+- [ ] Check color contrast ratios
+- [ ] Add proper ARIA labels
+- [ ] Test with accessibility tools
 
-## Success Metrics
-- **Content Quality**: Engagement time, return visitors
-- **Professional Growth**: Inquiries, networking opportunities
-- **Technical Reach**: Shares on dev.to, GitHub stars
-- **Personal Satisfaction**: Writing improvement, knowledge sharing
-
-## Future Enhancements
-- **Newsletter Integration**: Substack connection
-- **Comments System**: Giscus or similar
-- **Project Showcase**: Dedicated portfolio section
-- **Speaking/Writing**: Links to external publications
-- **Analytics**: Privacy-respecting visitor tracking
