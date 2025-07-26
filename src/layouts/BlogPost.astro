@@ -11,72 +11,51 @@ type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="bg-gruvbox-bg0">
 	<head>
 		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
 	</head>
 
-	<body>
+	<body class="bg-gruvbox-bg0 text-gruvbox-fg1 min-h-screen">
 		<Header />
-		<main>
+		<main class="max-w-4xl mx-auto px-4 py-12">
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
+				{heroImage && (
+					<div class="mb-8">
+						<Image 
+							width={1020} 
+							height={510} 
+							src={heroImage} 
+							alt="" 
+							class="w-full rounded-lg border border-gruvbox-bg3"
+						/>
 					</div>
+				)}
+				
+				<header class="mb-8 pb-8 border-b border-gruvbox-bg3">
+					<div class="text-center space-y-4">
+						<div class="space-y-2">
+							<time class="text-gruvbox-fg3 text-sm font-mono">
+								<FormattedDate date={pubDate} />
+							</time>
+							{updatedDate && (
+								<div class="text-gruvbox-fg4 text-xs font-mono italic">
+									Last updated: <FormattedDate date={updatedDate} />
+								</div>
+							)}
+						</div>
+						<h1 class="text-3xl md:text-4xl font-bold text-gruvbox-fg0 leading-tight">
+							{title}
+						</h1>
+						{description && (
+							<p class="text-xl text-gruvbox-fg2 max-w-2xl mx-auto leading-relaxed">
+								{description}
+							</p>
+						)}
+					</div>
+				</header>
+				
+				<div class="prose prose-lg max-w-none prose-gruvbox">
 					<slot />
 				</div>
 			</article>
@@ -84,3 +63,138 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Footer />
 	</body>
 </html>
+
+<style is:global>
+	/* Custom prose styling for Gruvbox theme */
+	.prose-gruvbox {
+		color: var(--fg2);
+		line-height: 1.7;
+	}
+	
+	.prose-gruvbox h1,
+	.prose-gruvbox h2,
+	.prose-gruvbox h3,
+	.prose-gruvbox h4,
+	.prose-gruvbox h5,
+	.prose-gruvbox h6 {
+		color: var(--fg0);
+		font-weight: 600;
+		margin-top: 2em;
+		margin-bottom: 1em;
+	}
+	
+	.prose-gruvbox h1 { font-size: 2.25em; }
+	.prose-gruvbox h2 { font-size: 1.875em; }
+	.prose-gruvbox h3 { font-size: 1.5em; }
+	.prose-gruvbox h4 { font-size: 1.25em; }
+	
+	.prose-gruvbox p {
+		margin-bottom: 1.5em;
+	}
+	
+	.prose-gruvbox a {
+		color: var(--blue-bright);
+		text-decoration: underline;
+		text-decoration-color: transparent;
+		transition: all 0.2s ease;
+	}
+	
+	.prose-gruvbox a:hover {
+		color: var(--yellow-bright);
+		text-decoration-color: currentColor;
+	}
+	
+	.prose-gruvbox strong {
+		color: var(--fg0);
+		font-weight: 600;
+	}
+	
+	.prose-gruvbox em {
+		color: var(--fg1);
+		font-style: italic;
+	}
+	
+	.prose-gruvbox ul,
+	.prose-gruvbox ol {
+		margin: 1.5em 0;
+		padding-left: 1.5em;
+	}
+	
+	.prose-gruvbox li {
+		margin: 0.5em 0;
+	}
+	
+	.prose-gruvbox blockquote {
+		border-left: 4px solid var(--yellow);
+		background-color: var(--bg1);
+		margin: 2em 0;
+		padding: 1.5em;
+		border-radius: 6px;
+		color: var(--fg1);
+		font-style: italic;
+	}
+	
+	.prose-gruvbox code {
+		font-family: "JetBrains Mono", monospace;
+		background-color: var(--bg1);
+		color: var(--green-bright);
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+	
+	.prose-gruvbox pre {
+		background-color: var(--bg1);
+		border: 1px solid var(--bg2);
+		border-radius: 8px;
+		padding: 1.5em;
+		overflow-x: auto;
+		margin: 2em 0;
+	}
+	
+	.prose-gruvbox pre code {
+		background: none;
+		padding: 0;
+		border-radius: 0;
+		font-size: inherit;
+		color: var(--fg1);
+	}
+	
+	.prose-gruvbox hr {
+		border: none;
+		border-top: 2px solid var(--bg3);
+		margin: 3em 0;
+	}
+	
+	.prose-gruvbox table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 2em 0;
+		border: 1px solid var(--bg3);
+		border-radius: 6px;
+		overflow: hidden;
+	}
+	
+	.prose-gruvbox th,
+	.prose-gruvbox td {
+		border: 1px solid var(--bg3);
+		padding: 0.75em 1em;
+		text-align: left;
+	}
+	
+	.prose-gruvbox th {
+		background-color: var(--bg1);
+		color: var(--fg0);
+		font-weight: 600;
+	}
+	
+	.prose-gruvbox td {
+		background-color: var(--bg0);
+	}
+	
+	.prose-gruvbox img {
+		border-radius: 8px;
+		border: 1px solid var(--bg3);
+		margin: 2em 0;
+	}
+</style>

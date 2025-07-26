@@ -1,63 +1,118 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en" class="bg-gruvbox-bg0">
+	<head>
+		<BaseHead title={`About - ${SITE_TITLE}`} description="About Amir and his technical journey" />
+	</head>
+	<body class="bg-gruvbox-bg0 text-gruvbox-fg1 min-h-screen">
+		<Header />
+		<main class="max-w-4xl mx-auto px-4 py-12">
+			<article class="prose prose-lg max-w-none">
+				<header class="text-center mb-12">
+					<h1 class="text-4xl font-bold text-gruvbox-fg0 mb-4">About Me</h1>
+					<div class="w-16 h-1 bg-gruvbox-yellow mx-auto"></div>
+				</header>
+				
+				<div class="space-y-6 text-gruvbox-fg2 leading-relaxed">
+					<p class="text-xl text-gruvbox-fg1 font-medium">
+						I'm Amir, a technologist passionate about the fundamentals of computing and the craft of programming.
+					</p>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+					<p>
+						My journey in technology is driven by curiosity about how things work at the deepest levels. 
+						I'm particularly drawn to <span class="text-gruvbox-green font-medium">low-level programming</span>, 
+						<span class="text-gruvbox-blue font-medium">systems design</span>, and 
+						<span class="text-gruvbox-purple font-medium">embedded development</span>. 
+						I believe that understanding the underlying mechanisms makes you a better programmer, 
+						regardless of what layer you're working at.
+					</p>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+					<p>
+						I'm a strong advocate for <span class="text-gruvbox-orange font-medium">tool mastery</span> 
+						and deliberate practice. In a world of endless frameworks and abstractions, I prefer to focus 
+						on timeless fundamentals that will remain relevant for decades. This means diving deep into 
+						topics like computer architecture, operating systems, compilers, and algorithms.
+					</p>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+					<p>
+						My technical interests span several areas:
+					</p>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+					<div class="bg-gruvbox-bg1 border border-gruvbox-bg3 rounded-lg p-6 my-8">
+						<div class="grid md:grid-cols-2 gap-6">
+							<div>
+								<h3 class="text-lg font-semibold text-gruvbox-yellow mb-3">Programming & Languages</h3>
+								<ul class="space-y-1 text-gruvbox-fg3">
+									<li>• Language design and implementation</li>
+									<li>• Compiler construction</li>
+									<li>• Type systems and formal methods</li>
+									<li>• Performance optimization</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gruvbox-blue mb-3">Systems & Architecture</h3>
+								<ul class="space-y-1 text-gruvbox-fg3">
+									<li>• Operating systems internals</li>
+									<li>• Computer architecture</li>
+									<li>• Network programming</li>
+									<li>• Distributed systems</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gruvbox-purple mb-3">Embedded & Hardware</h3>
+								<ul class="space-y-1 text-gruvbox-fg3">
+									<li>• Microcontroller programming</li>
+									<li>• Real-time systems</li>
+									<li>• Hardware interfacing</li>
+									<li>• Signal processing</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gruvbox-green mb-3">Tools & Philosophy</h3>
+								<ul class="space-y-1 text-gruvbox-fg3">
+									<li>• Linux and Unix philosophy</li>
+									<li>• Text editors (Emacs enthusiast)</li>
+									<li>• Build systems and automation</li>
+									<li>• Open-source development</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<p>
+						I'm somewhat contrarian when it comes to modern development practices. While others chase 
+						the latest JavaScript framework, I'm more interested in understanding why certain design 
+						decisions were made and what trade-offs they involve. I believe in choosing tools based 
+						on technical merit rather than popularity.
+					</p>
+
+					<p>
+						This blog serves multiple purposes: it's a way to document my learning journey, share 
+						knowledge with others who are interested in similar topics, and contribute to the broader 
+						conversation about software quality and engineering practices. I try to write posts that 
+						are both technically rigorous and accessible to those willing to dig deeper.
+					</p>
+
+					<p>
+						When I'm not writing code or blog posts, you might find me tinkering with hardware projects, 
+						reading academic papers, or exploring the intersection of technology and philosophy. 
+						I'm particularly interested in how the tools we use shape the way we think about problems.
+					</p>
+
+					<p class="text-gruvbox-fg1 font-medium">
+						If you share similar interests or want to discuss any of the topics I write about, 
+						feel free to reach out through the links in the footer. I'm always happy to connect 
+						with fellow practitioners who value depth over breadth.
+					</p>
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
