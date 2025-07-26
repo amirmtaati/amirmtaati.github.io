@@ -19,8 +19,36 @@ const posts = (await getCollection('blog')).sort(
 	<body class="bg-gruvbox-bg0 text-gruvbox-fg1 min-h-screen">
 		<Header />
 		<main class="max-w-4xl mx-auto px-4 py-12">
+			<!-- About Me Section -->
+			<section class="mb-16">
+				<div class="text-center mb-8">
+					<h1 class="text-4xl font-bold text-gruvbox-fg0 mb-4">Amir's Technical Notes</h1>
+					<div class="w-16 h-1 bg-gruvbox-yellow mx-auto mb-6"></div>
+				</div>
+				
+				<div class="bg-gruvbox-bg1 border border-gruvbox-bg3 rounded-lg p-8 mb-8">
+					<div class="max-w-3xl mx-auto text-center">
+						<p class="text-xl text-gruvbox-fg1 leading-relaxed mb-6">
+							I'm a young technologist passionate about the fundamentals of computing and the craft of programming. 
+							My journey is driven by deep curiosity about how things work at the lowest levels.
+						</p>
+						<p class="text-gruvbox-fg2 leading-relaxed mb-6">
+							I focus on <span class="text-gruvbox-green font-medium">low-level programming</span>, 
+							<span class="text-gruvbox-blue font-medium">systems design</span>, 
+							<span class="text-gruvbox-purple font-medium">embedded development</span>, and 
+							<span class="text-gruvbox-orange font-medium">tool mastery</span>. 
+							I believe understanding the underlying mechanisms makes you a better programmer, regardless of what layer you're working at.
+						</p>
+						<p class="text-gruvbox-fg2 leading-relaxed">
+							This blog is where I share thoughtful essays, tutorials, and often contrarian perspectives on programming, 
+							systems, and computing culture. I prefer focusing on timeless fundamentals over chasing the latest trends.
+						</p>
+					</div>
+				</div>
+			</section>
+
 			<div class="mb-12">
-				<h1 class="text-4xl font-bold text-gruvbox-fg0 mb-4">Blog Posts</h1>
+				<h2 class="text-3xl font-bold text-gruvbox-fg0 mb-4">Latest Posts</h2>
 				<p class="text-gruvbox-fg3 text-lg">
 					Thoughts on programming, systems, and computing culture.
 				</p>
