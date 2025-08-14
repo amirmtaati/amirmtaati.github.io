@@ -8,7 +8,7 @@ import { SITE_TITLE } from '../consts';
 <!doctype html>
 <html lang="en" class="bg-gruvbox-bg0">
 	<head>
-		<BaseHead title={`About - ${SITE_TITLE}`} description="About Amir and his learning journey" />
+		<BaseHead title={`About - ${SITE_TITLE}`} description="About Amir and his passion for computer science" />
 	</head>
 	<body class="bg-gruvbox-bg0 text-gruvbox-fg1 min-h-screen">
 		<Header />
@@ -21,110 +21,93 @@ import { SITE_TITLE } from '../consts';
 				
 				<div class="space-y-6 text-gruvbox-fg2 leading-relaxed">
 					<p class="text-xl text-gruvbox-fg1 font-medium">
-						I'm Amir, an 18-year-old curious student from Iran, passionate about learning at the intersection of 
-						electrical engineering, computer science, and mathematics.
+						I'm Amir, an 18-year-old from Iran who's passionate about computer science and the art of building 
+						software that works well and does exactly what it's supposed to do.
 					</p>
 
 					<p>
-						My journey began in childhood when I started creating web pages, which sparked a deep fascination 
-						with how technology works at its core. Though I'm still a student without any formal work experience, 
-						I've been programming for years and am driven by curiosity about the fundamental principles that govern 
-						both hardware and software systems.
+						My journey with programming started years ago, and what keeps me engaged is the endless depth of 
+						the field. From theoretical computation to hands-on system building, there's always something new 
+						to discover or a more elegant way to solve a problem.
 					</p>
 
 					<p>
-						Currently, I work primarily with <span class="text-gruvbox-green font-medium">Go</span>, 
-						<span class="text-gruvbox-blue font-medium">C/C++</span>, and 
-						<span class="text-gruvbox-purple font-medium">Julia</span>. I also dabble in 
-						<span class="text-gruvbox-orange font-medium">Python</span>, 
-						<span class="text-gruvbox-yellow font-medium">Bash</span>, and 
-						<span class="text-gruvbox-aqua font-medium">Lua</span> when needed. 
-						Each language teaches me something new about different approaches to problem-solving.
+						I love working at different levels of abstraction. Sometimes I'm writing 
+						<span class="text-gruvbox-green font-medium">C</span> code that gets as close to the metal as possible, 
+						other times I'm exploring the beauty of functional programming with 
+						<span class="text-gruvbox-purple font-medium">Racket</span>. When I need to build something practical and efficient, 
+						I reach for <span class="text-gruvbox-blue font-medium">Go</span> or 
+						<span class="text-gruvbox-orange font-medium">Python</span>.
 					</p>
 
 					<p>
-						What truly excites me is the convergence of disciplines. I'm deeply passionate about 
-						<span class="text-gruvbox-green font-medium">electrical engineering</span>, even though I'm still 
-						learning the basics. There's something beautiful about understanding how electrons move through 
-						circuits, how signals propagate, and how we can harness these phenomena to build incredible systems.
-					</p>
-
-					<p>
-						My technical interests span several interconnected areas:
+						For scientific computing and numerical work, <span class="text-gruvbox-aqua font-medium">Julia</span> 
+						has become a favorite—it strikes this perfect balance between high-level expressiveness and performance. 
+						And when raw speed is non-negotiable, <span class="text-gruvbox-red font-medium">C++</span> is still hard to beat.
 					</p>
 
 					<div class="bg-gruvbox-bg1 border border-gruvbox-bg3 rounded-lg p-6 my-8">
 						<div class="grid md:grid-cols-2 gap-6">
 							<div>
-								<h3 class="text-lg font-semibold text-gruvbox-yellow mb-3">Programming & Languages</h3>
+								<h3 class="text-lg font-semibold text-gruvbox-yellow mb-3">What I Work With</h3>
 								<ul class="space-y-1 text-gruvbox-fg3">
-									<li>• Systems programming with C/C++</li>
-									<li>• Concurrent programming with Go</li>
-									<li>• Scientific computing with Julia</li>
+									<li>• <strong>C</strong> — systems programming, getting close to the hardware</li>
+									<li>• <strong>Go</strong> — building efficient, concurrent systems</li>
+									<li>• <strong>Python</strong> — rapid prototyping and general scripting</li>
+									<li>• <strong>Racket</strong> — exploring functional programming concepts</li>
+									<li>• <strong>Julia</strong> — scientific computing and numerical analysis</li>
+									<li>• <strong>C++</strong> — performance-critical applications</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gruvbox-blue mb-3">What Interests Me</h3>
+								<ul class="space-y-1 text-gruvbox-fg3">
+									<li>• Systems programming and low-level optimization</li>
+									<li>• Building interpreters and compilers</li>
 									<li>• Algorithm design and analysis</li>
-								</ul>
-							</div>
-							<div>
-								<h3 class="text-lg font-semibold text-gruvbox-blue mb-3">Electrical Engineering</h3>
-								<ul class="space-y-1 text-gruvbox-fg3">
-									<li>• Circuit analysis and design</li>
-									<li>• Digital signal processing</li>
-									<li>• Microcontroller programming</li>
-									<li>• Hardware-software integration</li>
-								</ul>
-							</div>
-							<div>
-								<h3 class="text-lg font-semibold text-gruvbox-purple mb-3">Mathematics</h3>
-								<ul class="space-y-1 text-gruvbox-fg3">
-									<li>• Linear algebra and calculus</li>
-									<li>• Discrete mathematics</li>
-									<li>• Numerical methods</li>
-									<li>• Mathematical modeling</li>
-								</ul>
-							</div>
-							<div>
-								<h3 class="text-lg font-semibold text-gruvbox-green mb-3">Computer Science</h3>
-								<ul class="space-y-1 text-gruvbox-fg3">
-									<li>• Data structures and algorithms</li>
-									<li>• Computer architecture</li>
-									<li>• Operating systems concepts</li>
-									<li>• Computational complexity</li>
+									<li>• Scientific computing and numerical methods</li>
+									<li>• Minimal, clean software design</li>
+									<li>• Understanding how languages work under the hood</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 
 					<p>
-						Being young and without professional experience has its advantages - I approach problems with fresh eyes 
-						and am not constrained by "the way things are supposed to be done." I'm eager to learn from others 
-						while also sharing what I discover along the way.
+						My development environment reflects my philosophy: I use <span class="text-gruvbox-green font-medium">Emacs</span> 
+						as my editor and <span class="text-gruvbox-blue font-medium">Linux (Debian)</span> as my daily driver. 
+						I believe in tools that are powerful yet simple, workflows that are efficient without being complicated.
 					</p>
 
 					<p>
-						Living in Iran presents both challenges and unique opportunities. While access to some resources 
-						might be limited, it has taught me to be resourceful and to deeply understand the fundamentals 
-						rather than relying on convenient abstractions. This constraint has actually made me a more 
-						thoughtful learner and programmer.
+						What really excites me about computer science is how it combines abstract thinking with concrete results. 
+						You can spend hours thinking about algorithm complexity or the elegant design of a programming language, 
+						then turn around and build something that solves a real problem. That connection between theory and practice 
+						is what keeps me engaged.
 					</p>
 
 					<p>
-						This blog serves as my learning journal and a way to share knowledge with others who are on 
-						similar journeys. I write about programming concepts, mathematical insights, what I'm learning 
-						about electrical engineering, and the process of learning itself. My posts range from technical 
-						tutorials to reflective essays about curiosity and discovery.
+						I'm particularly drawn to understanding how things work at a fundamental level. Whether it's implementing 
+						a simple interpreter, optimizing a critical algorithm, or just figuring out why one approach is faster 
+						than another, I find the process of digging deep and really understanding the mechanisms fascinating.
 					</p>
 
 					<p>
-						When I'm not coding or studying, you might find me exploring circuit simulations, working through 
-						mathematical proofs, or reading about the history of computing and electrical engineering. 
-						I'm particularly fascinated by how theoretical concepts translate into practical applications, 
-						and I love writing about these connections.
+						Being based in Iran gives me a unique perspective on technology and problem-solving. Sometimes constraints 
+						force you to be more creative, to really understand your tools rather than just using them. It's taught me 
+						to appreciate simple, robust solutions and to always look for ways to do more with less.
+					</p>
+
+					<p>
+						This blog is where I document what I'm learning, share tools and techniques I've found useful, and explore 
+						ideas about programming and computer science. Sometimes I write about a specific technical problem I've solved, 
+						other times about broader concepts or approaches that I find interesting.
 					</p>
 
 					<p class="text-gruvbox-fg1 font-medium">
-						If you're interested in learning about these fields, mathematics, or programming - especially if you're also 
-						early in your journey - I'd love to connect and learn together. Feel free to reach out through 
-						the contact page!
+						If you're interested in any of these areas, or if you're working on something cool and want to share ideas, 
+						I'd love to hear from you. The best part of this field is the community of people who are curious about 
+						how things work and excited to build better solutions.
 					</p>
 				</div>
 			</article>
