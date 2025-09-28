@@ -9,6 +9,11 @@
 
 (require 'ox-publish)
 
+;; Set a clean theme for htmlize
+(setq htmlize-html-major-mode 'html-mode)
+(load-theme 'modus-vivendi t t)  ; Light theme for clean code block output
+(setq htmlize-use-rgb-map 'modus-vivendi)  ; Ensure consistent colors
+
 (setq org-publish-project-alist
       (list
        (list "website-org"

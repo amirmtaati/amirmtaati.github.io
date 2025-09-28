@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solutions to CSES Problemset</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Solutions to CSES Problemset</h1>
+</header><div id="outline-container-org1331212" class="outline-2">
+<h2 id="org1331212">Introductory Problems</h2>
+<div class="outline-text-2" id="text-org1331212">
+</div>
+<div id="outline-container-orgd34ae5e" class="outline-4">
+<h4 id="orgd34ae5e"><span class="done DONE">DONE</span> </h4>
+</div>
+<div id="outline-container-orgde5ee29" class="outline-4">
+<h4 id="orgde5ee29"><span class="done DONE">DONE</span> </h4>
+</div>
+<div id="outline-container-orga89064c" class="outline-4">
+<h4 id="orga89064c"><span class="done DONE">DONE</span> </h4>
+</div>
+<div id="outline-container-org6313d21" class="outline-4">
+<h4 id="org6313d21"><span class="done DONE">DONE</span> </h4>
+</div>
+<div id="outline-container-orge2ff459" class="outline-4">
+<h4 id="orge2ff459"><span class="done DONE">DONE</span> </h4>
+</div>
+<div id="outline-container-org69f2201" class="outline-4">
+<h4 id="org69f2201"><span class="done DONE">DONE</span> </h4>
+</div>
+<div id="outline-container-orgefa2c0b" class="outline-4">
+<h4 id="orgefa2c0b"><span class="done DONE">DONE</span> </h4>
+</div>
+<div id="outline-container-org18a84f9" class="outline-4">
+<h4 id="org18a84f9"><span class="done DONE">DONE</span> Two Knights</h4>
+</div>
+<div id="outline-container-org6cd08ac" class="outline-4">
+<h4 id="org6cd08ac"><span class="done DONE">DONE</span> Two Sets</h4>
+<div class="outline-text-4" id="text-org6cd08ac">
+<p>
+<a href="https://cses.fi/problemset/result/14520711/">Problem</a>
+</p>
+
+<p>
+First of all we need to check whether we can divide numbers 1 to n into two groups with equal sum. This means that we need to be able to divide the sum of 1 to n into two, in other words the sum of 1 to n is even.
+\[ S_n = n * (n + 1) / 2 \]
+</p>
+
+<p>
+Later we need to divide them into two groups with equal sum.
+</p>
+<div class="org-src-container">
+<pre class="src src-C++">    <span style="color: #66D9EF; font-style: italic;">vll</span> <span style="color: #F8F8F2;">s1</span>, <span style="color: #F8F8F2;">s2</span>;
+    <span style="color: #66D9EF; font-style: italic;">vll</span> <span style="color: #F8F8F2;">visited</span>(n+1, 0);
+
+    <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">sum</span> = n*(n+1)/4;
+    <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">sum_s1</span> = 0;
+    <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">max</span> = n;
+
+    <span style="color: #F92660;">while</span> (sum &gt; sum_s1) {
+        <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">remaining</span> = sum - sum_s1;
+
+        <span style="color: #F92660;">if</span> (remaining &gt; max) {
+            s1.pb(max);
+            visited[max] = 1;
+            sum_s1 += max;
+            max--;
+        } <span style="color: #F92660;">else</span> {
+            s1.pb(remaining);
+            visited[remaining] = 1;
+            sum_s1 = sum;
+        }
+    }
+
+    <span style="color: #F92660;">for</span> (<span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">i</span> = 1; i &lt;= n; i++) {
+        <span style="color: #F92660;">if</span> (visited[i] == 0) {
+            s2.push_back(i);
+        }
+    }
+</pre>
+</div>
+
+<p>
+Although not directly related, there is a similar problem in number theory named <a href="https://en.wikipedia.org/wiki/Partition_problem">partition problem</a>.
+</p>
+
+<p>
+<code>keywords</code>: parity, partition problem, greedy algorithm
+</p>
+</div>
+</div>
+<div id="outline-container-org3b1e9f5" class="outline-4">
+<h4 id="org3b1e9f5"><span class="done DONE">DONE</span> Bit Strings</h4>
+<div class="outline-text-4" id="text-org3b1e9f5">
+<p>
+<a href="https://cses.fi/problemset/task/1617">Problem</a>
+</p>
+
+<p>
+The solution to this problem is pretty simple and straight forward. All we need to do is to calculate \(2^n\). The problem is that for large n&rsquo;s the
+solution takes a long time to compute. Therefore we have to implemented an algorithm called <a href="https://cp-algorithms.com/algebra/binary-exp.html">Binary Exponentiation</a> to compute this power in O(log n).
+</p>
+</div>
+</div>
+<div id="outline-container-org9307edc" class="outline-4">
+<h4 id="org9307edc"><span class="done DONE">DONE</span> Trailing Zeros</h4>
+</div>
+<div id="outline-container-orgac0528a" class="outline-4">
+<h4 id="orgac0528a"><span class="done DONE">DONE</span> Coin Piles</h4>
+</div>
+<div id="outline-container-orgb3f92a2" class="outline-4">
+<h4 id="orgb3f92a2"><span class="done DONE">DONE</span> Palindrome Reorder</h4>
+</div>
+<div id="outline-container-org52c91a7" class="outline-4">
+<h4 id="org52c91a7"><span class="done DONE">DONE</span> Gray Code</h4>
+<div class="outline-text-4" id="text-org52c91a7">
+<p>
+<a href="https://cses.fi/problemset/task/2205">Problem</a>
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/Gray_code">Gray Code on Wikipedia</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org115d819" class="outline-4">
+<h4 id="org115d819"><span class="done DONE">DONE</span> Tower of Hanoi</h4>
+<div class="outline-text-4" id="text-org115d819">
+<p>
+<a href="https://cses.fi/problemset/task/2165/">Problem</a>
+One of the most famous problems in computer science. This is can be solved through <b>recursion</b>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #66D9EF; font-style: italic;">void</span> <span style="color: #A6E22E;">Hanoi</span>(<span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">n</span>, <span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">i</span>, <span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">j</span>, <span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">k</span>) {
+    <span style="color: #F92660;">if</span> (n == 0) {
+        <span style="color: #F92660;">return</span>;
+    }
+
+    Hanoi(n - 1, i, k, j);
+    cout &lt;&lt; i &lt;&lt; <span style="color: #E6DB74;">" "</span> &lt;&lt; j &lt;&lt; <span style="color: #E6DB74;">"\n"</span>;
+    Hanoi(n - 1, k, j, i);
+}
+</pre>
+</div>
+
+<p>
+This basically means that the solution to the whole problem is the same as the solution to a sub-problem of this.
+Note: Recursion and <b>induction</b> have something fundamental in common.
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/Recursion">Recursion on Wikipedia</a>
+<a href="https://en.wikipedia.org/wiki/Tower_of_Hanoi">Tower of Hanoi on Wikipedia</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org75429fc" class="outline-4">
+<h4 id="org75429fc"><span class="done DONE">DONE</span> Creating Strings</h4>
+<div class="outline-text-4" id="text-org75429fc">
+<p>
+<a href="https://cses.fi/problemset/task/1622/">Problem</a>
+</p>
+
+<p>
+This was a pretty straight forward problem to solve. All you need to do is to use the recursive technique you have learned before:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #66D9EF; font-style: italic;">set</span>&lt;<span style="color: #66D9EF; font-style: italic;">string</span>&gt; <span style="color: #A6E22E;">P</span>(<span style="color: #66D9EF; font-style: italic;">string</span> <span style="color: #F8F8F2;">str</span>) {
+    <span style="color: #66D9EF; font-style: italic;">set</span>&lt;<span style="color: #66D9EF; font-style: italic;">string</span>&gt; <span style="color: #F8F8F2;">sol</span>;
+    <span style="color: #F92660;">if</span> (str.length() == 1) {
+        sol.insert(str);
+        <span style="color: #F92660;">return</span> sol;
+    }
+
+    <span style="color: #F92660;">for</span> (<span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">i</span> = 0; i &lt; str.length(); i++) {
+        <span style="color: #66D9EF; font-style: italic;">char</span> <span style="color: #F8F8F2;">c1</span> = str[i];
+        <span style="color: #66D9EF; font-style: italic;">string</span> <span style="color: #F8F8F2;">r</span> = rest(str, i);
+        <span style="color: #F92660;">for</span> (<span style="color: #F92660;">auto</span> <span style="color: #F8F8F2;">s</span> : P(r)) {
+            sol.insert(c1 + s);
+        }
+    }
+    <span style="color: #F92660;">return</span> sol;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgffef231" class="outline-4">
+<h4 id="orgffef231"><span class="todo TODO">TODO</span> Apple Division</h4>
+</div>
+<div id="outline-container-orgd80c557" class="outline-4">
+<h4 id="orgd80c557"><span class="todo TODO">TODO</span> Chessboard and Queens</h4>
+</div>
+<div id="outline-container-org012c403" class="outline-4">
+<h4 id="org012c403"><span class="todo TODO">TODO</span> Raab Game I</h4>
+</div>
+<div id="outline-container-org5303913" class="outline-4">
+<h4 id="org5303913"><span class="todo TODO">TODO</span> Mex Grid Construction</h4>
+</div>
+<div id="outline-container-org8677aa2" class="outline-4">
+<h4 id="org8677aa2"><span class="todo TODO">TODO</span> Knight Moves Grid</h4>
+</div>
+<div id="outline-container-org80bea75" class="outline-4">
+<h4 id="org80bea75"><span class="todo TODO">TODO</span> Grid Coloring I</h4>
+</div>
+<div id="outline-container-orga748164" class="outline-4">
+<h4 id="orga748164"><span class="todo TODO">TODO</span> Digit Queries I</h4>
+</div>
+<div id="outline-container-orgaefeecf" class="outline-4">
+<h4 id="orgaefeecf"><span class="todo TODO">TODO</span> String Reorder</h4>
+</div>
+<div id="outline-container-org36996d4" class="outline-4">
+<h4 id="org36996d4"><span class="todo TODO">TODO</span> Grid Path Description</h4>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2025-09-28 Sun 00:00</p>
+</div>
+</body>
+</html>

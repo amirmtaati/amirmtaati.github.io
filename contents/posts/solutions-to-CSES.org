@@ -1,0 +1,121 @@
+#+TITLE: Solutions to CSES Problemset
+#+DATE: <2025-09-28 Sun>
+#+OPTIONS: toc:nil num:nil
+
+* Introductory Problems
+*** DONE
+*** DONE
+*** DONE
+*** DONE
+*** DONE
+*** DONE
+*** DONE
+*** DONE Two Knights
+*** DONE Two Sets
+[[https://cses.fi/problemset/result/14520711/][Problem]]
+
+First of all we need to check whether we can divide numbers 1 to n into two groups with equal sum. This means that we need to be able to divide the sum of 1 to n into two, in other words the sum of 1 to n is even.
+\[ S_n = n * (n + 1) / 2 \]
+
+Later we need to divide them into two groups with equal sum.
+#+BEGIN_SRC C++
+    vll s1, s2;
+    vll visited(n+1, 0);
+
+    ll sum = n*(n+1)/4;
+    ll sum_s1 = 0;
+    ll max = n;
+
+    while (sum > sum_s1) {
+        ll remaining = sum - sum_s1;
+
+        if (remaining > max) {
+            s1.pb(max);
+            visited[max] = 1;
+            sum_s1 += max;
+            max--;
+        } else {
+            s1.pb(remaining);
+            visited[remaining] = 1;
+            sum_s1 = sum;
+        }
+    }
+
+    for (ll i = 1; i <= n; i++) {
+        if (visited[i] == 0) {
+            s2.push_back(i);
+        }
+    }
+#+END_SRC
+
+Although not directly related, there is a similar problem in number theory named [[https://en.wikipedia.org/wiki/Partition_problem][partition problem]].
+
+=keywords=: parity, partition problem, greedy algorithm
+
+*** DONE Bit Strings
+[[https://cses.fi/problemset/task/1617][Problem]]
+
+The solution to this problem is pretty simple and straight forward. All we need to do is to calculate $2^n$. The problem is that for large n's the
+solution takes a long time to compute. Therefore we have to implemented an algorithm called [[https://cp-algorithms.com/algebra/binary-exp.html][Binary Exponentiation]] to compute this power in O(log n).
+*** DONE Trailing Zeros
+*** DONE Coin Piles
+*** DONE Palindrome Reorder
+*** DONE Gray Code
+[[https://cses.fi/problemset/task/2205][Problem]]
+
+[[https://en.wikipedia.org/wiki/Gray_code][Gray Code on Wikipedia]]
+*** DONE Tower of Hanoi
+[[https://cses.fi/problemset/task/2165/][Problem]]
+One of the most famous problems in computer science. This is can be solved through *recursion*.
+
+#+BEGIN_SRC c++
+void Hanoi(int n, int i, int j, int k) {
+    if (n == 0) {
+        return;
+    }
+
+    Hanoi(n - 1, i, k, j);
+    cout << i << " " << j << "\n";
+    Hanoi(n - 1, k, j, i);
+}
+#+END_SRC
+
+This basically means that the solution to the whole problem is the same as the solution to a sub-problem of this.
+Note: Recursion and *induction* have something fundamental in common.
+
+[[https://en.wikipedia.org/wiki/Recursion][Recursion on Wikipedia]]
+[[https://en.wikipedia.org/wiki/Tower_of_Hanoi][Tower of Hanoi on Wikipedia]]
+
+*** DONE Creating Strings
+[[https://cses.fi/problemset/task/1622/][Problem]]
+
+This was a pretty straight forward problem to solve. All you need to do is to use the recursive technique you have learned before:
+
+#+begin_src c++
+set<string> P(string str) {
+    set<string> sol;
+    if (str.length() == 1) {
+        sol.insert(str);
+        return sol;
+    }
+
+    for (int i = 0; i < str.length(); i++) {
+        char c1 = str[i];
+        string r = rest(str, i);
+        for (auto s : P(r)) {
+            sol.insert(c1 + s);
+        }
+    }
+    return sol;
+}
+#+end_src
+
+*** TODO Apple Division
+*** TODO Chessboard and Queens
+*** TODO Raab Game I
+*** TODO Mex Grid Construction
+*** TODO Knight Moves Grid
+*** TODO Grid Coloring I
+*** TODO Digit Queries I
+*** TODO String Reorder
+*** TODO Grid Path Description
