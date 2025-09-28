@@ -1,0 +1,12 @@
+#+TITLE: Amir Mohammad's Blog
+#+OPTIONS: toc:nil num:nil
+
+* Welcome
+Hi! I'm Amir Mohammad, a computer science enthusiast. I enjoy exploring new topics, mathematics and low level programming. My greatest passions in life are learning, building and sharing. This is my personal blog.
+
+* Navigation
+- [[file:about.org][About Me]]
+- [[file:contact.org][Contact]]
+
+* Recent Posts
+#+INCLUDE: "sitemap.org"

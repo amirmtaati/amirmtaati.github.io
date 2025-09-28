@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exploring Python and Math: A Sample Post</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">Exploring Python and Math: A Sample Post</h1>
+</header><nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb427e6b">Introduction</a></li>
+<li><a href="#org00ccde3">A Python Example</a></li>
+<li><a href="#org470fae3">Mathematical Foundations</a></li>
+<li><a href="#orgabfacaa">Applications</a></li>
+<li><a href="#org4e82c32">Conclusion</a></li>
+</ul>
+</div>
+</nav>
+<div id="outline-container-orgb427e6b" class="outline-2">
+<h2 id="orgb427e6b">Introduction</h2>
+<div class="outline-text-2" id="text-orgb427e6b">
+<p>
+Welcome to my blog post! This is an example of how I combine <b>programming</b> and <i>mathematics</i> to explore interesting problems. Below, you&rsquo;ll find a Python code snippet, some mathematical equations, and a discussion of their applications.
+</p>
+</div>
+</div>
+<div id="outline-container-org00ccde3" class="outline-2">
+<h2 id="org00ccde3">A Python Example</h2>
+<div class="outline-text-2" id="text-org00ccde3">
+<p>
+Let&rsquo;s start with a simple Python function to compute the Fibonacci sequence. This code calculates the first <i>n</i> numbers in the sequence:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #F92660;">def</span> <span style="color: #A6E22E;">fibonacci</span>(n):
+    <span style="color: #7f7f80; font-style: italic;">"""Return the first n numbers of the Fibonacci sequence."""</span>
+    <span style="color: #F8F8F2;">fib</span> = [0, 1]
+    <span style="color: #F92660;">while</span> <span style="color: #FD971F;">len</span>(fib) &lt; n:
+        fib.append(fib[-1] + fib[-2])
+    <span style="color: #F92660;">return</span> fib[:n]
+
+<span style="color: #555556; font-style: italic;"># </span><span style="color: #555556; font-style: italic;">Example usage
+</span><span style="color: #FD971F;">print</span>(fibonacci(10))  <span style="color: #555556; font-style: italic;"># </span><span style="color: #555556; font-style: italic;">Outputs: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span>
+</pre>
+</div>
+
+<p>
+This function:
+</p>
+<ul class="org-ul">
+<li>Takes an integer \( n \) as input.</li>
+<li>Returns a list of the first \( n \) Fibonacci numbers.</li>
+<li>Uses a loop to build the sequence iteratively.</li>
+</ul>
+
+<p>
+The code is simple but efficient for small \( n \). For larger values, consider memoization or recursion with caching.
+</p>
+</div>
+</div>
+<div id="outline-container-org470fae3" class="outline-2">
+<h2 id="org470fae3">Mathematical Foundations</h2>
+<div class="outline-text-2" id="text-org470fae3">
+<p>
+The Fibonacci sequence has deep ties to mathematics, particularly the <b>golden ratio</b>. The ratio of consecutive Fibonacci numbers approaches:
+</p>
+
+<p>
+\[ \phi = \frac{1 + \sqrt{5}}{2} \approx 1.618 \]
+</p>
+
+<p>
+This can be derived from the characteristic equation of the Fibonacci recurrence:
+</p>
+
+<p>
+\[ x^2 - x - 1 = 0 \]
+</p>
+
+<p>
+Solving this quadratic equation gives the roots:
+</p>
+
+<p>
+\[ x = \frac{1 \pm \sqrt{5}}{2} \]
+</p>
+
+<p>
+The positive root is the golden ratio, \(\phi\). For a deeper dive, the Binet formula expresses the \( n \)-th Fibonacci number directly:
+</p>
+
+<p>
+\[ F_n = \frac{\phi^n - (-\phi)^{-n}}{\sqrt{5}} \]
+</p>
+
+<p>
+This formula is elegant but less practical for computation due to floating-point precision issues.
+</p>
+</div>
+</div>
+<div id="outline-container-orgabfacaa" class="outline-2">
+<h2 id="orgabfacaa">Applications</h2>
+<div class="outline-text-2" id="text-orgabfacaa">
+<p>
+The Fibonacci sequence and golden ratio appear in:
+</p>
+<ul class="org-ul">
+<li><b>Nature</b>: Spiral patterns in sunflowers and pinecones.</li>
+<li><b>Computer Science</b>: Algorithms like Fibonacci search.</li>
+<li><b>Art</b>: Proportions in design and architecture.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4e82c32" class="outline-2">
+<h2 id="org4e82c32">Conclusion</h2>
+<div class="outline-text-2" id="text-org4e82c32">
+<p>
+Combining code and math opens up fascinating insights. Try running the Python code above and exploring the math behind it. For more details, check out resources like <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Wikipedia on Fibonacci numbers</a>.
+</p>
+
+<p>
+Back to <a href="../index.html">Home</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #555556; font-style: italic;"># </span><span style="color: #555556; font-style: italic;">Bonus: Print the golden ratio
+</span><span style="color: #F92660;">import</span> math
+<span style="color: #F8F8F2;">phi</span> = (1 + math.sqrt(5)) / 2
+<span style="color: #FD971F;">print</span>(f<span style="color: #E6DB74;">"Golden ratio: </span>{phi:.3f}<span style="color: #E6DB74;">"</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2025-09-27 Sat 00:00</p>
+</div>
+</body>
+</html>

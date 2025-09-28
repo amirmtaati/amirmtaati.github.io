@@ -1,0 +1,11 @@
+#+TITLE: Contact
+#+OPTIONS: toc:nil num:nil
+
+I’m always happy to get in touch with new people (as long as they’re polite). If you have something to share, feel free to contact me. And if not, just say hi!
+
+* Contact
+- Email: amirmtaati@gmail.com
+- Social: @amirmtaati on X
+- Telegram: @amirmohammadtaati
+
+Back to [[file:index.org][Home]]
