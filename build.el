@@ -14,7 +14,7 @@
        (list "website-org"
              :base-directory "./contents/"
              :base-extension "org"
-             :publishing-directory "./public/"
+             :publishing-directory "./docs/"
              :recursive t
              :publishing-function 'org-html-publish-to-html
              :headline-levels 4
@@ -36,7 +36,7 @@
        (list "website-static"
              :base-directory "./"
              :base-extension "jpg\\|png\\|gif"
-             :publishing-directory "./public/"
+             :publishing-directory "./docs/"
              :recursive t
              :publishing-function 'org-publish-attachment)
        (list "website" :components '("website-org" "website-static"))))
