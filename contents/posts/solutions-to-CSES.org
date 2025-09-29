@@ -112,6 +112,7 @@ set<string> P(string str) {
 *** TODO Apple Division
 *** DONE Chessboard and Queens
 [[https://cses.fi/problemset/task/1624/][Problem]]
+
 A fantastic problem known as [[https://en.wikipedia.org/wiki/Eight_queens_puzzle#Exercise_in_algorithm_design]["N Queens problem"]]. The goal is to compute the number of ways we can place n queens on a n by n chessboard such that they do not attack each other. This problem is solved through a technique called [[https://en.wikipedia.org/wiki/Backtracking][Backtracking.]] To put it simply, we check all the possible solutions one by one.
 The only challenge we have here is that some squares are already reserved so we need to check for them while putting the queens on the board.
 
