@@ -226,34 +226,34 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Solutions to CSES Problemset</h1>
-</header><div id="outline-container-orgac2e731" class="outline-2">
-<h2 id="orgac2e731">Introductory Problems</h2>
-<div class="outline-text-2" id="text-orgac2e731">
+</header><div id="outline-container-org0db13a8" class="outline-2">
+<h2 id="org0db13a8">Introductory Problems</h2>
+<div class="outline-text-2" id="text-org0db13a8">
 </div>
-<div id="outline-container-org1928e0e" class="outline-4">
-<h4 id="org1928e0e"><span class="done DONE">DONE</span> Weird Algorithm</h4>
+<div id="outline-container-orga806618" class="outline-4">
+<h4 id="orga806618"><span class="done DONE">DONE</span> Weird Algorithm</h4>
 </div>
-<div id="outline-container-org328c07c" class="outline-4">
-<h4 id="org328c07c"><span class="done DONE">DONE</span> Missing Number</h4>
+<div id="outline-container-orgcc1df73" class="outline-4">
+<h4 id="orgcc1df73"><span class="done DONE">DONE</span> Missing Number</h4>
 </div>
-<div id="outline-container-orgc3f570d" class="outline-4">
-<h4 id="orgc3f570d"><span class="done DONE">DONE</span> Repetitions</h4>
+<div id="outline-container-org3343cf2" class="outline-4">
+<h4 id="org3343cf2"><span class="done DONE">DONE</span> Repetitions</h4>
 </div>
-<div id="outline-container-org5b0f0c3" class="outline-4">
-<h4 id="org5b0f0c3"><span class="done DONE">DONE</span> Increasing Array</h4>
+<div id="outline-container-org8eb9f43" class="outline-4">
+<h4 id="org8eb9f43"><span class="done DONE">DONE</span> Increasing Array</h4>
 </div>
-<div id="outline-container-org303697f" class="outline-4">
-<h4 id="org303697f"><span class="done DONE">DONE</span> Permutations</h4>
+<div id="outline-container-org4c8147a" class="outline-4">
+<h4 id="org4c8147a"><span class="done DONE">DONE</span> Permutations</h4>
 </div>
-<div id="outline-container-orgd7d3655" class="outline-4">
-<h4 id="orgd7d3655"><span class="done DONE">DONE</span> Number Spiral</h4>
+<div id="outline-container-orge0f6443" class="outline-4">
+<h4 id="orge0f6443"><span class="done DONE">DONE</span> Number Spiral</h4>
 </div>
-<div id="outline-container-org31f1e24" class="outline-4">
-<h4 id="org31f1e24"><span class="done DONE">DONE</span> Two Knights</h4>
+<div id="outline-container-org3f5519f" class="outline-4">
+<h4 id="org3f5519f"><span class="done DONE">DONE</span> Two Knights</h4>
 </div>
-<div id="outline-container-orgf217ede" class="outline-4">
-<h4 id="orgf217ede"><span class="done DONE">DONE</span> Two Sets</h4>
-<div class="outline-text-4" id="text-orgf217ede">
+<div id="outline-container-org9557cfe" class="outline-4">
+<h4 id="org9557cfe"><span class="done DONE">DONE</span> Two Sets</h4>
+<div class="outline-text-4" id="text-org9557cfe">
 <p>
 <a href="https://cses.fi/problemset/result/14520711/">Problem</a>
 </p>
@@ -267,30 +267,30 @@ First of all we need to check whether we can divide numbers 1 to n into two grou
 Later we need to divide them into two groups with equal sum.
 </p>
 <div class="org-src-container">
-<pre class="src src-C++">    <span style="color: #66D9EF; font-style: italic;">vll</span> <span style="color: #F8F8F2;">s1</span>, <span style="color: #F8F8F2;">s2</span>;
-    <span style="color: #66D9EF; font-style: italic;">vll</span> <span style="color: #F8F8F2;">visited</span>(n+1, 0);
+<pre class="src src-C++">    <span class="org-type">vll</span> <span class="org-variable-name">s1</span>, <span class="org-variable-name">s2</span>;
+    <span class="org-type">vll</span> <span class="org-variable-name">visited</span>(n+1, 0);
 
-    <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">sum</span> = n*(n+1)/4;
-    <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">sum_s1</span> = 0;
-    <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">max</span> = n;
+    <span class="org-type">ll</span> <span class="org-variable-name">sum</span> = n*(n+1)/4;
+    <span class="org-type">ll</span> <span class="org-variable-name">sum_s1</span> = 0;
+    <span class="org-type">ll</span> <span class="org-variable-name">max</span> = n;
 
-    <span style="color: #F92660;">while</span> (sum &gt; sum_s1) {
-        <span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">remaining</span> = sum - sum_s1;
+    <span class="org-keyword">while</span> (sum &gt; sum_s1) {
+        <span class="org-type">ll</span> <span class="org-variable-name">remaining</span> = sum - sum_s1;
 
-        <span style="color: #F92660;">if</span> (remaining &gt; max) {
+        <span class="org-keyword">if</span> (remaining &gt; max) {
             s1.pb(max);
             visited[max] = 1;
             sum_s1 += max;
             max--;
-        } <span style="color: #F92660;">else</span> {
+        } <span class="org-keyword">else</span> {
             s1.pb(remaining);
             visited[remaining] = 1;
             sum_s1 = sum;
         }
     }
 
-    <span style="color: #F92660;">for</span> (<span style="color: #66D9EF; font-style: italic;">ll</span> <span style="color: #F8F8F2;">i</span> = 1; i &lt;= n; i++) {
-        <span style="color: #F92660;">if</span> (visited[i] == 0) {
+    <span class="org-keyword">for</span> (<span class="org-type">ll</span> <span class="org-variable-name">i</span> = 1; i &lt;= n; i++) {
+        <span class="org-keyword">if</span> (visited[i] == 0) {
             s2.push_back(i);
         }
     }
@@ -306,9 +306,9 @@ Although not directly related, there is a similar problem in number theory named
 </p>
 </div>
 </div>
-<div id="outline-container-org8639fbc" class="outline-4">
-<h4 id="org8639fbc"><span class="done DONE">DONE</span> Bit Strings</h4>
-<div class="outline-text-4" id="text-org8639fbc">
+<div id="outline-container-org73d0316" class="outline-4">
+<h4 id="org73d0316"><span class="done DONE">DONE</span> Bit Strings</h4>
+<div class="outline-text-4" id="text-org73d0316">
 <p>
 <a href="https://cses.fi/problemset/task/1617">Problem</a>
 </p>
@@ -319,18 +319,18 @@ solution takes a long time to compute. Therefore we have to implemented an algor
 </p>
 </div>
 </div>
-<div id="outline-container-org9e448dc" class="outline-4">
-<h4 id="org9e448dc"><span class="done DONE">DONE</span> Trailing Zeros</h4>
+<div id="outline-container-org2c2f2a0" class="outline-4">
+<h4 id="org2c2f2a0"><span class="done DONE">DONE</span> Trailing Zeros</h4>
 </div>
-<div id="outline-container-orgab2f54f" class="outline-4">
-<h4 id="orgab2f54f"><span class="done DONE">DONE</span> Coin Piles</h4>
+<div id="outline-container-orgaf535d8" class="outline-4">
+<h4 id="orgaf535d8"><span class="done DONE">DONE</span> Coin Piles</h4>
 </div>
-<div id="outline-container-org3d371c3" class="outline-4">
-<h4 id="org3d371c3"><span class="done DONE">DONE</span> Palindrome Reorder</h4>
+<div id="outline-container-org4a79c9f" class="outline-4">
+<h4 id="org4a79c9f"><span class="done DONE">DONE</span> Palindrome Reorder</h4>
 </div>
-<div id="outline-container-orgfecea1a" class="outline-4">
-<h4 id="orgfecea1a"><span class="done DONE">DONE</span> Gray Code</h4>
-<div class="outline-text-4" id="text-orgfecea1a">
+<div id="outline-container-org0c59011" class="outline-4">
+<h4 id="org0c59011"><span class="done DONE">DONE</span> Gray Code</h4>
+<div class="outline-text-4" id="text-org0c59011">
 <p>
 <a href="https://cses.fi/problemset/task/2205">Problem</a>
 </p>
@@ -340,22 +340,22 @@ solution takes a long time to compute. Therefore we have to implemented an algor
 </p>
 </div>
 </div>
-<div id="outline-container-orgc1df94b" class="outline-4">
-<h4 id="orgc1df94b"><span class="done DONE">DONE</span> Tower of Hanoi</h4>
-<div class="outline-text-4" id="text-orgc1df94b">
+<div id="outline-container-org5252791" class="outline-4">
+<h4 id="org5252791"><span class="done DONE">DONE</span> Tower of Hanoi</h4>
+<div class="outline-text-4" id="text-org5252791">
 <p>
 <a href="https://cses.fi/problemset/task/2165/">Problem</a>
 One of the most famous problems in computer science. This is can be solved through <b>recursion</b>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c++"><span style="color: #66D9EF; font-style: italic;">void</span> <span style="color: #A6E22E;">Hanoi</span>(<span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">n</span>, <span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">i</span>, <span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">j</span>, <span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">k</span>) {
-    <span style="color: #F92660;">if</span> (n == 0) {
-        <span style="color: #F92660;">return</span>;
+<pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">Hanoi</span>(<span class="org-type">int</span> <span class="org-variable-name">n</span>, <span class="org-type">int</span> <span class="org-variable-name">i</span>, <span class="org-type">int</span> <span class="org-variable-name">j</span>, <span class="org-type">int</span> <span class="org-variable-name">k</span>) {
+    <span class="org-keyword">if</span> (n == 0) {
+        <span class="org-keyword">return</span>;
     }
 
     Hanoi(n - 1, i, k, j);
-    cout &lt;&lt; i &lt;&lt; <span style="color: #E6DB74;">" "</span> &lt;&lt; j &lt;&lt; <span style="color: #E6DB74;">"\n"</span>;
+    cout &lt;&lt; i &lt;&lt; <span class="org-string">" "</span> &lt;&lt; j &lt;&lt; <span class="org-string">"\n"</span>;
     Hanoi(n - 1, k, j, i);
 }
 </pre>
@@ -372,9 +372,9 @@ Note: Recursion and <b>induction</b> have something fundamental in common.
 </p>
 </div>
 </div>
-<div id="outline-container-org52af0f8" class="outline-4">
-<h4 id="org52af0f8"><span class="done DONE">DONE</span> Creating Strings</h4>
-<div class="outline-text-4" id="text-org52af0f8">
+<div id="outline-container-orgc732259" class="outline-4">
+<h4 id="orgc732259"><span class="done DONE">DONE</span> Creating Strings</h4>
+<div class="outline-text-4" id="text-orgc732259">
 <p>
 <a href="https://cses.fi/problemset/task/1622/">Problem</a>
 </p>
@@ -384,32 +384,32 @@ This was a pretty straight forward problem to solve. All you need to do is to us
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c++"><span style="color: #66D9EF; font-style: italic;">set</span>&lt;<span style="color: #66D9EF; font-style: italic;">string</span>&gt; <span style="color: #A6E22E;">P</span>(<span style="color: #66D9EF; font-style: italic;">string</span> <span style="color: #F8F8F2;">str</span>) {
-    <span style="color: #66D9EF; font-style: italic;">set</span>&lt;<span style="color: #66D9EF; font-style: italic;">string</span>&gt; <span style="color: #F8F8F2;">sol</span>;
-    <span style="color: #F92660;">if</span> (str.length() == 1) {
+<pre class="src src-c++"><span class="org-type">set</span>&lt;<span class="org-type">string</span>&gt; <span class="org-function-name">P</span>(<span class="org-type">string</span> <span class="org-variable-name">str</span>) {
+    <span class="org-type">set</span>&lt;<span class="org-type">string</span>&gt; <span class="org-variable-name">sol</span>;
+    <span class="org-keyword">if</span> (str.length() == 1) {
         sol.insert(str);
-        <span style="color: #F92660;">return</span> sol;
+        <span class="org-keyword">return</span> sol;
     }
 
-    <span style="color: #F92660;">for</span> (<span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">i</span> = 0; i &lt; str.length(); i++) {
-        <span style="color: #66D9EF; font-style: italic;">char</span> <span style="color: #F8F8F2;">c1</span> = str[i];
-        <span style="color: #66D9EF; font-style: italic;">string</span> <span style="color: #F8F8F2;">r</span> = rest(str, i);
-        <span style="color: #F92660;">for</span> (<span style="color: #F92660;">auto</span> <span style="color: #F8F8F2;">s</span> : P(r)) {
+    <span class="org-keyword">for</span> (<span class="org-type">int</span> <span class="org-variable-name">i</span> = 0; i &lt; str.length(); i++) {
+        <span class="org-type">char</span> <span class="org-variable-name">c1</span> = str[i];
+        <span class="org-type">string</span> <span class="org-variable-name">r</span> = rest(str, i);
+        <span class="org-keyword">for</span> (<span class="org-keyword">auto</span> <span class="org-variable-name">s</span> : P(r)) {
             sol.insert(c1 + s);
         }
     }
-    <span style="color: #F92660;">return</span> sol;
+    <span class="org-keyword">return</span> sol;
 }
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org8457710" class="outline-4">
-<h4 id="org8457710"><span class="todo TODO">TODO</span> Apple Division</h4>
+<div id="outline-container-org4682fe6" class="outline-4">
+<h4 id="org4682fe6"><span class="todo TODO">TODO</span> Apple Division</h4>
 </div>
-<div id="outline-container-org5820f91" class="outline-4">
-<h4 id="org5820f91"><span class="done DONE">DONE</span> Chessboard and Queens</h4>
-<div class="outline-text-4" id="text-org5820f91">
+<div id="outline-container-org5923dcd" class="outline-4">
+<h4 id="org5923dcd"><span class="done DONE">DONE</span> Chessboard and Queens</h4>
+<div class="outline-text-4" id="text-org5923dcd">
 <p>
 <a href="https://cses.fi/problemset/task/1624/">Problem</a>
 </p>
@@ -420,22 +420,22 @@ The only challenge we have here is that some squares are already reserved so we 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C++"><span style="color: #F92660; font-weight: bold;">#define</span> <span style="color: #F8F8F2;">N</span> 8
+<pre class="src src-C++"><span class="org-preprocessor">#define</span> <span class="org-variable-name">N</span> 8
 
-<span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">counter</span> = 0;
-<span style="color: #66D9EF; font-style: italic;">vector</span>&lt;<span style="color: #66D9EF; font-style: italic;">int</span>&gt; <span style="color: #A6E22E;">col</span>(<span style="color: #66D9EF; font-style: italic;">N</span>*<span style="color: #F8F8F2;">N</span>);
-<span style="color: #66D9EF; font-style: italic;">vector</span>&lt;<span style="color: #66D9EF; font-style: italic;">int</span>&gt; <span style="color: #A6E22E;">diag1</span>(<span style="color: #66D9EF; font-style: italic;">N</span>*<span style="color: #F8F8F2;">N</span>);
-<span style="color: #66D9EF; font-style: italic;">vector</span>&lt;<span style="color: #66D9EF; font-style: italic;">int</span>&gt; <span style="color: #A6E22E;">diag2</span>(<span style="color: #66D9EF; font-style: italic;">N</span>*<span style="color: #F8F8F2;">N</span>);
-<span style="color: #66D9EF; font-style: italic;">char</span> <span style="color: #F8F8F2;">board</span>[N][N];
+<span class="org-type">int</span> <span class="org-variable-name">counter</span> = 0;
+<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">col</span>(<span class="org-type">N</span>*<span class="org-variable-name">N</span>);
+<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">diag1</span>(<span class="org-type">N</span>*<span class="org-variable-name">N</span>);
+<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">diag2</span>(<span class="org-type">N</span>*<span class="org-variable-name">N</span>);
+<span class="org-type">char</span> <span class="org-variable-name">board</span>[N][N];
 
-<span style="color: #66D9EF; font-style: italic;">void</span> <span style="color: #A6E22E;">solve</span>(<span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">y</span>) {
-    <span style="color: #F92660;">if</span> (y == N) {
+<span class="org-type">void</span> <span class="org-function-name">solve</span>(<span class="org-type">int</span> <span class="org-variable-name">y</span>) {
+    <span class="org-keyword">if</span> (y == N) {
         counter++;
-        <span style="color: #F92660;">return</span>;
+        <span class="org-keyword">return</span>;
     }
 
-    <span style="color: #F92660;">for</span> (<span style="color: #66D9EF; font-style: italic;">int</span> <span style="color: #F8F8F2;">x</span> = 0; x &lt; N; x++) {
-        <span style="color: #F92660;">if</span> (board[y][x] == <span style="color: #E6DB74;">'*'</span> || col[x] || diag1[x+y] || diag2[x-y+N-1]) <span style="color: #F92660;">continue</span>;
+    <span class="org-keyword">for</span> (<span class="org-type">int</span> <span class="org-variable-name">x</span> = 0; x &lt; N; x++) {
+        <span class="org-keyword">if</span> (board[y][x] == <span class="org-string">'*'</span> || col[x] || diag1[x+y] || diag2[x-y+N-1]) <span class="org-keyword">continue</span>;
         col[x] = diag1[x+y] = diag2[x-y+N-1] = 1;
         solve(y+1);
         col[x] = diag1[x+y] = diag2[x-y+N-1] = 0;
@@ -445,26 +445,26 @@ The only challenge we have here is that some squares are already reserved so we 
 </div>
 </div>
 </div>
-<div id="outline-container-orge3e68da" class="outline-4">
-<h4 id="orge3e68da"><span class="todo TODO">TODO</span> Raab Game I</h4>
+<div id="outline-container-org9c24978" class="outline-4">
+<h4 id="org9c24978"><span class="todo TODO">TODO</span> Raab Game I</h4>
 </div>
-<div id="outline-container-org8102469" class="outline-4">
-<h4 id="org8102469"><span class="todo TODO">TODO</span> Mex Grid Construction</h4>
+<div id="outline-container-org1c58edc" class="outline-4">
+<h4 id="org1c58edc"><span class="todo TODO">TODO</span> Mex Grid Construction</h4>
 </div>
-<div id="outline-container-org1e896b8" class="outline-4">
-<h4 id="org1e896b8"><span class="todo TODO">TODO</span> Knight Moves Grid</h4>
+<div id="outline-container-orgc71237e" class="outline-4">
+<h4 id="orgc71237e"><span class="todo TODO">TODO</span> Knight Moves Grid</h4>
 </div>
-<div id="outline-container-org155aa68" class="outline-4">
-<h4 id="org155aa68"><span class="todo TODO">TODO</span> Grid Coloring I</h4>
+<div id="outline-container-orgd27fba7" class="outline-4">
+<h4 id="orgd27fba7"><span class="todo TODO">TODO</span> Grid Coloring I</h4>
 </div>
-<div id="outline-container-org407c010" class="outline-4">
-<h4 id="org407c010"><span class="todo TODO">TODO</span> Digit Queries I</h4>
+<div id="outline-container-org38054ff" class="outline-4">
+<h4 id="org38054ff"><span class="todo TODO">TODO</span> Digit Queries I</h4>
 </div>
-<div id="outline-container-org189dac1" class="outline-4">
-<h4 id="org189dac1"><span class="todo TODO">TODO</span> String Reorder</h4>
+<div id="outline-container-orga6ec995" class="outline-4">
+<h4 id="orga6ec995"><span class="todo TODO">TODO</span> String Reorder</h4>
 </div>
-<div id="outline-container-org41aa827" class="outline-4">
-<h4 id="org41aa827"><span class="todo TODO">TODO</span> Grid Path Description</h4>
+<div id="outline-container-org125ae84" class="outline-4">
+<h4 id="org125ae84"><span class="todo TODO">TODO</span> Grid Path Description</h4>
 </div>
 </div>
 </div>
