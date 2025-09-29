@@ -3,13 +3,12 @@
 #+OPTIONS: toc:nil num:nil
 
 * Introductory Problems
-*** DONE
-*** DONE
-*** DONE
-*** DONE
-*** DONE
-*** DONE
-*** DONE
+*** DONE Weird Algorithm
+*** DONE Missing Number
+*** DONE Repetitions
+*** DONE Increasing Array
+*** DONE Permutations
+*** DONE Number Spiral
 *** DONE Two Knights
 *** DONE Two Sets
 [[https://cses.fi/problemset/result/14520711/][Problem]]
@@ -111,7 +110,35 @@ set<string> P(string str) {
 #+end_src
 
 *** TODO Apple Division
-*** TODO Chessboard and Queens
+*** DONE Chessboard and Queens
+[[https://cses.fi/problemset/task/1624/][Problem]]
+A fantastic problem known as [[https://en.wikipedia.org/wiki/Eight_queens_puzzle#Exercise_in_algorithm_design]["N Queens problem"]]. The goal is to compute the number of ways we can place n queens on a n by n chessboard such that they do not attack each other. This problem is solved through a technique called [[https://en.wikipedia.org/wiki/Backtracking][Backtracking.]] To put it simply, we check all the possible solutions one by one.
+The only challenge we have here is that some squares are already reserved so we need to check for them while putting the queens on the board.
+
+#+BEGIN_SRC C++
+#define N 8
+
+int counter = 0;
+vector<int> col(N*N);
+vector<int> diag1(N*N);
+vector<int> diag2(N*N);
+char board[N][N];
+
+void solve(int y) {
+    if (y == N) {
+        counter++;
+        return;
+    }
+
+    for (int x = 0; x < N; x++) {
+        if (board[y][x] == '*' || col[x] || diag1[x+y] || diag2[x-y+N-1]) continue;
+        col[x] = diag1[x+y] = diag2[x-y+N-1] = 1;
+        solve(y+1);
+        col[x] = diag1[x+y] = diag2[x-y+N-1] = 0;
+    }
+}
+#+END_SRC
+
 *** TODO Raab Game I
 *** TODO Mex Grid Construction
 *** TODO Knight Moves Grid
