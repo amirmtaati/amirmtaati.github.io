@@ -1,8 +1,8 @@
 #+TITLE: All Posts
 
 - [[file:about.org][About Me]]
-- [[file:contact.org][Contact]]
 - [[file:index.org][Amir Mohammad's Blog]]
+- [[file:contact.org][Contact]]
 - posts
   - [[file:posts/sitemap.org][sitemap]]
   - [[file:posts/solutions-to-CSES.org][Solutions to CSES Problemset]]
