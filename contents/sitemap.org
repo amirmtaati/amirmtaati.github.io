@@ -4,5 +4,6 @@
 - [[file:index.org][Amir Mohammad's Blog]]
 - [[file:contact.org][Contact]]
 - posts
-  - [[file:posts/sitemap.org][sitemap]]
+  - [[file:posts/sitemap.org][Recent Posts]]
+  - [[file:posts/a-very-short-guide-to-random-number-generators.org][A Very Short Guide to Random Number Generators]]
   - [[file:posts/solutions-to-CSES.org][Solutions to CSES Problemset]]

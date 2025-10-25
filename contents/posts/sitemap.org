@@ -1,0 +1,4 @@
+#+TITLE: Recent Posts
+
+- [[file:a-very-short-guide-to-random-number-generators.org][A Very Short Guide to Random Number Generators]] <2025-10-25 Sat>
+-  [[file:solutions-to-CSES.org][Solutions to CSES Problemset]] <2025-09-28 Sun>

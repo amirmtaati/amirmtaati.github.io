@@ -2,9 +2,9 @@
 #+OPTIONS: toc:nil num:nil
 
 * About Me
-Hi, I’m Amir Mohammad. I'm a first year electrical engineering student. I’m passionate about computer science, mathematics, and building things from scratch.
+Hi, I’m Amir Mohammad. I'm a first year *electrical engineering* student. I’m passionate about *computer science*, *mathematics*, and building things from scratch.
 
-I first got into programming out of curiosity, and over time I discovered a love for both the theory and practice of computing. Studying combinatorics and algorithms in highschool also helped me discover my passion for mathematics and computer science. I enjoy low-level programming, working with languages like C and Go, and experimenting with compilers, chess engines, and creative tools. Alongside coding, I enjoy reading books, meditating, and taking long walks.
+I first got into programming out of curiosity, and over time I discovered a love for both the theory and practice of computing. Studying /combinatorics/, /algorithms/, and /data structures/ in highschool also helped me discover my passion for mathematics and computer science. I enjoy *low-level programming*, working with languages like *C* and *Go*, and experimenting with compilers, chess engines, and creative tools. Alongside coding, I enjoy reading books, meditating, and taking long walks.
 
 My greatest passions are learning, building, and sharing. This blog is where I document my journey in CS, reflect on what I discover, and share projects and ideas that excite me.
 
