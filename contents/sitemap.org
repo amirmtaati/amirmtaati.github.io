@@ -1,7 +1,7 @@
 #+TITLE: All Posts
 
-- [[file:contact.org][Contact]]
 - [[file:reading.org][Reading]]
+- [[file:contact.org][Contact]]
 - [[file:index.org][Amir Mohammad's Blog]]
 - [[file:about.org][About Me]]
 - posts

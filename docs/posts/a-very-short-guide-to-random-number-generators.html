@@ -230,26 +230,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf094411">1. Introduction</a></li>
-<li><a href="#org2e4dc5c">2. Properties of a Good PRNG</a></li>
-<li><a href="#org23e0807">3. Linear Congruential Generators</a></li>
-<li><a href="#org81f4fad">4. Implementation</a>
+<li><a href="#org163f844">1. Introduction</a></li>
+<li><a href="#org9882f24">2. Properties of a Good PRNG</a></li>
+<li><a href="#org21e04c1">3. Linear Congruential Generators</a></li>
+<li><a href="#org544d7c3">4. Implementation</a>
 <ul>
-<li><a href="#org790c588">4.1. Example 1: Inefficient values (short period)</a></li>
-<li><a href="#orged2f527">4.2. Example 2: Recommended values (long period)</a></li>
+<li><a href="#orga2ce50e">4.1. Example 1: Inefficient values (short period)</a></li>
+<li><a href="#org666761e">4.2. Example 2: Recommended values (long period)</a></li>
 </ul>
 </li>
-<li><a href="#orgf79c96b">5. Final Remarks</a>
+<li><a href="#orgd3c8b8d">5. Final Remarks</a>
 <ul>
-<li><a href="#org74afcd7">5.1. Looking Back (October 2025)</a></li>
+<li><a href="#org06647b7">5.1. Looking Back (October 2025)</a></li>
 </ul>
 </li>
-<li><a href="#org3eb13bd">6. Further Reading</a></li>
+<li><a href="#orgdfacf45">6. Further Reading</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-orgf094411" class="outline-2">
-<h2 id="orgf094411"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org163f844" class="outline-2">
+<h2 id="org163f844"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Random numbers might seem useless at first glance. But they have a variety
@@ -302,8 +302,8 @@ Generator throughout the rest of this article.
 </p>
 </div>
 </div>
-<div id="outline-container-org2e4dc5c" class="outline-2">
-<h2 id="org2e4dc5c"><span class="section-number-2">2.</span> Properties of a Good PRNG</h2>
+<div id="outline-container-org9882f24" class="outline-2">
+<h2 id="org9882f24"><span class="section-number-2">2.</span> Properties of a Good PRNG</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The definition of a good PRNG may differ from person to person, depending
@@ -340,8 +340,8 @@ be looking for, let us familiarize ourselves with one such generator.
 </p>
 </div>
 </div>
-<div id="outline-container-org23e0807" class="outline-2">
-<h2 id="org23e0807"><span class="section-number-2">3.</span> Linear Congruential Generators</h2>
+<div id="outline-container-org21e04c1" class="outline-2">
+<h2 id="org21e04c1"><span class="section-number-2">3.</span> Linear Congruential Generators</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It is by far one of the most popular PRNGs because of its simplicity and
@@ -372,16 +372,16 @@ Now let us implement this generator using Python and check out the results.
 </p>
 </div>
 </div>
-<div id="outline-container-org81f4fad" class="outline-2">
-<h2 id="org81f4fad"><span class="section-number-2">4.</span> Implementation</h2>
+<div id="outline-container-org544d7c3" class="outline-2">
+<h2 id="org544d7c3"><span class="section-number-2">4.</span> Implementation</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It is really easy to implement this generator using a high level programming
 language like Python. Here is the final code.
 </p>
 </div>
-<div id="outline-container-org790c588" class="outline-3">
-<h3 id="org790c588"><span class="section-number-3">4.1.</span> Example 1: Inefficient values (short period)</h3>
+<div id="outline-container-orga2ce50e" class="outline-3">
+<h3 id="orga2ce50e"><span class="section-number-3">4.1.</span> Example 1: Inefficient values (short period)</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 First, let&rsquo;s try with inefficient values to see the pattern:
@@ -419,7 +419,7 @@ get a cycle with a short period. You can see this in the bit mask image below.
 </p>
 
 
-<figure id="orgc808912">
+<figure id="org7ab67e8">
 <img src="../../public/bad.png" alt="bad.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>Bad PRNG output showing visible patterns</figcaption>
@@ -430,8 +430,8 @@ You can see the numbers start repeating after a certain number of iterations.
 </p>
 </div>
 </div>
-<div id="outline-container-orged2f527" class="outline-3">
-<h3 id="orged2f527"><span class="section-number-3">4.2.</span> Example 2: Recommended values (long period)</h3>
+<div id="outline-container-org666761e" class="outline-3">
+<h3 id="org666761e"><span class="section-number-3">4.2.</span> Example 2: Recommended values (long period)</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Now let us set the recommended values for the variables mentioned above:
@@ -467,7 +467,7 @@ This is the result we get:
 </p>
 
 
-<figure id="orgcbcb5d3">
+<figure id="org1cbfa68">
 <img src="../../public/good.png" alt="good.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>Good PRNG output with no visible patterns</figcaption>
@@ -475,8 +475,8 @@ This is the result we get:
 </div>
 </div>
 </div>
-<div id="outline-container-orgf79c96b" class="outline-2">
-<h2 id="orgf79c96b"><span class="section-number-2">5.</span> Final Remarks</h2>
+<div id="outline-container-orgd3c8b8d" class="outline-2">
+<h2 id="orgd3c8b8d"><span class="section-number-2">5.</span> Final Remarks</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 In this article, we introduced PRNGs and discussed the applications of random
@@ -501,8 +501,8 @@ For production use, consider more robust algorithms like Mersenne Twister
 applications.
 </p>
 </div>
-<div id="outline-container-org74afcd7" class="outline-3">
-<h3 id="org74afcd7"><span class="section-number-3">5.1.</span> Looking Back (October 2025)</h3>
+<div id="outline-container-org06647b7" class="outline-3">
+<h3 id="org06647b7"><span class="section-number-3">5.1.</span> Looking Back (October 2025)</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Reading this article almost two years later, here&rsquo;s what I&rsquo;d approach
@@ -531,8 +531,8 @@ learning journey, with minor edits for clarity.</i>
 </div>
 </div>
 </div>
-<div id="outline-container-org3eb13bd" class="outline-2">
-<h2 id="org3eb13bd"><span class="section-number-2">6.</span> Further Reading</h2>
+<div id="outline-container-orgdfacf45" class="outline-2">
+<h2 id="orgdfacf45"><span class="section-number-2">6.</span> Further Reading</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 The resources mentioned here are worth checking out and have helped me to
