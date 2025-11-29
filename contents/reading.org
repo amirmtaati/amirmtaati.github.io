@@ -1,0 +1,26 @@
+#+TITLE: Reading
+#+OPTIONS: toc:nil num:nil
+
+* Currently Reading
+- /The Art of Computer Programming/ by Donald Knuth
+- /Zen Mind, Beginner's Mind/ by Shunryu Suzuki
+- /Notes from Underground/ by Fyodor Dostoevsky
+
+* Finished
+** 2025
+- [[file:reviews/the-stranger.org][/The Stranger/]] by Albert Camus
+- /Meditations/ by Marcus Aurelius
+- [[file:reviews/walden.org][/Walden/]] by Henry David Thoreau
+- /Structure and Interpretation of Computer Programs/ by Abelson & Sussman
+
+** 2024
+- /Siddhartha/ by Hermann Hesse
+- /The Brothers Karamazov/ by Fyodor Dostoevsky
+- /Algorithms/ by Robert Sedgewick
+
+* Want to Read
+- /Gödel, Escher, Bach/ by Douglas Hofstadter
+- /The Dharma Bums/ by Jack Kerouac
+- /Compilers: Principles, Techniques, and Tools/ by Aho, Lam, Sethi, Ullman
+
+Back to [[file:index.org][Home]]

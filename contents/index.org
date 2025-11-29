@@ -6,6 +6,7 @@ Hi! I'm Amir Mohammad, a first year *electrical engineering* student. I enjoy ex
 
 * Navigation
 - [[file:about.org][About Me]]
+- [[file:reading.org][Reading]]
 - [[file:contact.org][Contact]]
 
 * Recent Posts
