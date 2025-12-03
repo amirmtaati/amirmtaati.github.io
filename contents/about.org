@@ -8,4 +8,12 @@ I first got into programming out of curiosity, and over time I discovered a love
 
 My greatest passions are learning, building, and sharing. This blog is where I document my journey in CS, reflect on what I discover, and share projects and ideas that excite me.
 
+Some of my current interests include:
+1. Compilers
+2. Programming Language Theory
+3. Functional Programming
+4. Scientific Computing
+
+I mostly code in *Go*, *C*, and *Python*, but I also love exploring languages like *Racket*, *Julia*, and *OCaml*, discovering the unique ways each lets me think and build.
+
 Back to [[file:index.org][Home]]

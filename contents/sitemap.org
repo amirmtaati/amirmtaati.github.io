@@ -1,9 +1,9 @@
 #+TITLE: All Posts
 
+- [[file:about.org][About Me]]
 - [[file:reading.org][Reading]]
 - [[file:contact.org][Contact]]
 - [[file:index.org][Amir Mohammad's Blog]]
-- [[file:about.org][About Me]]
 - posts
   - [[file:posts/sitemap.org][Recent Posts]]
   - [[file:posts/a-very-short-guide-to-random-number-generators.org][A Very Short Guide to Random Number Generators]]
