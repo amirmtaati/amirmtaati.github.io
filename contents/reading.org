@@ -2,11 +2,12 @@
 #+OPTIONS: toc:nil num:nil
 
 * Currently Reading
-- /How to Become a Straight-A Student/ by Cal Newport
+- /Meet the Real Dragon/ by Gudo Wafu Nishijima
 - /Gödel, Escher, Bach/ by Douglas Hofstadter
 
 * Finished
 ** 2025
+- /How to Become a Straight-A Student/ by Cal Newport
 - /The Wisdom of Insecurity/ by Alan Watts
 - /Build Your Own Lisp/ by Daniel Holden
 - /Zen Mind, Beginner's Mind/ by Shunryu Suzuki
