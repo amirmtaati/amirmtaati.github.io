@@ -2,10 +2,15 @@
 #+OPTIONS: toc:nil num:nil
 
 * Currently Reading
-- /Meet the Real Dragon/ by Gudo Wafu Nishijima
+- /Digital Minimalism/ by Cal Newport
 - /Gödel, Escher, Bach/ by Douglas Hofstadter
 
 * Finished
+** 2026
+
+- /Getting Started with Arduino: The Open Source Electronics Prototyping Platform/ by Massimo Banzi
+- /All Gall is Divided/ by Emil Cioran
+- /Meet the Real Dragon/ by Gudo Wafu Nishijima
 ** 2025
 - /How to Become a Straight-A Student/ by Cal Newport
 - /The Wisdom of Insecurity/ by Alan Watts

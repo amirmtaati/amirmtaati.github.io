@@ -226,34 +226,34 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Solutions to CSES Problemset</h1>
-</header><div id="outline-container-orga1a4f27" class="outline-2">
-<h2 id="orga1a4f27">Introductory Problems</h2>
-<div class="outline-text-2" id="text-orga1a4f27">
+</header><div id="outline-container-org51d13bb" class="outline-2">
+<h2 id="org51d13bb">Introductory Problems</h2>
+<div class="outline-text-2" id="text-org51d13bb">
 </div>
-<div id="outline-container-org04d0523" class="outline-4">
-<h4 id="org04d0523"><span class="done DONE">DONE</span> Weird Algorithm</h4>
+<div id="outline-container-org9578f25" class="outline-4">
+<h4 id="org9578f25"><span class="done DONE">DONE</span> Weird Algorithm</h4>
 </div>
-<div id="outline-container-org3c23071" class="outline-4">
-<h4 id="org3c23071"><span class="done DONE">DONE</span> Missing Number</h4>
+<div id="outline-container-org68ebe92" class="outline-4">
+<h4 id="org68ebe92"><span class="done DONE">DONE</span> Missing Number</h4>
 </div>
-<div id="outline-container-orgeaf39ff" class="outline-4">
-<h4 id="orgeaf39ff"><span class="done DONE">DONE</span> Repetitions</h4>
+<div id="outline-container-org6cebdc2" class="outline-4">
+<h4 id="org6cebdc2"><span class="done DONE">DONE</span> Repetitions</h4>
 </div>
-<div id="outline-container-orgd0c36d2" class="outline-4">
-<h4 id="orgd0c36d2"><span class="done DONE">DONE</span> Increasing Array</h4>
+<div id="outline-container-orge8c614c" class="outline-4">
+<h4 id="orge8c614c"><span class="done DONE">DONE</span> Increasing Array</h4>
 </div>
-<div id="outline-container-org1df7d4f" class="outline-4">
-<h4 id="org1df7d4f"><span class="done DONE">DONE</span> Permutations</h4>
+<div id="outline-container-org7afa664" class="outline-4">
+<h4 id="org7afa664"><span class="done DONE">DONE</span> Permutations</h4>
 </div>
-<div id="outline-container-org21a048c" class="outline-4">
-<h4 id="org21a048c"><span class="done DONE">DONE</span> Number Spiral</h4>
+<div id="outline-container-orgac663b3" class="outline-4">
+<h4 id="orgac663b3"><span class="done DONE">DONE</span> Number Spiral</h4>
 </div>
-<div id="outline-container-org235fde2" class="outline-4">
-<h4 id="org235fde2"><span class="done DONE">DONE</span> Two Knights</h4>
+<div id="outline-container-org0ba7219" class="outline-4">
+<h4 id="org0ba7219"><span class="done DONE">DONE</span> Two Knights</h4>
 </div>
-<div id="outline-container-orge562b42" class="outline-4">
-<h4 id="orge562b42"><span class="done DONE">DONE</span> Two Sets</h4>
-<div class="outline-text-4" id="text-orge562b42">
+<div id="outline-container-orgfe5db4a" class="outline-4">
+<h4 id="orgfe5db4a"><span class="done DONE">DONE</span> Two Sets</h4>
+<div class="outline-text-4" id="text-orgfe5db4a">
 <p>
 <a href="https://cses.fi/problemset/result/14520711/">Problem</a>
 </p>
@@ -267,33 +267,33 @@ First of all we need to check whether we can divide numbers 1 to n into two grou
 Later we need to divide them into two groups with equal sum.
 </p>
 <div class="org-src-container">
-<pre class="src src-C++">    <span class="org-type">vll</span> <span class="org-variable-name">s1</span>, <span class="org-variable-name">s2</span>;
-    <span class="org-type">vll</span> <span class="org-variable-name">visited</span>(n+1, 0);
+<pre class="src src-C++"><span class="org-type">vll</span> <span class="org-variable-name">s1</span>, <span class="org-variable-name">s2</span>;
+<span class="org-type">vll</span> <span class="org-variable-name">visited</span>(n+1, 0);
 
-    <span class="org-type">ll</span> <span class="org-variable-name">sum</span> = n*(n+1)/4;
-    <span class="org-type">ll</span> <span class="org-variable-name">sum_s1</span> = 0;
-    <span class="org-type">ll</span> <span class="org-variable-name">max</span> = n;
+<span class="org-type">ll</span> <span class="org-variable-name">sum</span> = n*(n+1)/4;
+<span class="org-type">ll</span> <span class="org-variable-name">sum_s1</span> = 0;
+<span class="org-type">ll</span> <span class="org-variable-name">max</span> = n;
 
-    <span class="org-keyword">while</span> (sum &gt; sum_s1) {
-        <span class="org-type">ll</span> <span class="org-variable-name">remaining</span> = sum - sum_s1;
+<span class="org-keyword">while</span> (sum &gt; sum_s1) {
+    <span class="org-type">ll</span> <span class="org-variable-name">remaining</span> = sum - sum_s1;
 
-        <span class="org-keyword">if</span> (remaining &gt; max) {
-            s1.pb(max);
-            visited[max] = 1;
-            sum_s1 += max;
-            max--;
-        } <span class="org-keyword">else</span> {
-            s1.pb(remaining);
-            visited[remaining] = 1;
-            sum_s1 = sum;
-        }
+    <span class="org-keyword">if</span> (remaining &gt; max) {
+        s1.pb(max);
+        visited[max] = 1;
+        sum_s1 += max;
+        max--;
+    } <span class="org-keyword">else</span> {
+        s1.pb(remaining);
+        visited[remaining] = 1;
+        sum_s1 = sum;
     }
+}
 
-    <span class="org-keyword">for</span> (<span class="org-type">ll</span> <span class="org-variable-name">i</span> = 1; i &lt;= n; i++) {
-        <span class="org-keyword">if</span> (visited[i] == 0) {
-            s2.push_back(i);
-        }
+<span class="org-keyword">for</span> (<span class="org-type">ll</span> <span class="org-variable-name">i</span> = 1; i &lt;= n; i++) {
+    <span class="org-keyword">if</span> (visited[i] == 0) {
+        s2.push_back(i);
     }
+}
 </pre>
 </div>
 
@@ -306,31 +306,31 @@ Although not directly related, there is a similar problem in number theory named
 </p>
 </div>
 </div>
-<div id="outline-container-org2b36ebe" class="outline-4">
-<h4 id="org2b36ebe"><span class="done DONE">DONE</span> Bit Strings</h4>
-<div class="outline-text-4" id="text-org2b36ebe">
+<div id="outline-container-org037661e" class="outline-4">
+<h4 id="org037661e"><span class="done DONE">DONE</span> Bit Strings</h4>
+<div class="outline-text-4" id="text-org037661e">
 <p>
 <a href="https://cses.fi/problemset/task/1617">Problem</a>
 </p>
 
 <p>
-The solution to this problem is pretty simple and straight forward. All we need to do is to calculate \(2^n\). The problem is that for large n&rsquo;s the
+The solution to this problem is pretty simple and straight forward. All we need to do is to calculate \(2^n\). The problem is that for large n's the
 solution takes a long time to compute. Therefore we have to implemented an algorithm called <a href="https://cp-algorithms.com/algebra/binary-exp.html">Binary Exponentiation</a> to compute this power in O(log n).
 </p>
 </div>
 </div>
-<div id="outline-container-org8cc0305" class="outline-4">
-<h4 id="org8cc0305"><span class="done DONE">DONE</span> Trailing Zeros</h4>
+<div id="outline-container-org342ef09" class="outline-4">
+<h4 id="org342ef09"><span class="done DONE">DONE</span> Trailing Zeros</h4>
 </div>
-<div id="outline-container-org573c8b0" class="outline-4">
-<h4 id="org573c8b0"><span class="done DONE">DONE</span> Coin Piles</h4>
+<div id="outline-container-orgafe6555" class="outline-4">
+<h4 id="orgafe6555"><span class="done DONE">DONE</span> Coin Piles</h4>
 </div>
-<div id="outline-container-orge9d2a09" class="outline-4">
-<h4 id="orge9d2a09"><span class="done DONE">DONE</span> Palindrome Reorder</h4>
+<div id="outline-container-org96bd667" class="outline-4">
+<h4 id="org96bd667"><span class="done DONE">DONE</span> Palindrome Reorder</h4>
 </div>
-<div id="outline-container-org165bcb9" class="outline-4">
-<h4 id="org165bcb9"><span class="done DONE">DONE</span> Gray Code</h4>
-<div class="outline-text-4" id="text-org165bcb9">
+<div id="outline-container-org13c8b89" class="outline-4">
+<h4 id="org13c8b89"><span class="done DONE">DONE</span> Gray Code</h4>
+<div class="outline-text-4" id="text-org13c8b89">
 <p>
 <a href="https://cses.fi/problemset/task/2205">Problem</a>
 </p>
@@ -340,9 +340,9 @@ solution takes a long time to compute. Therefore we have to implemented an algor
 </p>
 </div>
 </div>
-<div id="outline-container-orga22d3db" class="outline-4">
-<h4 id="orga22d3db"><span class="done DONE">DONE</span> Tower of Hanoi</h4>
-<div class="outline-text-4" id="text-orga22d3db">
+<div id="outline-container-org2a93ca1" class="outline-4">
+<h4 id="org2a93ca1"><span class="done DONE">DONE</span> Tower of Hanoi</h4>
+<div class="outline-text-4" id="text-org2a93ca1">
 <p>
 <a href="https://cses.fi/problemset/task/2165/">Problem</a>
 One of the most famous problems in computer science. This is can be solved through <b>recursion</b>.
@@ -372,9 +372,9 @@ Note: Recursion and <b>induction</b> have something fundamental in common.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcc1debe" class="outline-4">
-<h4 id="orgcc1debe"><span class="done DONE">DONE</span> Creating Strings</h4>
-<div class="outline-text-4" id="text-orgcc1debe">
+<div id="outline-container-orgdbd6a7a" class="outline-4">
+<h4 id="orgdbd6a7a"><span class="done DONE">DONE</span> Creating Strings</h4>
+<div class="outline-text-4" id="text-orgdbd6a7a">
 <p>
 <a href="https://cses.fi/problemset/task/1622/">Problem</a>
 </p>
@@ -404,18 +404,18 @@ This was a pretty straight forward problem to solve. All you need to do is to us
 </div>
 </div>
 </div>
-<div id="outline-container-org14d3759" class="outline-4">
-<h4 id="org14d3759"><span class="todo TODO">TODO</span> Apple Division</h4>
+<div id="outline-container-org9e0922a" class="outline-4">
+<h4 id="org9e0922a"><span class="todo TODO">TODO</span> Apple Division</h4>
 </div>
-<div id="outline-container-org5cf0542" class="outline-4">
-<h4 id="org5cf0542"><span class="done DONE">DONE</span> Chessboard and Queens</h4>
-<div class="outline-text-4" id="text-org5cf0542">
+<div id="outline-container-org1b4307e" class="outline-4">
+<h4 id="org1b4307e"><span class="done DONE">DONE</span> Chessboard and Queens</h4>
+<div class="outline-text-4" id="text-org1b4307e">
 <p>
 <a href="https://cses.fi/problemset/task/1624/">Problem</a>
 </p>
 
 <p>
-A fantastic problem known as <a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle#Exercise_in_algorithm_design">&ldquo;N Queens problem&rdquo;</a>. The goal is to compute the number of ways we can place n queens on a n by n chessboard such that they do not attack each other. This problem is solved through a technique called <a href="https://en.wikipedia.org/wiki/Backtracking">Backtracking.</a> To put it simply, we check all the possible solutions one by one.
+A fantastic problem known as <a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle#Exercise_in_algorithm_design">"N Queens problem"</a>. The goal is to compute the number of ways we can place n queens on a n by n chessboard such that they do not attack each other. This problem is solved through a technique called <a href="https://en.wikipedia.org/wiki/Backtracking">Backtracking.</a> To put it simply, we check all the possible solutions one by one.
 The only challenge we have here is that some squares are already reserved so we need to check for them while putting the queens on the board.
 </p>
 
@@ -445,31 +445,32 @@ The only challenge we have here is that some squares are already reserved so we 
 </div>
 </div>
 </div>
-<div id="outline-container-org42e279f" class="outline-4">
-<h4 id="org42e279f"><span class="todo TODO">TODO</span> Raab Game I</h4>
+<div id="outline-container-orgb77e5db" class="outline-4">
+<h4 id="orgb77e5db"><span class="todo TODO">TODO</span> Raab Game I</h4>
 </div>
-<div id="outline-container-org96cce8c" class="outline-4">
-<h4 id="org96cce8c"><span class="todo TODO">TODO</span> Mex Grid Construction</h4>
+<div id="outline-container-org44b8921" class="outline-4">
+<h4 id="org44b8921"><span class="todo TODO">TODO</span> Mex Grid Construction</h4>
 </div>
-<div id="outline-container-org47c213b" class="outline-4">
-<h4 id="org47c213b"><span class="todo TODO">TODO</span> Knight Moves Grid</h4>
+<div id="outline-container-org666d01d" class="outline-4">
+<h4 id="org666d01d"><span class="todo TODO">TODO</span> Knight Moves Grid</h4>
 </div>
-<div id="outline-container-org6795479" class="outline-4">
-<h4 id="org6795479"><span class="todo TODO">TODO</span> Grid Coloring I</h4>
+<div id="outline-container-orgbe66870" class="outline-4">
+<h4 id="orgbe66870"><span class="todo TODO">TODO</span> Grid Coloring I</h4>
 </div>
-<div id="outline-container-org8c69504" class="outline-4">
-<h4 id="org8c69504"><span class="todo TODO">TODO</span> Digit Queries I</h4>
+<div id="outline-container-org7ee5897" class="outline-4">
+<h4 id="org7ee5897"><span class="todo TODO">TODO</span> Digit Queries I</h4>
 </div>
-<div id="outline-container-orgaad2b70" class="outline-4">
-<h4 id="orgaad2b70"><span class="todo TODO">TODO</span> String Reorder</h4>
+<div id="outline-container-org126574e" class="outline-4">
+<h4 id="org126574e"><span class="todo TODO">TODO</span> String Reorder</h4>
 </div>
-<div id="outline-container-orgc3f2829" class="outline-4">
-<h4 id="orgc3f2829"><span class="todo TODO">TODO</span> Grid Path Description</h4>
+<div id="outline-container-orgcb0de85" class="outline-4">
+<h4 id="orgcb0de85"><span class="todo TODO">TODO</span> Grid Path Description</h4>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2025-09-28 Sun 00:00</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
