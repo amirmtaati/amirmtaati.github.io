@@ -226,34 +226,34 @@
 <div id="content" class="content">
 <header>
 <h1 class="title">Solutions to CSES Problemset</h1>
-</header><div id="outline-container-org51d13bb" class="outline-2">
-<h2 id="org51d13bb">Introductory Problems</h2>
-<div class="outline-text-2" id="text-org51d13bb">
+</header><div id="outline-container-orgb403370" class="outline-2">
+<h2 id="orgb403370">Introductory Problems</h2>
+<div class="outline-text-2" id="text-orgb403370">
 </div>
-<div id="outline-container-org9578f25" class="outline-4">
-<h4 id="org9578f25"><span class="done DONE">DONE</span> Weird Algorithm</h4>
+<div id="outline-container-org3bb8c1a" class="outline-4">
+<h4 id="org3bb8c1a"><span class="done DONE">DONE</span> Weird Algorithm</h4>
 </div>
-<div id="outline-container-org68ebe92" class="outline-4">
-<h4 id="org68ebe92"><span class="done DONE">DONE</span> Missing Number</h4>
+<div id="outline-container-org8cb6879" class="outline-4">
+<h4 id="org8cb6879"><span class="done DONE">DONE</span> Missing Number</h4>
 </div>
-<div id="outline-container-org6cebdc2" class="outline-4">
-<h4 id="org6cebdc2"><span class="done DONE">DONE</span> Repetitions</h4>
+<div id="outline-container-org3016cdd" class="outline-4">
+<h4 id="org3016cdd"><span class="done DONE">DONE</span> Repetitions</h4>
 </div>
-<div id="outline-container-orge8c614c" class="outline-4">
-<h4 id="orge8c614c"><span class="done DONE">DONE</span> Increasing Array</h4>
+<div id="outline-container-org72b001f" class="outline-4">
+<h4 id="org72b001f"><span class="done DONE">DONE</span> Increasing Array</h4>
 </div>
-<div id="outline-container-org7afa664" class="outline-4">
-<h4 id="org7afa664"><span class="done DONE">DONE</span> Permutations</h4>
+<div id="outline-container-org16c085f" class="outline-4">
+<h4 id="org16c085f"><span class="done DONE">DONE</span> Permutations</h4>
 </div>
-<div id="outline-container-orgac663b3" class="outline-4">
-<h4 id="orgac663b3"><span class="done DONE">DONE</span> Number Spiral</h4>
+<div id="outline-container-orge26581e" class="outline-4">
+<h4 id="orge26581e"><span class="done DONE">DONE</span> Number Spiral</h4>
 </div>
-<div id="outline-container-org0ba7219" class="outline-4">
-<h4 id="org0ba7219"><span class="done DONE">DONE</span> Two Knights</h4>
+<div id="outline-container-orgac5aa19" class="outline-4">
+<h4 id="orgac5aa19"><span class="done DONE">DONE</span> Two Knights</h4>
 </div>
-<div id="outline-container-orgfe5db4a" class="outline-4">
-<h4 id="orgfe5db4a"><span class="done DONE">DONE</span> Two Sets</h4>
-<div class="outline-text-4" id="text-orgfe5db4a">
+<div id="outline-container-org95e69a3" class="outline-4">
+<h4 id="org95e69a3"><span class="done DONE">DONE</span> Two Sets</h4>
+<div class="outline-text-4" id="text-org95e69a3">
 <p>
 <a href="https://cses.fi/problemset/result/14520711/">Problem</a>
 </p>
@@ -267,33 +267,33 @@ First of all we need to check whether we can divide numbers 1 to n into two grou
 Later we need to divide them into two groups with equal sum.
 </p>
 <div class="org-src-container">
-<pre class="src src-C++"><span class="org-type">vll</span> <span class="org-variable-name">s1</span>, <span class="org-variable-name">s2</span>;
-<span class="org-type">vll</span> <span class="org-variable-name">visited</span>(n+1, 0);
+<pre class="src src-C++">    <span class="org-type">vll</span> <span class="org-variable-name">s1</span>, <span class="org-variable-name">s2</span>;
+    <span class="org-type">vll</span> <span class="org-variable-name">visited</span><span class="org-rainbow-delimiters-depth-1">(</span>n+1, 0<span class="org-rainbow-delimiters-depth-1">)</span>;
 
-<span class="org-type">ll</span> <span class="org-variable-name">sum</span> = n*(n+1)/4;
-<span class="org-type">ll</span> <span class="org-variable-name">sum_s1</span> = 0;
-<span class="org-type">ll</span> <span class="org-variable-name">max</span> = n;
+    <span class="org-type">ll</span> <span class="org-variable-name">sum</span> = n*<span class="org-rainbow-delimiters-depth-1">(</span>n+1<span class="org-rainbow-delimiters-depth-1">)</span>/4;
+    <span class="org-type">ll</span> <span class="org-variable-name">sum_s1</span> = 0;
+    <span class="org-type">ll</span> <span class="org-variable-name">max</span> = n;
 
-<span class="org-keyword">while</span> (sum &gt; sum_s1) {
-    <span class="org-type">ll</span> <span class="org-variable-name">remaining</span> = sum - sum_s1;
+    <span class="org-keyword">while</span> <span class="org-rainbow-delimiters-depth-1">(</span>sum &gt; sum_s1<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
+        <span class="org-type">ll</span> <span class="org-variable-name">remaining</span> = sum - sum_s1;
 
-    <span class="org-keyword">if</span> (remaining &gt; max) {
-        s1.pb(max);
-        visited[max] = 1;
-        sum_s1 += max;
-        max--;
-    } <span class="org-keyword">else</span> {
-        s1.pb(remaining);
-        visited[remaining] = 1;
-        sum_s1 = sum;
-    }
-}
+        <span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-2">(</span>remaining &gt; max<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
+            s1.pb<span class="org-rainbow-delimiters-depth-3">(</span>max<span class="org-rainbow-delimiters-depth-3">)</span>;
+            visited<span class="org-rainbow-delimiters-depth-3">[</span>max<span class="org-rainbow-delimiters-depth-3">]</span> = 1;
+            sum_s1 += max;
+            max--;
+        <span class="org-rainbow-delimiters-depth-2">}</span> <span class="org-keyword">else</span> <span class="org-rainbow-delimiters-depth-2">{</span>
+            s1.pb<span class="org-rainbow-delimiters-depth-3">(</span>remaining<span class="org-rainbow-delimiters-depth-3">)</span>;
+            visited<span class="org-rainbow-delimiters-depth-3">[</span>remaining<span class="org-rainbow-delimiters-depth-3">]</span> = 1;
+            sum_s1 = sum;
+        <span class="org-rainbow-delimiters-depth-2">}</span>
+    <span class="org-rainbow-delimiters-depth-1">}</span>
 
-<span class="org-keyword">for</span> (<span class="org-type">ll</span> <span class="org-variable-name">i</span> = 1; i &lt;= n; i++) {
-    <span class="org-keyword">if</span> (visited[i] == 0) {
-        s2.push_back(i);
-    }
-}
+    <span class="org-keyword">for</span> <span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">ll</span> <span class="org-variable-name">i</span> = 1; i &lt;= n; i++<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
+        <span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-2">(</span>visited<span class="org-rainbow-delimiters-depth-3">[</span>i<span class="org-rainbow-delimiters-depth-3">]</span> == 0<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
+            s2.push_back<span class="org-rainbow-delimiters-depth-3">(</span>i<span class="org-rainbow-delimiters-depth-3">)</span>;
+        <span class="org-rainbow-delimiters-depth-2">}</span>
+    <span class="org-rainbow-delimiters-depth-1">}</span>
 </pre>
 </div>
 
@@ -306,9 +306,9 @@ Although not directly related, there is a similar problem in number theory named
 </p>
 </div>
 </div>
-<div id="outline-container-org037661e" class="outline-4">
-<h4 id="org037661e"><span class="done DONE">DONE</span> Bit Strings</h4>
-<div class="outline-text-4" id="text-org037661e">
+<div id="outline-container-orgf0c755a" class="outline-4">
+<h4 id="orgf0c755a"><span class="done DONE">DONE</span> Bit Strings</h4>
+<div class="outline-text-4" id="text-orgf0c755a">
 <p>
 <a href="https://cses.fi/problemset/task/1617">Problem</a>
 </p>
@@ -319,18 +319,18 @@ solution takes a long time to compute. Therefore we have to implemented an algor
 </p>
 </div>
 </div>
-<div id="outline-container-org342ef09" class="outline-4">
-<h4 id="org342ef09"><span class="done DONE">DONE</span> Trailing Zeros</h4>
+<div id="outline-container-org658c7a5" class="outline-4">
+<h4 id="org658c7a5"><span class="done DONE">DONE</span> Trailing Zeros</h4>
 </div>
-<div id="outline-container-orgafe6555" class="outline-4">
-<h4 id="orgafe6555"><span class="done DONE">DONE</span> Coin Piles</h4>
+<div id="outline-container-orgaa49da0" class="outline-4">
+<h4 id="orgaa49da0"><span class="done DONE">DONE</span> Coin Piles</h4>
 </div>
-<div id="outline-container-org96bd667" class="outline-4">
-<h4 id="org96bd667"><span class="done DONE">DONE</span> Palindrome Reorder</h4>
+<div id="outline-container-org5a91c82" class="outline-4">
+<h4 id="org5a91c82"><span class="done DONE">DONE</span> Palindrome Reorder</h4>
 </div>
-<div id="outline-container-org13c8b89" class="outline-4">
-<h4 id="org13c8b89"><span class="done DONE">DONE</span> Gray Code</h4>
-<div class="outline-text-4" id="text-org13c8b89">
+<div id="outline-container-orgb0e8068" class="outline-4">
+<h4 id="orgb0e8068"><span class="done DONE">DONE</span> Gray Code</h4>
+<div class="outline-text-4" id="text-orgb0e8068">
 <p>
 <a href="https://cses.fi/problemset/task/2205">Problem</a>
 </p>
@@ -340,24 +340,24 @@ solution takes a long time to compute. Therefore we have to implemented an algor
 </p>
 </div>
 </div>
-<div id="outline-container-org2a93ca1" class="outline-4">
-<h4 id="org2a93ca1"><span class="done DONE">DONE</span> Tower of Hanoi</h4>
-<div class="outline-text-4" id="text-org2a93ca1">
+<div id="outline-container-org2a09e5f" class="outline-4">
+<h4 id="org2a09e5f"><span class="done DONE">DONE</span> Tower of Hanoi</h4>
+<div class="outline-text-4" id="text-org2a09e5f">
 <p>
 <a href="https://cses.fi/problemset/task/2165/">Problem</a>
 One of the most famous problems in computer science. This is can be solved through <b>recursion</b>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">Hanoi</span>(<span class="org-type">int</span> <span class="org-variable-name">n</span>, <span class="org-type">int</span> <span class="org-variable-name">i</span>, <span class="org-type">int</span> <span class="org-variable-name">j</span>, <span class="org-type">int</span> <span class="org-variable-name">k</span>) {
-    <span class="org-keyword">if</span> (n == 0) {
+<pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">Hanoi</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">int</span> <span class="org-variable-name">n</span>, <span class="org-type">int</span> <span class="org-variable-name">i</span>, <span class="org-type">int</span> <span class="org-variable-name">j</span>, <span class="org-type">int</span> <span class="org-variable-name">k</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
+    <span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-2">(</span>n == 0<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
         <span class="org-keyword">return</span>;
-    }
+    <span class="org-rainbow-delimiters-depth-2">}</span>
 
-    Hanoi(n - 1, i, k, j);
+    Hanoi<span class="org-rainbow-delimiters-depth-2">(</span>n - 1, i, k, j<span class="org-rainbow-delimiters-depth-2">)</span>;
     cout &lt;&lt; i &lt;&lt; <span class="org-string">" "</span> &lt;&lt; j &lt;&lt; <span class="org-string">"\n"</span>;
-    Hanoi(n - 1, k, j, i);
-}
+    Hanoi<span class="org-rainbow-delimiters-depth-2">(</span>n - 1, k, j, i<span class="org-rainbow-delimiters-depth-2">)</span>;
+<span class="org-rainbow-delimiters-depth-1">}</span>
 </pre>
 </div>
 
@@ -372,9 +372,9 @@ Note: Recursion and <b>induction</b> have something fundamental in common.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdbd6a7a" class="outline-4">
-<h4 id="orgdbd6a7a"><span class="done DONE">DONE</span> Creating Strings</h4>
-<div class="outline-text-4" id="text-orgdbd6a7a">
+<div id="outline-container-org8d937c8" class="outline-4">
+<h4 id="org8d937c8"><span class="done DONE">DONE</span> Creating Strings</h4>
+<div class="outline-text-4" id="text-org8d937c8">
 <p>
 <a href="https://cses.fi/problemset/task/1622/">Problem</a>
 </p>
@@ -384,32 +384,32 @@ This was a pretty straight forward problem to solve. All you need to do is to us
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c++"><span class="org-type">set</span>&lt;<span class="org-type">string</span>&gt; <span class="org-function-name">P</span>(<span class="org-type">string</span> <span class="org-variable-name">str</span>) {
-    <span class="org-type">set</span>&lt;<span class="org-type">string</span>&gt; <span class="org-variable-name">sol</span>;
-    <span class="org-keyword">if</span> (str.length() == 1) {
-        sol.insert(str);
+<pre class="src src-c++"><span class="org-type">set</span><span class="org-rainbow-delimiters-depth-1">&lt;</span><span class="org-type">string</span><span class="org-rainbow-delimiters-depth-1">&gt;</span> <span class="org-function-name">P</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">string</span> <span class="org-variable-name">str</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
+    <span class="org-type">set</span><span class="org-rainbow-delimiters-depth-2">&lt;</span><span class="org-type">string</span><span class="org-rainbow-delimiters-depth-2">&gt;</span> <span class="org-variable-name">sol</span>;
+    <span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-2">(</span>str.length<span class="org-rainbow-delimiters-depth-3">()</span> == 1<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
+        sol.insert<span class="org-rainbow-delimiters-depth-3">(</span>str<span class="org-rainbow-delimiters-depth-3">)</span>;
         <span class="org-keyword">return</span> sol;
-    }
+    <span class="org-rainbow-delimiters-depth-2">}</span>
 
-    <span class="org-keyword">for</span> (<span class="org-type">int</span> <span class="org-variable-name">i</span> = 0; i &lt; str.length(); i++) {
-        <span class="org-type">char</span> <span class="org-variable-name">c1</span> = str[i];
-        <span class="org-type">string</span> <span class="org-variable-name">r</span> = rest(str, i);
-        <span class="org-keyword">for</span> (<span class="org-keyword">auto</span> <span class="org-variable-name">s</span> : P(r)) {
-            sol.insert(c1 + s);
-        }
-    }
+    <span class="org-keyword">for</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-type">int</span> <span class="org-variable-name">i</span> = 0; i &lt; str.length<span class="org-rainbow-delimiters-depth-3">()</span>; i++<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
+        <span class="org-type">char</span> <span class="org-variable-name">c1</span> = str<span class="org-rainbow-delimiters-depth-3">[</span>i<span class="org-rainbow-delimiters-depth-3">]</span>;
+        <span class="org-type">string</span> <span class="org-variable-name">r</span> = rest<span class="org-rainbow-delimiters-depth-3">(</span>str, i<span class="org-rainbow-delimiters-depth-3">)</span>;
+        <span class="org-keyword">for</span> <span class="org-rainbow-delimiters-depth-3">(</span><span class="org-keyword">auto</span> <span class="org-variable-name">s</span> : P<span class="org-rainbow-delimiters-depth-4">(</span>r<span class="org-rainbow-delimiters-depth-4">)</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-rainbow-delimiters-depth-3">{</span>
+            sol.insert<span class="org-rainbow-delimiters-depth-4">(</span>c1 + s<span class="org-rainbow-delimiters-depth-4">)</span>;
+        <span class="org-rainbow-delimiters-depth-3">}</span>
+    <span class="org-rainbow-delimiters-depth-2">}</span>
     <span class="org-keyword">return</span> sol;
-}
+<span class="org-rainbow-delimiters-depth-1">}</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org9e0922a" class="outline-4">
-<h4 id="org9e0922a"><span class="todo TODO">TODO</span> Apple Division</h4>
+<div id="outline-container-orgabc05c6" class="outline-4">
+<h4 id="orgabc05c6"><span class="todo TODO">TODO</span> Apple Division</h4>
 </div>
-<div id="outline-container-org1b4307e" class="outline-4">
-<h4 id="org1b4307e"><span class="done DONE">DONE</span> Chessboard and Queens</h4>
-<div class="outline-text-4" id="text-org1b4307e">
+<div id="outline-container-orgcb946eb" class="outline-4">
+<h4 id="orgcb946eb"><span class="done DONE">DONE</span> Chessboard and Queens</h4>
+<div class="outline-text-4" id="text-orgcb946eb">
 <p>
 <a href="https://cses.fi/problemset/task/1624/">Problem</a>
 </p>
@@ -423,48 +423,48 @@ The only challenge we have here is that some squares are already reserved so we 
 <pre class="src src-C++"><span class="org-preprocessor">#define</span> <span class="org-variable-name">N</span> 8
 
 <span class="org-type">int</span> <span class="org-variable-name">counter</span> = 0;
-<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">col</span>(<span class="org-type">N</span>*<span class="org-variable-name">N</span>);
-<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">diag1</span>(<span class="org-type">N</span>*<span class="org-variable-name">N</span>);
-<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">diag2</span>(<span class="org-type">N</span>*<span class="org-variable-name">N</span>);
-<span class="org-type">char</span> <span class="org-variable-name">board</span>[N][N];
+<span class="org-type">vector</span><span class="org-rainbow-delimiters-depth-1">&lt;</span><span class="org-type">int</span><span class="org-rainbow-delimiters-depth-1">&gt;</span> <span class="org-function-name">col</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">N</span>*<span class="org-variable-name">N</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">vector</span><span class="org-rainbow-delimiters-depth-1">&lt;</span><span class="org-type">int</span><span class="org-rainbow-delimiters-depth-1">&gt;</span> <span class="org-function-name">diag1</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">N</span>*<span class="org-variable-name">N</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">vector</span><span class="org-rainbow-delimiters-depth-1">&lt;</span><span class="org-type">int</span><span class="org-rainbow-delimiters-depth-1">&gt;</span> <span class="org-function-name">diag2</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">N</span>*<span class="org-variable-name">N</span><span class="org-rainbow-delimiters-depth-1">)</span>;
+<span class="org-type">char</span> <span class="org-variable-name">board</span><span class="org-rainbow-delimiters-depth-1">[</span>N<span class="org-rainbow-delimiters-depth-1">][</span>N<span class="org-rainbow-delimiters-depth-1">]</span>;
 
-<span class="org-type">void</span> <span class="org-function-name">solve</span>(<span class="org-type">int</span> <span class="org-variable-name">y</span>) {
-    <span class="org-keyword">if</span> (y == N) {
+<span class="org-type">void</span> <span class="org-function-name">solve</span><span class="org-rainbow-delimiters-depth-1">(</span><span class="org-type">int</span> <span class="org-variable-name">y</span><span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-rainbow-delimiters-depth-1">{</span>
+    <span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-2">(</span>y == N<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
         counter++;
         <span class="org-keyword">return</span>;
-    }
+    <span class="org-rainbow-delimiters-depth-2">}</span>
 
-    <span class="org-keyword">for</span> (<span class="org-type">int</span> <span class="org-variable-name">x</span> = 0; x &lt; N; x++) {
-        <span class="org-keyword">if</span> (board[y][x] == <span class="org-string">'*'</span> || col[x] || diag1[x+y] || diag2[x-y+N-1]) <span class="org-keyword">continue</span>;
-        col[x] = diag1[x+y] = diag2[x-y+N-1] = 1;
-        solve(y+1);
-        col[x] = diag1[x+y] = diag2[x-y+N-1] = 0;
-    }
-}
+    <span class="org-keyword">for</span> <span class="org-rainbow-delimiters-depth-2">(</span><span class="org-type">int</span> <span class="org-variable-name">x</span> = 0; x &lt; N; x++<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-rainbow-delimiters-depth-2">{</span>
+        <span class="org-keyword">if</span> <span class="org-rainbow-delimiters-depth-3">(</span>board<span class="org-rainbow-delimiters-depth-4">[</span>y<span class="org-rainbow-delimiters-depth-4">][</span>x<span class="org-rainbow-delimiters-depth-4">]</span> == <span class="org-string">'*'</span> || col<span class="org-rainbow-delimiters-depth-4">[</span>x<span class="org-rainbow-delimiters-depth-4">]</span> || diag1<span class="org-rainbow-delimiters-depth-4">[</span>x+y<span class="org-rainbow-delimiters-depth-4">]</span> || diag2<span class="org-rainbow-delimiters-depth-4">[</span>x-y+N-1<span class="org-rainbow-delimiters-depth-4">]</span><span class="org-rainbow-delimiters-depth-3">)</span> <span class="org-keyword">continue</span>;
+        col<span class="org-rainbow-delimiters-depth-3">[</span>x<span class="org-rainbow-delimiters-depth-3">]</span> = diag1<span class="org-rainbow-delimiters-depth-3">[</span>x+y<span class="org-rainbow-delimiters-depth-3">]</span> = diag2<span class="org-rainbow-delimiters-depth-3">[</span>x-y+N-1<span class="org-rainbow-delimiters-depth-3">]</span> = 1;
+        solve<span class="org-rainbow-delimiters-depth-3">(</span>y+1<span class="org-rainbow-delimiters-depth-3">)</span>;
+        col<span class="org-rainbow-delimiters-depth-3">[</span>x<span class="org-rainbow-delimiters-depth-3">]</span> = diag1<span class="org-rainbow-delimiters-depth-3">[</span>x+y<span class="org-rainbow-delimiters-depth-3">]</span> = diag2<span class="org-rainbow-delimiters-depth-3">[</span>x-y+N-1<span class="org-rainbow-delimiters-depth-3">]</span> = 0;
+    <span class="org-rainbow-delimiters-depth-2">}</span>
+<span class="org-rainbow-delimiters-depth-1">}</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb77e5db" class="outline-4">
-<h4 id="orgb77e5db"><span class="todo TODO">TODO</span> Raab Game I</h4>
+<div id="outline-container-org93001e1" class="outline-4">
+<h4 id="org93001e1"><span class="todo TODO">TODO</span> Raab Game I</h4>
 </div>
-<div id="outline-container-org44b8921" class="outline-4">
-<h4 id="org44b8921"><span class="todo TODO">TODO</span> Mex Grid Construction</h4>
+<div id="outline-container-orgfe0c462" class="outline-4">
+<h4 id="orgfe0c462"><span class="todo TODO">TODO</span> Mex Grid Construction</h4>
 </div>
-<div id="outline-container-org666d01d" class="outline-4">
-<h4 id="org666d01d"><span class="todo TODO">TODO</span> Knight Moves Grid</h4>
+<div id="outline-container-org9d970fc" class="outline-4">
+<h4 id="org9d970fc"><span class="todo TODO">TODO</span> Knight Moves Grid</h4>
 </div>
-<div id="outline-container-orgbe66870" class="outline-4">
-<h4 id="orgbe66870"><span class="todo TODO">TODO</span> Grid Coloring I</h4>
+<div id="outline-container-orgceed1d0" class="outline-4">
+<h4 id="orgceed1d0"><span class="todo TODO">TODO</span> Grid Coloring I</h4>
 </div>
-<div id="outline-container-org7ee5897" class="outline-4">
-<h4 id="org7ee5897"><span class="todo TODO">TODO</span> Digit Queries I</h4>
+<div id="outline-container-org80c7055" class="outline-4">
+<h4 id="org80c7055"><span class="todo TODO">TODO</span> Digit Queries I</h4>
 </div>
-<div id="outline-container-org126574e" class="outline-4">
-<h4 id="org126574e"><span class="todo TODO">TODO</span> String Reorder</h4>
+<div id="outline-container-org6b54f02" class="outline-4">
+<h4 id="org6b54f02"><span class="todo TODO">TODO</span> String Reorder</h4>
 </div>
-<div id="outline-container-orgcb0de85" class="outline-4">
-<h4 id="orgcb0de85"><span class="todo TODO">TODO</span> Grid Path Description</h4>
+<div id="outline-container-org60de429" class="outline-4">
+<h4 id="org60de429"><span class="todo TODO">TODO</span> Grid Path Description</h4>
 </div>
 </div>
 </div>

@@ -230,26 +230,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org52fd81b">1. Introduction</a></li>
-<li><a href="#orgaeecc05">2. Properties of a Good PRNG</a></li>
-<li><a href="#org78843ba">3. Linear Congruential Generators</a></li>
-<li><a href="#orge6d73cf">4. Implementation</a>
+<li><a href="#orge62ab4b">1. Introduction</a></li>
+<li><a href="#org2570074">2. Properties of a Good PRNG</a></li>
+<li><a href="#org1b8ab51">3. Linear Congruential Generators</a></li>
+<li><a href="#org226c792">4. Implementation</a>
 <ul>
-<li><a href="#orgeeeee73">4.1. Example 1: Inefficient values (short period)</a></li>
-<li><a href="#orgda637c2">4.2. Example 2: Recommended values (long period)</a></li>
+<li><a href="#org9fd3ef3">4.1. Example 1: Inefficient values (short period)</a></li>
+<li><a href="#org0edb0b3">4.2. Example 2: Recommended values (long period)</a></li>
 </ul>
 </li>
-<li><a href="#orgb180ffc">5. Final Remarks</a>
+<li><a href="#orge0bccbe">5. Final Remarks</a>
 <ul>
-<li><a href="#org7db317f">5.1. Looking Back (October 2025)</a></li>
+<li><a href="#orgf81d347">5.1. Looking Back (October 2025)</a></li>
 </ul>
 </li>
-<li><a href="#orgb17104d">6. Further Reading</a></li>
+<li><a href="#org66efeba">6. Further Reading</a></li>
 </ul>
 </div>
 </nav>
-<div id="outline-container-org52fd81b" class="outline-2">
-<h2 id="org52fd81b"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-orge62ab4b" class="outline-2">
+<h2 id="orge62ab4b"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Random numbers might seem useless at first glance. But they have a variety
@@ -302,8 +302,8 @@ Generator throughout the rest of this article.
 </p>
 </div>
 </div>
-<div id="outline-container-orgaeecc05" class="outline-2">
-<h2 id="orgaeecc05"><span class="section-number-2">2.</span> Properties of a Good PRNG</h2>
+<div id="outline-container-org2570074" class="outline-2">
+<h2 id="org2570074"><span class="section-number-2">2.</span> Properties of a Good PRNG</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The definition of a good PRNG may differ from person to person, depending
@@ -340,8 +340,8 @@ be looking for, let us familiarize ourselves with one such generator.
 </p>
 </div>
 </div>
-<div id="outline-container-org78843ba" class="outline-2">
-<h2 id="org78843ba"><span class="section-number-2">3.</span> Linear Congruential Generators</h2>
+<div id="outline-container-org1b8ab51" class="outline-2">
+<h2 id="org1b8ab51"><span class="section-number-2">3.</span> Linear Congruential Generators</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It is by far one of the most popular PRNGs because of its simplicity and
@@ -372,16 +372,16 @@ Now let us implement this generator using Python and check out the results.
 </p>
 </div>
 </div>
-<div id="outline-container-orge6d73cf" class="outline-2">
-<h2 id="orge6d73cf"><span class="section-number-2">4.</span> Implementation</h2>
+<div id="outline-container-org226c792" class="outline-2">
+<h2 id="org226c792"><span class="section-number-2">4.</span> Implementation</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It is really easy to implement this generator using a high level programming
 language like Python. Here is the final code.
 </p>
 </div>
-<div id="outline-container-orgeeeee73" class="outline-3">
-<h3 id="orgeeeee73"><span class="section-number-3">4.1.</span> Example 1: Inefficient values (short period)</h3>
+<div id="outline-container-org9fd3ef3" class="outline-3">
+<h3 id="org9fd3ef3"><span class="section-number-3">4.1.</span> Example 1: Inefficient values (short period)</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 First, let's try with inefficient values to see the pattern:
@@ -395,21 +395,21 @@ First, let's try with inefficient values to see the pattern:
 </span><span class="org-variable-name">c</span> <span class="org-operator">=</span> 0
 <span class="org-variable-name">m</span> <span class="org-operator">=</span> 255      <span class="org-comment-delimiter"># </span><span class="org-comment">Inefficient value
 </span>
-<span class="org-keyword">def</span> <span class="org-function-name">lcg</span>():
+<span class="org-keyword">def</span> <span class="org-function-name">lcg</span><span class="org-rainbow-delimiters-depth-1">()</span>:
     <span class="org-keyword">global</span> seed
-    <span class="org-variable-name">seed</span> <span class="org-operator">=</span> (a<span class="org-operator">*</span>seed <span class="org-operator">+</span> c) <span class="org-operator">%</span> m
+    <span class="org-variable-name">seed</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">(</span>a<span class="org-operator">*</span>seed <span class="org-operator">+</span> c<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-operator">%</span> m
     <span class="org-variable-name">random_number</span> <span class="org-operator">=</span> seed <span class="org-operator">/</span> m
     <span class="org-keyword">return</span> random_number
 
-<span class="org-keyword">def</span> <span class="org-function-name">random_seq</span>(n):
-    <span class="org-variable-name">seq</span> <span class="org-operator">=</span> []
-    <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(n):
-        seq.append(lcg())
+<span class="org-keyword">def</span> <span class="org-function-name">random_seq</span><span class="org-rainbow-delimiters-depth-1">(</span>n<span class="org-rainbow-delimiters-depth-1">)</span>:
+    <span class="org-variable-name">seq</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[]</span>
+    <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-1">(</span>n<span class="org-rainbow-delimiters-depth-1">)</span>:
+        seq.append<span class="org-rainbow-delimiters-depth-1">(</span>lcg<span class="org-rainbow-delimiters-depth-2">()</span><span class="org-rainbow-delimiters-depth-1">)</span>
     <span class="org-keyword">return</span> seq
 
-<span class="org-variable-name">random_image</span> <span class="org-operator">=</span> [random_seq(300) <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(300)]
-plt.imshow(random_image, cmap<span class="org-operator">=</span><span class="org-string">'gray'</span>)
-plt.show()
+<span class="org-variable-name">random_image</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>random_seq<span class="org-rainbow-delimiters-depth-2">(</span>300<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-2">(</span>300<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">]</span>
+plt.imshow<span class="org-rainbow-delimiters-depth-1">(</span>random_image, cmap<span class="org-operator">=</span><span class="org-string">'gray'</span><span class="org-rainbow-delimiters-depth-1">)</span>
+plt.show<span class="org-rainbow-delimiters-depth-1">()</span>
 </pre>
 </div>
 
@@ -419,7 +419,7 @@ get a cycle with a short period. You can see this in the bit mask image below.
 </p>
 
 
-<figure id="orga07013a">
+<figure id="org5dda1f0">
 <img src="../../public/bad.png" alt="bad.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>Bad PRNG output showing visible patterns</figcaption>
@@ -430,8 +430,8 @@ You can see the numbers start repeating after a certain number of iterations.
 </p>
 </div>
 </div>
-<div id="outline-container-orgda637c2" class="outline-3">
-<h3 id="orgda637c2"><span class="section-number-3">4.2.</span> Example 2: Recommended values (long period)</h3>
+<div id="outline-container-org0edb0b3" class="outline-3">
+<h3 id="org0edb0b3"><span class="section-number-3">4.2.</span> Example 2: Recommended values (long period)</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Now let us set the recommended values for the variables mentioned above:
@@ -444,21 +444,21 @@ Now let us set the recommended values for the variables mentioned above:
 <span class="org-variable-name">m</span> <span class="org-operator">=</span> 2<span class="org-operator">**</span>31 <span class="org-operator">-</span> 1
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">Rest of the code remains the same
-</span><span class="org-keyword">def</span> <span class="org-function-name">lcg</span>():
+</span><span class="org-keyword">def</span> <span class="org-function-name">lcg</span><span class="org-rainbow-delimiters-depth-1">()</span>:
     <span class="org-keyword">global</span> seed
-    <span class="org-variable-name">seed</span> <span class="org-operator">=</span> (a<span class="org-operator">*</span>seed <span class="org-operator">+</span> c) <span class="org-operator">%</span> m
+    <span class="org-variable-name">seed</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">(</span>a<span class="org-operator">*</span>seed <span class="org-operator">+</span> c<span class="org-rainbow-delimiters-depth-1">)</span> <span class="org-operator">%</span> m
     <span class="org-variable-name">random_number</span> <span class="org-operator">=</span> seed <span class="org-operator">/</span> m
     <span class="org-keyword">return</span> random_number
 
-<span class="org-keyword">def</span> <span class="org-function-name">random_seq</span>(n):
-    <span class="org-variable-name">seq</span> <span class="org-operator">=</span> []
-    <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(n):
-        seq.append(lcg())
+<span class="org-keyword">def</span> <span class="org-function-name">random_seq</span><span class="org-rainbow-delimiters-depth-1">(</span>n<span class="org-rainbow-delimiters-depth-1">)</span>:
+    <span class="org-variable-name">seq</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[]</span>
+    <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-1">(</span>n<span class="org-rainbow-delimiters-depth-1">)</span>:
+        seq.append<span class="org-rainbow-delimiters-depth-1">(</span>lcg<span class="org-rainbow-delimiters-depth-2">()</span><span class="org-rainbow-delimiters-depth-1">)</span>
     <span class="org-keyword">return</span> seq
 
-<span class="org-variable-name">random_image</span> <span class="org-operator">=</span> [random_seq(300) <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(300)]
-plt.imshow(random_image, cmap<span class="org-operator">=</span><span class="org-string">'gray'</span>)
-plt.show()
+<span class="org-variable-name">random_image</span> <span class="org-operator">=</span> <span class="org-rainbow-delimiters-depth-1">[</span>random_seq<span class="org-rainbow-delimiters-depth-2">(</span>300<span class="org-rainbow-delimiters-depth-2">)</span> <span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span><span class="org-rainbow-delimiters-depth-2">(</span>300<span class="org-rainbow-delimiters-depth-2">)</span><span class="org-rainbow-delimiters-depth-1">]</span>
+plt.imshow<span class="org-rainbow-delimiters-depth-1">(</span>random_image, cmap<span class="org-operator">=</span><span class="org-string">'gray'</span><span class="org-rainbow-delimiters-depth-1">)</span>
+plt.show<span class="org-rainbow-delimiters-depth-1">()</span>
 </pre>
 </div>
 
@@ -467,7 +467,7 @@ This is the result we get:
 </p>
 
 
-<figure id="orgd8bcae7">
+<figure id="orgc4552d4">
 <img src="../../public/good.png" alt="good.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>Good PRNG output with no visible patterns</figcaption>
@@ -475,8 +475,8 @@ This is the result we get:
 </div>
 </div>
 </div>
-<div id="outline-container-orgb180ffc" class="outline-2">
-<h2 id="orgb180ffc"><span class="section-number-2">5.</span> Final Remarks</h2>
+<div id="outline-container-orge0bccbe" class="outline-2">
+<h2 id="orge0bccbe"><span class="section-number-2">5.</span> Final Remarks</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 In this article, we introduced PRNGs and discussed the applications of random
@@ -501,8 +501,8 @@ For production use, consider more robust algorithms like Mersenne Twister
 applications.
 </p>
 </div>
-<div id="outline-container-org7db317f" class="outline-3">
-<h3 id="org7db317f"><span class="section-number-3">5.1.</span> Looking Back (October 2025)</h3>
+<div id="outline-container-orgf81d347" class="outline-3">
+<h3 id="orgf81d347"><span class="section-number-3">5.1.</span> Looking Back (October 2025)</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Reading this article almost two years later, here's what I'd approach
@@ -531,8 +531,8 @@ learning journey, with minor edits for clarity.</i>
 </div>
 </div>
 </div>
-<div id="outline-container-orgb17104d" class="outline-2">
-<h2 id="orgb17104d"><span class="section-number-2">6.</span> Further Reading</h2>
+<div id="outline-container-org66efeba" class="outline-2">
+<h2 id="org66efeba"><span class="section-number-2">6.</span> Further Reading</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 The resources mentioned here are worth checking out and have helped me to

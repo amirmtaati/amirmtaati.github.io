@@ -4,16 +4,15 @@
 * About Me
 Hi, I’m Amir Mohammad. I'm a first year *electrical engineering* student. I’m passionate about *computer science*, *mathematics*, and building things from scratch.
 
-I first got into programming out of curiosity, and over time I discovered a love for both the theory and practice of computing. Studying /combinatorics/, /algorithms/, and /data structures/ in highschool also helped me discover my passion for mathematics and computer science. I enjoy *low-level programming*, working with languages like *C* and *Go*, and experimenting with compilers, chess engines, and creative tools. Alongside coding, I enjoy reading books, meditating, and taking long walks.
+I first got into programming out of curiosity, and over time I discovered a love for both the theory and practice of computing. Studying /combinatorics/, /algorithms/, and /data structures/ in highschool also helped me discover my passion for mathematics and computer science. Later I decided to study electrical engineering since I also love physics and building real-world devices. I also enjoy *low-level programming*, working with languages like *C++*, *C*, and *Go*. Alongside coding, I enjoy reading books, meditating, and taking long walks.
 
-My greatest passions are learning, building, and sharing. This blog is where I document my journey in CS, reflect on what I discover, and share projects and ideas that excite me.
+My greatest passions are learning, building, and sharing. This blog is where I document my journey in engineering, reflect on what I discover, and share projects and ideas that excite me.
 
 Some of my current interests include:
-1. Compilers
-2. Programming Language Theory
+1. Embedded Systems
+2. Autonomous Robots
 3. Functional Programming
-4. Scientific Computing
 
-I mostly code in *Go*, *C*, and *Python*, but I also love exploring languages like *Racket*, *Julia*, and *OCaml*, discovering the unique ways each lets me think and build.
+I mostly code in *C++*, *Go*, *C*, and *Python*, but I also love exploring languages like *Racket*  and *Julia* discovering the unique ways each lets me think and build.
 
 Back to [[file:index.org][Home]]
