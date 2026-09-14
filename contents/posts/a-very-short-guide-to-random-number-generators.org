@@ -127,7 +127,7 @@ As you can see, these values for $a$ and $m$ are inefficient. Thus, we will
 get a cycle with a short period. You can see this in the bit mask image below.
 
 #+CAPTION: Bad PRNG output showing visible patterns
-[[../../public/bad.png]]
+[[../public/bad.png]]
 
 You can see the numbers start repeating after a certain number of iterations.
 
@@ -162,7 +162,7 @@ plt.show()
 This is the result we get:
 
 #+CAPTION: Good PRNG output with no visible patterns
-[[../../public/good.png]]
+[[../public/good.png]]
 
 * Final Remarks
 

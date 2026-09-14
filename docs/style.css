@@ -1,0 +1,588 @@
+/* ==========================================================================
+   amirmtaati.github.io — zen theme
+   A quiet, paper-like reading environment for a personal + technical blog.
+
+   Type system
+     Newsreader      prose, titles        (optical sizing, true italics)
+     Inter           interface, meta      (nav, dates, captions, labels)
+     JetBrains Mono  code                 (inline + blocks)
+
+   Everything is driven by custom properties below; dark mode re-tunes
+   them automatically via prefers-color-scheme.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+
+  /* surfaces & ink */
+  --paper: #faf9f4;
+  --surface: #f1eee5;
+  --ink: #3a382f;
+  --ink-soft: #57544a;
+  --muted: #8a8474;
+
+  /* lines & accents */
+  --hairline: #e6e2d5;
+  --hairline-strong: #d6d1c0;
+  --accent: #62785c;
+  --accent-deep: #4d6048;
+
+  /* code */
+  --inline-code: #9a5b43;
+
+  /* syntax — calm, warm */
+  --syn-keyword: #6b6bb0;
+  --syn-builtin: #3e8a7e;
+  --syn-string: #7f8b45;
+  --syn-function: #b06c49;
+  --syn-variable: #565247;
+  --syn-type: #4a7d9b;
+  --syn-constant: #9c6b3f;
+  --syn-operator: #8a7f6a;
+  --syn-comment: #a09b8c;
+  --syn-preproc: #8a6a9c;
+  --syn-paren-1: #a89f8c;
+  --syn-paren-2: #b3a78e;
+  --syn-paren-3: #98917d;
+
+  /* effects */
+  --sel: rgba(98, 120, 92, 0.20);
+  --shadow: 0 1px 2px rgba(62, 57, 42, 0.05), 0 10px 28px -14px rgba(62, 57, 42, 0.16);
+
+  /* type stacks */
+  --serif: "Newsreader", "Charter", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1a1916;
+    --surface: #242219;
+    --ink: #d8d4c8;
+    --ink-soft: #bab6a9;
+    --muted: #8f8a7c;
+
+    --hairline: #2d2b24;
+    --hairline-strong: #3b382f;
+    --accent: #a4ba97;
+    --accent-deep: #c2d3b6;
+
+    --inline-code: #d4a084;
+
+    --syn-keyword: #9fa3e0;
+    --syn-builtin: #7cc4b5;
+    --syn-string: #b3bd7a;
+    --syn-function: #e0a380;
+    --syn-variable: #c9c4b4;
+    --syn-type: #85b3cc;
+    --syn-constant: #d1a06a;
+    --syn-operator: #a39a87;
+    --syn-comment: #77726a;
+    --syn-preproc: #b694cc;
+    --syn-paren-1: #6f6a5c;
+    --syn-paren-2: #7d7666;
+    --syn-paren-3: #655f52;
+
+    --sel: rgba(164, 186, 151, 0.24);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.30), 0 10px 28px -14px rgba(0, 0, 0, 0.50);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Foundation
+   -------------------------------------------------------------------------- */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-size: clamp(1.075rem, 1rem + 0.35vw, 1.2rem);
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--sel); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+#content {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+#preamble, #postamble { margin: 0; padding: 0; }
+
+/* --------------------------------------------------------------------------
+   3. Site navigation
+   -------------------------------------------------------------------------- */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.5rem;
+  padding: 1.9rem 0 1.05rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.site-nav .brand {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.06rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-nav .brand:hover { color: var(--accent); }
+
+.site-nav .nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.35rem;
+}
+
+.site-nav .nav-links a {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.site-nav .nav-links a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.35em;
+  text-decoration-color: var(--hairline-strong);
+}
+
+/* --------------------------------------------------------------------------
+   4. Post header — date kicker + title
+   -------------------------------------------------------------------------- */
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.5rem 0 0;
+}
+
+.title {
+  font-size: clamp(2rem, 1.45rem + 2.2vw, 2.55rem);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  margin: 1.6rem 0 1.15rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink-soft);
+  text-align: left;
+  margin: -0.6rem 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. Headings & prose
+   -------------------------------------------------------------------------- */
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 2.6rem 0 0.8rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 2.1rem 0 0.6rem;
+}
+
+h4 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.5rem;
+}
+
+p { margin: 0 0 1.15em; }
+
+b, strong { font-weight: 600; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-deep);
+  text-decoration-color: var(--accent);
+}
+
+.section-number-2, .section-number-3, .section-number-4, .section-number-5 {
+  color: var(--muted);
+  font-weight: 400;
+  margin-right: 0.35em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+  margin: 2.6em 0;
+}
+
+/* lists */
+ul, ol { padding-left: 1.55em; margin: 0 0 1.2em; }
+
+li { margin-bottom: 0.45em; }
+
+li > p { margin: 0.4em 0; }
+
+li::marker { color: var(--muted); }
+
+/* blockquotes — quiet, italic */
+blockquote {
+  margin: 1.6em 0;
+  padding: 0.15em 0 0.15em 1.35em;
+  border-left: 2px solid var(--hairline-strong);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+blockquote p { margin: 0.5em 0; }
+
+/* tables */
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.6em 0;
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+th, td {
+  padding: 0.5em 0.9em;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--hairline);
+}
+
+th {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+/* figures */
+figure {
+  margin: 2.1rem 0;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow);
+}
+
+figcaption {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.7em;
+}
+
+.figure-number { color: var(--muted); }
+
+/* footnotes */
+.footdef { margin: 1.6em 0; }
+
+.footpara {
+  display: inline;
+  font-size: 0.92em;
+  color: var(--ink-soft);
+}
+
+.footnum { color: var(--accent); }
+
+/* org odds & ends */
+.inlinetask {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 0.9em 1.2em;
+  margin: 1.4em 0;
+}
+
+.tag {
+  font-family: var(--sans);
+  font-size: 0.72em;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.12em 0.65em;
+  color: var(--muted);
+}
+
+/* org todo / done keywords — small progress pills */
+span.done, span.todo {
+  font-family: var(--sans);
+  font-size: 0.62em;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  border-radius: 999px;
+  padding: 0.22em 0.75em;
+  margin-right: 0.6em;
+  vertical-align: 0.2em;
+}
+
+span.done {
+  color: var(--accent-deep);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+span.todo {
+  color: var(--inline-code);
+  background: color-mix(in srgb, var(--inline-code) 11%, transparent);
+}
+
+.timestamp-wrapper .timestamp {
+  font-family: var(--sans);
+  font-size: 0.82em;
+  color: var(--muted);
+}
+
+/* date chip in post lists (sitemap, index) */
+.post-date {
+  font-family: var(--sans);
+  font-size: 0.72em;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.code-highlighted { background-color: var(--sel); }
+
+.org-svg { max-width: 100%; }
+
+/* --------------------------------------------------------------------------
+   6. Code — inline & blocks
+   -------------------------------------------------------------------------- */
+code {
+  font-family: var(--mono);
+  font-size: 0.78em;
+  color: var(--inline-code);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 0.12em 0.42em;
+}
+
+.org-src-container { margin: 1.5em 0; }
+
+pre.src, pre.example {
+  position: relative;
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 1.05rem 1.25rem;
+  margin: 1.5em 0;
+  overflow-x: auto;
+  tab-size: 4;
+  -webkit-font-smoothing: antialiased;
+}
+
+pre::-webkit-scrollbar { height: 8px; }
+pre::-webkit-scrollbar-thumb {
+  background: var(--hairline-strong);
+  border-radius: 4px;
+}
+
+/* language label on hover (org default behaviour, re-skinned) */
+pre.src::before {
+  display: none;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.75rem;
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 0.32rem 0.55rem;
+}
+
+pre.src:hover::before { display: inline-block; }
+
+/* syntax classes produced by htmlize (org-html-htmlize-output-type 'css) */
+.org-keyword        { color: var(--syn-keyword); }
+.org-builtin        { color: var(--syn-builtin); }
+.org-string         { color: var(--syn-string); }
+.org-function-name  { color: var(--syn-function); }
+.org-variable-name  { color: var(--syn-variable); }
+.org-type           { color: var(--syn-type); }
+.org-constant       { color: var(--syn-constant); }
+.org-number         { color: var(--syn-constant); }
+.org-operator       { color: var(--syn-operator); }
+.org-preprocessor   { color: var(--syn-preproc); }
+.org-comment,
+.org-comment-delimiter { color: var(--syn-comment); font-style: italic; }
+
+.org-rainbow-delimiters-depth-1 { color: var(--syn-paren-1); }
+.org-rainbow-delimiters-depth-2 { color: var(--syn-paren-2); }
+.org-rainbow-delimiters-depth-3 { color: var(--syn-paren-3); }
+.org-rainbow-delimiters-depth-4 { color: var(--syn-paren-1); }
+.org-rainbow-delimiters-depth-5 { color: var(--syn-paren-2); }
+.org-rainbow-delimiters-depth-6 { color: var(--syn-paren-3); }
+.org-rainbow-delimiters-depth-7 { color: var(--syn-paren-1); }
+.org-rainbow-delimiters-depth-8 { color: var(--syn-paren-2); }
+
+/* --------------------------------------------------------------------------
+   7. Table of contents — a quiet card
+   -------------------------------------------------------------------------- */
+nav#table-of-contents {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 1.15rem 1.5rem 1.25rem;
+  margin: 2.3rem 0 0;
+}
+
+nav#table-of-contents h2 {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.8rem;
+}
+
+#text-table-of-contents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#text-table-of-contents li { margin: 0.32em 0; }
+
+#text-table-of-contents ul ul {
+  margin-left: 0.3rem;
+  padding-left: 1.05rem;
+  border-left: 1px solid var(--hairline-strong);
+}
+
+#text-table-of-contents a {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+#text-table-of-contents a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+/* --------------------------------------------------------------------------
+   8. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  max-width: 42rem;
+  margin: 4.2rem auto 0;
+  padding: 1.5rem 1.5rem 2.8rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.site-footer .backlink { margin: 0 0 0.55rem; }
+
+.site-footer .backlink a {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.site-footer .backlink a:hover {
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.site-footer .fineprint {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. Small screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  #content { padding: 0 1.15rem; }
+
+  .site-nav { padding: 1.5rem 0 0.95rem; }
+  .site-nav .nav-links { gap: 1.05rem; }
+  .site-nav .nav-links a { font-size: 0.84rem; }
+
+  body { line-height: 1.72; }
+
+  pre.src, pre.example {
+    font-size: 0.78rem;
+    padding: 0.9rem 1rem;
+  }
+
+  code { font-size: 0.74em; }
+
+  nav#table-of-contents { padding: 1rem 1.15rem 1.1rem; }
+
+  .site-footer { margin-top: 3.2rem; padding-bottom: 2.4rem; }
+}

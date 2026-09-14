@@ -2,6 +2,5 @@
 #+DATE: <2025-12-19 Sun>
 #+OPTIONS: toc:nil num:nil
 
-* Build Your Own Lisp: Understanding How Programming Languages Work
-** Introduction
+* Introduction
 This is a short talk I gave recently in *UrumLug* (Linux User Group). It is about building a simple lisp interpreter from scratch. You can say it was more of a workshop than a simple talk.
